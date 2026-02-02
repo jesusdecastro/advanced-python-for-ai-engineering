@@ -4,7 +4,7 @@ Curso intensivo de 6 días enfocado en Python avanzado aplicado a Inteligencia A
 
 ## 📋 Estructura del Curso
 
-- **Día 1**: Fundamentos avanzados de Python
+- **Día 1**: Entornos virtuales y configuración de Python
 - **Día 2**: NumPy y manipulación de datos
 - **Día 3**: Pandas y análisis de datos
 - **Día 4**: Machine Learning con scikit-learn
