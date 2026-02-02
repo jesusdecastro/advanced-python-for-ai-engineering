@@ -2,45 +2,19 @@
 
 ## Descripción General
 
-Este día se enfoca en comprender y configurar entornos de desarrollo Python adecuados, lo cual es crucial para cualquier proyecto de IA/ML.
+Este es el punto de entrada del curso. Aquí aprenderás a configurar tu entorno de desarrollo Python, que es fundamental para todo lo que viene después.
 
-## Contenido
+## Inicio Rápido (5 minutos)
 
-### Notebooks
-
-1. **01_virtual_environments.ipynb** - Fundamentos de entornos virtuales
-   - Qué son los entornos virtuales y por qué son importantes
-   - Crear entornos con `venv`
-   - Gestión moderna de dependencias con `uv`
-   - Mejores prácticas para gestión de proyectos
-
-## Objetivos de Aprendizaje
-
-Al finalizar el Día 1, los estudiantes serán capaces de:
-
-- Comprender la importancia de los entornos Python aislados
-- Crear y gestionar entornos virtuales usando `venv`
-- Utilizar herramientas modernas como `uv` para gestión rápida de dependencias
-- Aplicar mejores prácticas en la configuración de proyectos Python
-- Verificar que su entorno de desarrollo esté correctamente configurado
-
-## Requisitos Previos
-
-- Python 3.10 o superior instalado
-- Conocimientos básicos de línea de comandos
-- Editor de texto o IDE (VS Code, PyCharm, etc.)
-
-## Inicio Rápido
-
-### Paso 0: Navegar a la Carpeta del Día 1
+### Paso 1: Navega a la Raíz del Repositorio
 
 ```bash
-cd day_1
+cd ..
 ```
 
-### Paso 1: Crear el Entorno Virtual
+(Si estás en `day_1/`, vuelve a la carpeta raíz del proyecto)
 
-Desde el directorio `day_1`, ejecuta:
+### Paso 2: Crea el Entorno Virtual
 
 ```bash
 # Windows
@@ -50,7 +24,7 @@ python -m venv venv
 python3 -m venv venv
 ```
 
-### Paso 2: Activar el Entorno
+### Paso 3: Activa el Entorno
 
 ```bash
 # Windows (CMD)
@@ -65,51 +39,56 @@ source venv/bin/activate
 
 Deberías ver `(venv)` al inicio de tu línea de comandos.
 
-### Paso 3: Instalar Dependencias Mínimas
-
-Para ejecutar el notebook del Día 1, instala solo lo esencial:
+### Paso 4: Instala las Dependencias Mínimas
 
 ```bash
 pip install -r day_1/requirements-minimal.txt
 ```
 
-Esto instala:
-- **jupyter** y **notebook**: Para ejecutar los notebooks
-- **matplotlib**: Para las visualizaciones del notebook
-- **numpy** y **pandas**: Para ejemplos de código
+Esto instala solo lo esencial para el Día 1 (menos de 2 minutos).
 
-La instalación debería completarse en menos de 2 minutos.
-
-### Paso 4: Ejecutar el Notebook
+### Paso 5: Inicia Jupyter
 
 ```bash
-jupyter notebook day_1/01_virtual_environments.ipynb
+jupyter notebook
 ```
 
-## Entornos de Dependencias
+Se abrirá una ventana en tu navegador. Navega a `day_1/01_virtual_environments.ipynb`.
 
-### requirements-minimal.txt
+## Contenido del Día 1
 
-Este archivo contiene solo lo esencial para ejecutar el Día 1. Es ideal para:
-- Instalación rápida
-- Verificar que tu entorno funciona
-- Comenzar a aprender sin esperar descargas largas
+### Notebook: 01_virtual_environments.ipynb
 
-### requirements.txt (Completo)
+En este notebook aprenderás:
 
-El archivo `requirements.txt` en la raíz del proyecto contiene todas las dependencias para todo el curso. Úsalo cuando estés listo para los días posteriores:
+1. **Qué son los entornos virtuales** - Conceptos fundamentales
+2. **Por qué son esenciales** - Visualización del problema de conflictos de dependencias
+3. **Cómo crear entornos con venv** - Paso a paso
+4. **Herramientas modernas como uv** - Alternativas rápidas
+5. **Mejores prácticas** - Cómo gestionar proyectos Python profesionalmente
 
-```bash
-pip install -r requirements.txt
-```
+Tiempo estimado: 45-60 minutos
 
-## Flujo Recomendado
+## Objetivos de Aprendizaje
 
-1. **Primero**: Instala `requirements-minimal.txt` (Día 1)
-2. **Luego**: Completa el notebook del Día 1
-3. **Después**: Instala `requirements.txt` completo para los días 2-6
+Al finalizar el Día 1, serás capaz de:
+
+- Comprender la importancia de los entornos Python aislados
+- Crear y gestionar entornos virtuales usando `venv`
+- Utilizar herramientas modernas como `uv` para gestión rápida de dependencias
+- Aplicar mejores prácticas en la configuración de proyectos Python
+- Verificar que tu entorno de desarrollo esté correctamente configurado
+
+## Requisitos Previos
+
+- Python 3.10 o superior instalado
+- Conocimientos básicos de línea de comandos
+- Editor de texto o IDE (VS Code, PyCharm, etc.)
 
 ## Solución de Problemas
+
+### "python: command not found" o "python3: command not found"
+Python no está instalado o no está en tu PATH. Descárgalo desde [python.org](https://www.python.org/downloads/)
 
 ### "pip: command not found"
 Asegúrate de que el entorno virtual está activado. Deberías ver `(venv)` en tu terminal.
@@ -131,15 +110,24 @@ pip install -r day_1/requirements-minimal.txt --no-cache-dir
 
 Antes de pasar al Día 2, asegúrate de haber:
 
-- [ ] Creado un entorno virtual
+- [ ] Creado un entorno virtual en la raíz del proyecto
 - [ ] Activado el entorno virtual
-- [ ] Instalado `requirements-minimal.txt`
+- [ ] Instalado `day_1/requirements-minimal.txt`
 - [ ] Ejecutado `jupyter notebook` exitosamente
 - [ ] Completado todas las celdas del notebook
 - [ ] Respondido las preguntas de autoevaluación
+
+## Próximos Pasos
+
+Una vez completes el Día 1:
+
+1. Mantén el entorno virtual activado
+2. Instala las dependencias completas: `pip install -r requirements.txt`
+3. Dirígete al Día 2 para aprender sobre NumPy
 
 ## Recursos Adicionales
 
 - [Documentación de Python venv](https://docs.python.org/3/library/venv.html)
 - [Documentación de uv](https://docs.astral.sh/uv/)
 - [Guía de Empaquetado de Python](https://packaging.python.org/)
+
