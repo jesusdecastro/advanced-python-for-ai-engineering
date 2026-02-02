@@ -2,5 +2,5 @@
 # This is the essential setup to run the Day 1 notebook
 # Install with: pip install -r requirements-minimal.txt
 
-jupyter>=7.0.0
-notebook>=7.0.0
+jupyter==1.1.1
+notebook==7.5.3
