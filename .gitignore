@@ -36,6 +36,7 @@ wheels/
 *.swp
 *.swo
 *~
+.kiro/
 
 # OS
 .DS_Store
