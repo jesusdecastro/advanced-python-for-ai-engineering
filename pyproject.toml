@@ -1,0 +1,48 @@
+[project]
+name = "advanced-python-ai"
+version = "1.0.0"
+description = "Advanced Python for Artificial Intelligence Course"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "scikit-learn>=1.3.0",
+    "torch>=2.0.0",
+    "tensorflow>=2.13.0",
+    "ipywidgets>=8.0.0",
+    "plotly>=5.14.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.4.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "ruff>=0.1.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "D"]
+ignore = ["E501", "D100", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
