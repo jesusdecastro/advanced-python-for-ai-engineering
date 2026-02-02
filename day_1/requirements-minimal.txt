@@ -1,0 +1,9 @@
+# Minimal environment for Day 1
+# This is the essential setup to run the Day 1 notebook
+# Install with: pip install -r requirements-minimal.txt
+
+jupyter>=7.0.0
+notebook>=7.0.0
+matplotlib>=3.7.0
+numpy>=1.24.0
+pandas>=2.0.0
