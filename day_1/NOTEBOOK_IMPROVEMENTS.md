@@ -123,6 +123,49 @@ Los entornos virtuales son la base de la reproducibilidad en Python.
 Sin ellos, es imposible garantizar que tu código funcione en otra máquina o en el futuro.
 ```
 
+## Estructura de un Entorno Virtual
+
+**Reemplazar el código Python innecesario con Markdown:**
+
+En lugar de:
+```python
+def visualize_venv_structure():
+    venv_structure = """
+venv/
+├── bin/...
+```
+
+Usar directamente en Markdown:
+
+```markdown
+### Estructura de un Entorno Virtual
+
+Cuando creas un entorno virtual, se genera la siguiente estructura de directorios:
+
+\`\`\`
+venv/
+├── bin/                    (Linux/Mac) o Scripts/ (Windows)
+│   ├── python              Intérprete de Python
+│   ├── pip                 Instalador de paquetes
+│   ├── activate            Script de activación
+│   └── ...
+├── lib/                    (Linux/Mac) o Lib/ (Windows)
+│   └── python3.10/
+│       └── site-packages/  Aquí se instalan tus paquetes
+│           ├── numpy/
+│           ├── pandas/
+│           └── ...
+├── include/                Encabezados C para paquetes compilados
+└── pyvenv.cfg              Archivo de configuración
+\`\`\`
+
+**Puntos Clave:**
+
+- **bin/ (o Scripts/)**: Contiene ejecutables específicos de este entorno virtual
+- **site-packages/**: Donde pip instala paquetes solo para este entorno
+- **pyvenv.cfg**: Almacena configuración como `home = /usr/bin/python3`
+```
+
 ## Cambios en Visualizaciones
 
 Reemplazar todo el texto en inglés en las visualizaciones de Matplotlib:
