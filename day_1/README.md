@@ -32,9 +32,15 @@ Al finalizar el Día 1, los estudiantes serán capaces de:
 
 ## Inicio Rápido
 
+### Paso 0: Navegar a la Carpeta del Día 1
+
+```bash
+cd day_1
+```
+
 ### Paso 1: Crear el Entorno Virtual
 
-Desde el directorio del curso, ejecuta:
+Desde el directorio `day_1`, ejecuta:
 
 ```bash
 # Windows
