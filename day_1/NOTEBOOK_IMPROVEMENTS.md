@@ -191,5 +191,96 @@ Cada sección debe seguir este patrón:
 3. **Hint** (consejo basado en la explicación anterior)
 4. **Key Insight** (conclusión importante)
 5. **Pregunta de Comprensión** (con respuesta incluida)
+6. **Documentación Oficial** (enlace a la documentación relevante)
 
 Esto asegura que cada elemento tenga contexto suficiente y sea completamente en castellano.
+
+## Integración de Referencias de Documentación
+
+### En Cada Sección Relevante
+
+Añadir referencias inline cuando se mencione un concepto estándar o librería:
+
+**Ejemplo para sección de venv:**
+```markdown
+## Opción 1: Usando `venv` (Estándar de Python)
+
+`venv` es el módulo estándar de Python para crear entornos virtuales. 
+Viene incluido con Python 3.3+.
+
+**Documentación oficial:** [venv — Creation of virtual environments](https://docs.python.org/3/library/venv.html)
+```
+
+**Ejemplo para sección de pip:**
+```markdown
+### Instalar Paquetes
+
+Una vez activado el entorno:
+
+```bash
+pip install numpy pandas matplotlib
+```
+
+**Documentación oficial:** [pip - The Python Package Installer](https://pip.pypa.io/)
+```
+
+**Ejemplo para sección de pyproject.toml:**
+```markdown
+### pyproject.toml (Moderno)
+
+`pyproject.toml` es el estándar moderno de Python para declarar metadatos del proyecto.
+
+**Documentación oficial:** [PEP 621 – Declaring project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+```
+
+### Sección Final: Recursos y Referencias
+
+Al final del notebook, añadir una sección completa:
+
+```markdown
+## Recursos y Referencias Oficiales
+
+### Python Standard Library
+
+- [venv — Creation of virtual environments](https://docs.python.org/3/library/venv.html)
+- [sys — System-specific parameters and functions](https://docs.python.org/3/library/sys.html)
+- [importlib — The implementation of import](https://docs.python.org/3/library/importlib.html)
+- [subprocess — Subprocess management](https://docs.python.org/3/library/subprocess.html)
+- [platform — Access to underlying platform's identifying data](https://docs.python.org/3/library/platform.html)
+
+### PEPs (Python Enhancement Proposals)
+
+- [PEP 621 – Declaring project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
+- [PEP 508 – Dependency specification for Python Software Packages](https://peps.python.org/pep-0508/)
+- [PEP 440 – Version Identification and Dependency Specification](https://peps.python.org/pep-0440/)
+
+### Herramientas de Gestión de Paquetes
+
+- [pip - The Python Package Installer](https://pip.pypa.io/)
+  - [Requirements File Format](https://pip.pypa.io/en/stable/reference/requirements-file-format/)
+  - [pip freeze](https://pip.pypa.io/en/stable/reference/pip_freeze/)
+
+- [uv - An extremely fast Python package installer and resolver](https://docs.astral.sh/uv/)
+
+### Librerías Científicas
+
+- [NumPy Documentation](https://numpy.org/doc/)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+- [Matplotlib Documentation](https://matplotlib.org/stable/contents.html/)
+
+### Empaquetado y Distribución
+
+- [Python Packaging User Guide](https://packaging.python.org/)
+- [setuptools documentation](https://setuptools.pypa.io/)
+```
+
+## Checklist de Implementación
+
+- [ ] Añadir referencia a venv en la sección "Opción 1"
+- [ ] Añadir referencia a pip en la sección "Instalar Paquetes"
+- [ ] Añadir referencia a PEP 621 en la sección "pyproject.toml"
+- [ ] Añadir referencia a uv en la sección "Opción 2"
+- [ ] Añadir referencia a sys en la sección de verificación de Python
+- [ ] Crear sección final "Recursos y Referencias Oficiales" con todos los enlaces
+- [ ] Verificar que todos los enlaces funcionan
+- [ ] Asegurar que todo está en castellano (sin Spanglish)
