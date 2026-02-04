@@ -1,106 +1,338 @@
 # Curso de Python Avanzado para IA
 
-Curso intensivo de 6 días enfocado en Python avanzado aplicado a Inteligencia Artificial.
+Curso intensivo de 6 días enfocado en Python avanzado aplicado a Ingeniería de IA, con énfasis en Clean Code, arquitectura de software y mejores prácticas de desarrollo.
 
-## Inicio Rápido
+## 📋 Descripción
 
-Para comenzar el curso, dirígete a la carpeta `day_1/` y sigue las instrucciones en su README:
+Este curso está diseñado para desarrolladores que desean dominar Python avanzado aplicado a proyectos de Inteligencia Artificial. A través de 6 días intensivos, aprenderás desde la configuración profesional de proyectos hasta el desarrollo de paquetes Python production-ready, aplicando principios de Clean Code, SOLID y TDD.
 
+**Duración:** 48 horas (6 días × 8 horas)  
+**Modalidad:** Presencial con proyecto integrador grupal  
+**Nivel:** Intermedio-Avanzado
+
+## 🎯 Objetivos del Curso
+
+Al finalizar este curso, serás capaz de:
+
+- Configurar proyectos Python profesionales con estructura modular
+- Aplicar principios de Clean Code y SOLID en Python
+- Desarrollar código pythónico usando idioms y patrones avanzados
+- Diseñar arquitecturas orientadas a objetos robustas y mantenibles
+- Implementar testing completo con pytest (TDD, fixtures, mocking)
+- Optimizar código para procesamiento de datos con NumPy y pandas
+- Crear paquetes Python distribuibles y production-ready
+
+## 📚 Contenido por Día
+
+### Día 1: Fundamentos - Configuración de Proyectos Python
+- Entornos virtuales (venv, uv)
+- Sistema de módulos e imports
+- Estructura de paquetes (src layout)
+- pyproject.toml y gestión de dependencias
+- Distribución de paquetes (wheels)
+- Herramientas de calidad (ruff, pyright)
+
+### Día 2: Código Pythónico - Idioms y Programación Funcional
+- Comprehensions (list, dict, set)
+- Generadores e iteradores
+- Decoradores prácticos
+- Programación funcional (map, filter, reduce)
+- Context managers
+- Métodos mágicos
+
+### Día 3: Código Limpio - Legibilidad y Robustez
+- Clean Functions (SRP, funciones pequeñas)
+- Meaningful Names
+- Type hints avanzados
+- Error handling y excepciones custom
+- Documentación y docstrings
+- Principios DRY y KISS
+
+### Día 4: Diseño - Programación Orientada a Objetos
+- Objects vs Data Structures
+- Pydantic vs dataclasses
+- Classes y Single Responsibility Principle
+- Herencia vs composición
+- Abstract Base Classes (ABC)
+- Principios SOLID en Python
+
+### Día 5: Procesamiento de Datos y Testing
+- NumPy vectorization
+- pandas optimization
+- Memory profiling
+- Unit testing con pytest
+- Test-Driven Development (TDD)
+
+### Día 6: Proyecto Integrador
+- Finalización del proyecto grupal
+- Integración de todos los conceptos
+- Documentación completa
+- Presentación de proyectos
+
+## 🚀 Inicio Rápido
+
+### Requisitos Previos
+
+- Python 3.11 o superior
+- Git instalado
+- Editor de código (VS Code, PyCharm, etc.)
+- Conocimientos básicos de Python
+
+### Instalación
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/tu-usuario/advanced-python-for-ai-engineering.git
+cd advanced-python-for-ai-engineering
+```
+
+2. Crea y activa un entorno virtual:
+```bash
+# Con venv
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# O con uv (recomendado)
+uv venv
+source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate     # Windows
+```
+
+3. Instala las dependencias:
+```bash
+pip install -r requirements.txt
+```
+
+4. Comienza con el Día 1:
 ```bash
 cd day_1
 ```
 
-Allí encontrarás el punto de entrada completo con instrucciones paso a paso para configurar tu entorno.
-
-## Estructura del Curso
-
-- **Día 1**: Entornos virtuales y configuración de Python
-- **Día 2**: NumPy y manipulación de datos
-- **Día 3**: Pandas y análisis de datos
-- **Día 4**: Machine Learning con scikit-learn
-- **Día 5**: Deep Learning con PyTorch/TensorFlow
-- **Día 6**: Proyecto final integrador
-
-## Requisitos
-
-- Python 3.10 o superior
-- Conexión a internet (para descargar paquetes)
-- Editor de texto o IDE (VS Code, PyCharm, etc.)
-
-## Tecnologías Utilizadas
-
-- Python 3.10+
-- Jupyter Notebooks
-- NumPy, Pandas
-- scikit-learn
-- PyTorch / TensorFlow
-- Matplotlib, Seaborn
-
-## Estructura del Repositorio
+## 📁 Estructura del Repositorio
 
 ```
-├── day_1/              # Punto de entrada - Entornos virtuales
-├── day_2/              # NumPy y manipulación de datos
-├── day_3/              # Pandas y análisis de datos
-├── day_4/              # Machine Learning
-├── day_5/              # Deep Learning
-├── day_6/              # Proyecto final
-├── exercises/          # Módulos Python para practicar
-├── solutions/          # Soluciones de ejercicios
-├── resources/          # Material adicional
-├── requirements.txt    # Dependencias completas
-└── pyproject.toml      # Configuración del proyecto
+advanced-python-for-ai-engineering/
+├── day_1/                          # Día 1: Configuración de proyectos
+│   ├── 01_virtual_environments.ipynb
+│   ├── 02_type_hinting.ipynb
+│   ├── 03_modules_and_imports.ipynb
+│   ├── 04_package_distribution.ipynb
+│   ├── 05_code_quality_tools.ipynb
+│   ├── exercises/                  # Ejercicios con tests
+│   └── README.md
+├── day_2/                          # Día 2: Código pythónico
+│   ├── 01_comprehensions.ipynb
+│   ├── 02_generators_iterators.ipynb
+│   ├── 03_decorators.ipynb
+│   ├── 04_functional_programming.ipynb
+│   ├── 05_context_managers.ipynb
+│   ├── 06_magic_methods.ipynb
+│   └── exercises/
+├── day_3/                          # Día 3: Código limpio
+│   ├── 01_clean_functions.ipynb
+│   ├── 02_meaningful_names.ipynb
+│   ├── 03_type_hints_advanced.ipynb
+│   ├── 04_error_handling.ipynb
+│   ├── 05_comments_documentation.ipynb
+│   ├── 06_dry_kiss_principles.ipynb
+│   └── exercises/
+├── day_4/                          # Día 4: OOP y diseño
+│   ├── 01_objects_vs_data_structures.ipynb
+│   ├── 02_pydantic_vs_dataclasses.ipynb
+│   ├── 03_classes_srp.ipynb
+│   ├── 04_inheritance_vs_composition.ipynb
+│   ├── 05_abstract_base_classes.ipynb
+│   ├── 06_solid_principles.ipynb
+│   └── exercises/
+├── day_5/                          # Día 5: Testing y optimización
+│   ├── 01_unit_testing_pytest.ipynb
+│   ├── 02_tdd.ipynb
+│   ├── 03_numpy_vectorization.ipynb
+│   ├── 04_pandas_optimization.ipynb
+│   ├── 05_memory_profiling.ipynb
+│   └── exercises/
+├── proyectos_integradores/         # Guías de proyectos
+│   ├── 01_data_pipeline_guia.md
+│   ├── 02_log_analyzer_guia.md
+│   ├── 03_csv_cleaner_guia.md
+│   ├── 04_config_manager_guia.md
+│   ├── 05_data_validator_guia.md
+│   ├── 06_text_processing_guia.md
+│   └── README.md
+├── .kiro/steering/                 # Estándares del curso
+│   ├── course-standards.md
+│   └── notebook-structure.md
+├── plan_de_formacion.md            # Plan detallado del curso
+├── requirements.txt                # Dependencias
+├── pyproject.toml                  # Configuración del proyecto
+└── README.md                       # Este archivo
 ```
 
-## Cómo Usar Este Repositorio
+## 💻 Cómo Usar Este Repositorio
 
-1. Clona o descarga el repositorio
-2. Abre `day_1/README.md` para comenzar
-3. Sigue las instrucciones para configurar tu entorno
-4. Completa los notebooks en orden
-5. Practica con los ejercicios en la carpeta `exercises/`
+### Notebooks
 
-## Ejercicios Prácticos
+Cada día contiene notebooks Jupyter con:
+- Explicaciones teóricas en castellano
+- Ejemplos de código ejecutables
+- Ejercicios prácticos
+- Preguntas de autoevaluación
+- Referencias oficiales
 
-Cada notebook tiene ejercicios asociados con tests unitarios:
+Para trabajar con los notebooks:
+```bash
+cd day_1
+jupyter notebook
+```
+
+### Ejercicios
+
+Cada día incluye ejercicios prácticos con tests unitarios:
 
 ```bash
-# Desde la carpeta day_1
+# Navega al día correspondiente
 cd day_1
 
-# Completa los ejercicios en exercises/02_type_hinting.py
+# Completa los ejercicios en exercises/
 code exercises/02_type_hinting.py
 
-# Ejecuta los tests para validar tu solución
+# Ejecuta los tests
 pytest exercises/tests/test_02_type_hinting.py -v
 
-# O usa el script helper
-./run_tests.sh          # En Linux/Mac
-run_tests.bat           # En Windows
+# O ejecuta todos los tests del día
+pytest exercises/tests/ -v
+
+# Con el script helper
+./run_tests.sh          # Linux/Mac
+run_tests.bat           # Windows
 ```
 
-Todos los tests deben pasar para considerar el ejercicio como completado.
+### Validación de Código
 
-## Validación de Código
-
-Asegúrate de que tu código siga los estándares del curso:
+Todos los ejercicios deben cumplir con los estándares del curso:
 
 ```bash
-# Validar type hints con Pyright
-pyright exercises/02_type_hinting.py
+# Type checking con pyright
+pyright exercises/
 
-# Verificar calidad con Ruff
-ruff check exercises/02_type_hinting.py
+# Linting con ruff
+ruff check exercises/
 
-# Formatear código
-ruff format exercises/02_type_hinting.py
+# Formateo automático
+ruff format exercises/
+
+# Ejecutar todo junto
+ruff check exercises/ && ruff format exercises/ && pyright exercises/
 ```
 
-## Notas Importantes
+## 🎓 Proyecto Integrador
 
-- Cada día tiene su propio README con instrucciones específicas
-- Mantén el entorno virtual activado mientras trabajas
-- Completa los notebooks en orden para mejor comprensión
-- Los ejercicios son fundamentales para el aprendizaje
+Durante el curso, trabajarás en grupos de 3 personas en uno de estos proyectos:
 
-¡Bienvenido al curso! Comienza en `day_1/README.md`.
+1. **Data Pipeline Package** (⭐⭐ Básica) - Sistema ETL configurable
+2. **Log Analyzer Tool** (⭐⭐ Básica) - Análisis de logs con métricas
+3. **CSV Data Cleaner** (⭐⭐ Básica) - Limpieza y validación de CSV
+4. **Config File Manager** (⭐⭐ Básica) - Gestión de configuraciones
+5. **Data Validator Library** (⭐⭐⭐ Media) - Framework de validación
+6. **Text Processing Toolkit** (⭐⭐⭐ Media) - Procesamiento de texto
+
+Cada día agregarás funcionalidad aplicando los conceptos aprendidos. Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos.
+
+## 🛠️ Stack Tecnológico
+
+**Core:**
+- Python 3.11+
+- uv / venv (entornos virtuales)
+- pytest (testing)
+- ruff (linting y formateo)
+- pyright (type checking)
+
+**Librerías principales:**
+- pydantic (validación de datos)
+- numpy (computación numérica)
+- pandas (análisis de datos)
+- functools, itertools (programación funcional)
+
+**Herramientas de desarrollo:**
+- Jupyter Notebook
+- Git
+- VS Code / PyCharm
+
+## 📖 Estándares del Curso
+
+Este curso sigue estándares estrictos de calidad:
+
+### Idioma
+- **Documentación**: Castellano
+- **Código**: Inglés
+- **Docstrings**: Inglés (formato Sphinx)
+- **Comentarios**: Inglés
+
+### Código
+- Type hints en todas las funciones
+- Docstrings formato Sphinx
+- Convenciones PEP 8 (snake_case, PascalCase)
+- Tests unitarios con pytest
+- Cobertura mínima 80%
+
+Ver [.kiro/steering/course-standards.md](.kiro/steering/course-standards.md) para detalles completos.
+
+## 📝 Evaluación
+
+El curso se evalúa mediante:
+
+1. **Ejercicios diarios** (40%) - Tests deben pasar
+2. **Proyecto integrador** (50%) - Funcionalidad, tests, documentación
+3. **Participación** (10%) - Preguntas, discusiones, code reviews
+
+### Criterios del Proyecto Final
+
+- ✅ Funcionalidad completa según especificación
+- ✅ Tests con cobertura ≥ 80%
+- ✅ Código pasa ruff y pyright sin errores
+- ✅ Docstrings completos en formato Sphinx
+- ✅ README con instalación y ejemplos de uso
+- ✅ Paquete distribuible (wheel)
+
+## 🤝 Contribuciones
+
+Este es un curso en constante mejora. Si encuentras errores o tienes sugerencias:
+
+1. Abre un issue describiendo el problema
+2. Propón mejoras mediante pull requests
+3. Comparte feedback con los instructores
+
+## 📚 Recursos Adicionales
+
+### Documentación Oficial
+- [Python Documentation](https://docs.python.org/3/)
+- [PEP 8 - Style Guide](https://peps.python.org/pep-0008/)
+- [Type Hints - PEP 484](https://peps.python.org/pep-0484/)
+- [pytest Documentation](https://docs.pytest.org/)
+
+### Libros Recomendados
+- "Clean Code" - Robert C. Martin
+- "Fluent Python" - Luciano Ramalho
+- "Python Testing with pytest" - Brian Okken
+- "Effective Python" - Brett Slatkin
+
+### Herramientas
+- [Ruff Documentation](https://docs.astral.sh/ruff/)
+- [Pyright Documentation](https://microsoft.github.io/pyright/)
+- [uv Documentation](https://docs.astral.sh/uv/)
+
+## 📧 Contacto
+
+Para preguntas sobre el curso:
+- Instructor: [Nombre del instructor]
+- Email: [email@ejemplo.com]
+- Horario de consultas: [Horario]
+
+## 📄 Licencia
+
+Este material educativo está disponible bajo [especificar licencia].
+
+---
+
+**¡Bienvenido al curso!** Comienza tu viaje en `day_1/README.md` 🚀
