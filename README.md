@@ -120,73 +120,22 @@ Para la guía completa de instalación incremental por día, consulta [INSTALACI
 ```
 advanced-python-for-ai-engineering/
 ├── day_1/                          # Día 1: Configuración de proyectos
-│   ├── 01_virtual_environments.ipynb
-│   ├── 02_type_hinting.ipynb
-│   ├── 03_modules_and_imports.ipynb
-│   ├── 04_package_distribution.ipynb
-│   ├── 05_code_quality_tools.ipynb
-│   ├── exercises/                  # Ejercicios con tests
-│   └── README.md
 ├── day_2/                          # Día 2: Código pythónico
-│   ├── 01_comprehensions.ipynb
-│   ├── 02_generators_iterators.ipynb
-│   ├── 03_decorators.ipynb
-│   ├── 04_functional_programming.ipynb
-│   ├── 05_context_managers.ipynb
-│   ├── 06_magic_methods.ipynb
-│   └── exercises/
 ├── day_3/                          # Día 3: Código limpio
-│   ├── 01_clean_functions.ipynb
-│   ├── 02_meaningful_names.ipynb
-│   ├── 03_type_hints_advanced.ipynb
-│   ├── 04_error_handling.ipynb
-│   ├── 05_comments_documentation.ipynb
-│   ├── 06_dry_kiss_principles.ipynb
-│   └── exercises/
 ├── day_4/                          # Día 4: OOP y diseño
-│   ├── 01_objects_vs_data_structures.ipynb
-│   ├── 02_pydantic_vs_dataclasses.ipynb
-│   ├── 03_classes_srp.ipynb
-│   ├── 04_inheritance_vs_composition.ipynb
-│   ├── 05_abstract_base_classes.ipynb
-│   ├── 06_solid_principles.ipynb
-│   └── exercises/
 ├── day_5/                          # Día 5: Testing y optimización
-│   ├── 01_unit_testing_pytest.ipynb
-│   ├── 02_tdd.ipynb
-│   ├── 03_numpy_vectorization.ipynb
-│   ├── 04_pandas_optimization.ipynb
-│   ├── 05_memory_profiling.ipynb
-│   └── exercises/
 ├── proyectos_integradores/         # Guías de proyectos
-│   ├── 01_data_pipeline_guia.md
-│   ├── 02_log_analyzer_guia.md
-│   ├── 03_csv_cleaner_guia.md
-│   ├── 04_config_manager_guia.md
-│   ├── 05_data_validator_guia.md
-│   ├── 06_text_processing_guia.md
-│   └── README.md
-├── .kiro/steering/                 # Estándares del curso
-│   ├── course-standards.md
-│   └── notebook-structure.md
+├── INSTALACION.md                  # Guía de instalación incremental
 ├── plan_de_formacion.md            # Plan detallado del curso
-├── requirements.txt                # Dependencias
-├── pyproject.toml                  # Configuración del proyecto
-└── README.md                       # Este archivo
+└── pyproject.toml                  # Configuración del proyecto
 ```
 
 ## Cómo Usar Este Repositorio
 
 ### Notebooks
 
-Cada día contiene notebooks Jupyter con:
-- Explicaciones teóricas en castellano
-- Ejemplos de código ejecutables
-- Ejercicios prácticos
-- Preguntas de autoevaluación
-- Referencias oficiales
+Cada día contiene notebooks Jupyter con explicaciones teóricas, ejemplos ejecutables, ejercicios prácticos y referencias oficiales.
 
-Para trabajar con los notebooks:
 ```bash
 cd day_1
 jupyter notebook
@@ -197,59 +146,41 @@ jupyter notebook
 Cada día incluye ejercicios prácticos con tests unitarios:
 
 ```bash
-# Navega al día correspondiente
-cd day_1
-
-# Completa los ejercicios en exercises/
-code exercises/02_type_hinting.py
+# Completa los ejercicios
+code day_1/exercises/02_type_hinting.py
 
 # Ejecuta los tests
-pytest exercises/tests/test_02_type_hinting.py -v
-
-# O ejecuta todos los tests del día
-pytest exercises/tests/ -v
-
-# Con el script helper
-./run_tests.sh          # Linux/Mac
-run_tests.bat           # Windows
+pytest day_1/exercises/tests/ -v
 ```
 
 ### Validación de Código
 
-Todos los ejercicios deben cumplir con los estándares del curso:
-
 ```bash
-# Type checking con pyright
+# Type checking
 pyright exercises/
 
-# Linting con ruff
+# Linting y formateo
 ruff check exercises/
-
-# Formateo automático
 ruff format exercises/
-
-# Ejecutar todo junto
-ruff check exercises/ && ruff format exercises/ && pyright exercises/
 ```
 
 ## Proyecto Integrador
 
-Durante el curso, trabajarás en grupos de 3 personas en uno de estos proyectos:
+Trabajarás en grupos de 3 personas en uno de estos proyectos:
 
-1. **Data Pipeline Package** (⭐⭐ Básica) - Sistema ETL configurable
-2. **Log Analyzer Tool** (⭐⭐ Básica) - Análisis de logs con métricas
-3. **CSV Data Cleaner** (⭐⭐ Básica) - Limpieza y validación de CSV
-4. **Config File Manager** (⭐⭐ Básica) - Gestión de configuraciones
-5. **Data Validator Library** (⭐⭐⭐ Media) - Framework de validación
-6. **Text Processing Toolkit** (⭐⭐⭐ Media) - Procesamiento de texto
+1. **Data Pipeline Package** - Sistema ETL configurable
+2. **Log Analyzer Tool** - Análisis de logs con métricas
+3. **CSV Data Cleaner** - Limpieza y validación de CSV
+4. **Config File Manager** - Gestión de configuraciones
+5. **Data Validator Library** - Framework de validación
+6. **Text Processing Toolkit** - Procesamiento de texto
 
-Cada día agregarás funcionalidad aplicando los conceptos aprendidos. Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos.
+Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos.
 
 ## Stack Tecnológico
 
 **Core:**
 - Python 3.11+
-- uv / venv (entornos virtuales)
 - pytest (testing)
 - ruff (linting y formateo)
 - pyright (type checking)
@@ -258,86 +189,33 @@ Cada día agregarás funcionalidad aplicando los conceptos aprendidos. Ver [proy
 - pydantic (validación de datos)
 - numpy (computación numérica)
 - pandas (análisis de datos)
-- functools, itertools (programación funcional)
 
-**Herramientas de desarrollo:**
+**Herramientas:**
 - Jupyter Notebook
 - Git
-- VS Code / PyCharm
-
-## Estándares del Curso
-
-Este curso sigue estándares estrictos de calidad:
-
-### Idioma
-- **Documentación**: Castellano
-- **Código**: Inglés
-- **Docstrings**: Inglés (formato Sphinx)
-- **Comentarios**: Inglés
-
-### Código
-- Type hints en todas las funciones
-- Docstrings formato Sphinx
-- Convenciones PEP 8 (snake_case, PascalCase)
-- Tests unitarios con pytest
-- Cobertura mínima 80%
-
-Ver [.kiro/steering/course-standards.md](.kiro/steering/course-standards.md) para detalles completos.
+- VS Code
 
 ## Evaluación
 
-El curso se evalúa mediante:
+La evaluación se centra en la comprensión y aplicación de los conceptos en el proyecto integrador grupal. Los grupos deberán defender su proyecto demostrando:
 
-1. **Ejercicios diarios** (40%) - Tests deben pasar
-2. **Proyecto integrador** (50%) - Funcionalidad, tests, documentación
-3. **Participación** (10%) - Preguntas, discusiones, code reviews
+- **Comprensión**: Entendimiento profundo de los principios aplicados
+- **Comunicación**: Capacidad de explicar decisiones técnicas
+- **Colaboración**: Trabajo efectivo en equipo
+- **Finalización**: Proyecto funcional y completo
 
-### Criterios del Proyecto Final
+### Criterios del Proyecto
 
-- ✅ Funcionalidad completa según especificación
-- ✅ Tests con cobertura ≥ 80%
-- ✅ Código pasa ruff y pyright sin errores
-- ✅ Docstrings completos en formato Sphinx
-- ✅ README con instalación y ejemplos de uso
-- ✅ Paquete distribuible (wheel)
-
-## Contribuciones
-
-Este es un curso en constante mejora. Si encuentras errores o tienes sugerencias:
-
-1. Abre un issue describiendo el problema
-2. Propón mejoras mediante pull requests
-3. Comparte feedback con los instructores
-
-## Recursos Adicionales
-
-### Documentación Oficial
-- [Python Documentation](https://docs.python.org/3/)
-- [PEP 8 - Style Guide](https://peps.python.org/pep-0008/)
-- [Type Hints - PEP 484](https://peps.python.org/pep-0484/)
-- [pytest Documentation](https://docs.pytest.org/)
-
-### Libros Recomendados
-- "Clean Code" - Robert C. Martin
-- "Fluent Python" - Luciano Ramalho
-- "Python Testing with pytest" - Brian Okken
-- "Effective Python" - Brett Slatkin
-
-### Herramientas
-- [Ruff Documentation](https://docs.astral.sh/ruff/)
-- [Pyright Documentation](https://microsoft.github.io/pyright/)
-- [uv Documentation](https://docs.astral.sh/uv/)
-
-## Contacto
-
-Para preguntas sobre el curso:
-- Instructor: [Nombre del instructor]
-- Email: [email@ejemplo.com]
-- Horario de consultas: [Horario]
+- Funcionalidad completa según especificación
+- Tests con cobertura ≥ 80%
+- Código pasa ruff y pyright sin errores
+- Docstrings completos en formato Sphinx
+- README con instalación y ejemplos de uso
+- Paquete distribuible (wheel)
 
 ## Licencia
 
-Este material educativo está disponible bajo [especificar licencia].
+Este material educativo está disponible bajo licencia MIT para uso educativo y formación.
 
 ---
 
