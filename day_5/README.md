@@ -34,6 +34,7 @@ pip install -e ".[dev]"
 ## Ejercicios
 
 Ejecutar tests con cobertura:
+
 ```bash
 pytest day_5/exercises/tests/ --cov=day_5/exercises
 ```

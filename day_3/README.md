@@ -16,6 +16,7 @@ Este día no requiere instalación de dependencias adicionales. Utiliza las herr
 ## Ejercicios
 
 Ejecutar tests:
+
 ```bash
 pytest day_3/exercises/tests/
 ```

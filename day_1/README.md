@@ -42,12 +42,17 @@ pip install -e ".[dev]"
 ## Ejercicios
 
 Ejecutar tests:
+
 ```bash
 pytest day_1/exercises/tests/
 ```
 
 Validar código:
+
 ```bash
 ruff check day_1/exercises/
+```
+
+```bash
 pyright day_1/exercises/
 ```

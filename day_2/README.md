@@ -16,6 +16,7 @@ Este día utiliza únicamente la biblioteca estándar de Python. No requiere ins
 ## Ejercicios
 
 Ejecutar tests:
+
 ```bash
 pytest day_2/exercises/tests/
 ```

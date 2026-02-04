@@ -115,6 +115,9 @@ Cada día contiene notebooks Jupyter con explicaciones teóricas, ejemplos ejecu
 
 ```bash
 cd day_1
+```
+
+```bash
 jupyter notebook
 ```
 
@@ -122,22 +125,30 @@ jupyter notebook
 
 Cada día incluye ejercicios prácticos con tests unitarios:
 
+Completa los ejercicios:
 ```bash
-# Completa los ejercicios
 code day_1/exercises/02_type_hinting.py
+```
 
-# Ejecuta los tests
+Ejecuta los tests:
+```bash
 pytest day_1/exercises/tests/ -v
 ```
 
 ### Validación de Código
 
+Type checking:
 ```bash
-# Type checking
 pyright exercises/
+```
 
-# Linting y formateo
+Linting:
+```bash
 ruff check exercises/
+```
+
+Formateo:
+```bash
 ruff format exercises/
 ```
 

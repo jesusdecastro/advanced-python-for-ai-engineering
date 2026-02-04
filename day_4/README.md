@@ -28,6 +28,7 @@ pip install -e ".[dev]"
 ## Ejercicios
 
 Ejecutar tests:
+
 ```bash
 pytest day_4/exercises/tests/
 ```

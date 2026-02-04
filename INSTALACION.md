@@ -10,23 +10,32 @@ Este curso utiliza un enfoque incremental para la gestión de dependencias. Cada
 
 ```bash
 git clone https://github.com/tu-usuario/advanced-python-for-ai-engineering.git
+```
+
+```bash
 cd advanced-python-for-ai-engineering
 ```
 
 ### 2. Crear Entorno Virtual
 
 ```bash
-# Con venv (estándar)
 python -m venv venv
+```
 
-# Activar el entorno
-# Windows (CMD)
+Activar el entorno:
+
+Windows (CMD):
+```bash
 venv\Scripts\activate
+```
 
-# Windows (PowerShell)
+Windows (PowerShell):
+```bash
 venv\Scripts\Activate.ps1
+```
 
-# Linux/Mac
+Linux/Mac:
+```bash
 source venv/bin/activate
 ```
 
@@ -64,8 +73,17 @@ pip install -e ".[dev]"
 
 ```bash
 jupyter --version
+```
+
+```bash
 ruff --version
+```
+
+```bash
 pyright --version
+```
+
+```bash
 pytest --version
 ```
 
@@ -210,8 +228,9 @@ pip install -e ".[dev]"
 
 ```bash
 pip uninstall nombre-paquete
-# Luego elimínala de pyproject.toml
 ```
+
+Luego elimínala de pyproject.toml.
 
 ## Solución de Problemas
 
@@ -222,11 +241,25 @@ Asegúrate de que el entorno virtual está activado. Deberías ver `(venv)` en t
 Ejecuta `pip install -e ".[dev]"` después de editar pyproject.toml.
 
 ### Conflictos de versiones
+
 Si encuentras conflictos, elimina el entorno y créalo de nuevo:
+
 ```bash
 deactivate
-rm -rf venv  # Linux/Mac
-rmdir /s venv  # Windows
+```
+
+Linux/Mac:
+```bash
+rm -rf venv
+```
+
+Windows:
+```bash
+rmdir /s venv
+```
+
+Luego recrea el entorno:
+```bash
 python -m venv venv
 ```
 
