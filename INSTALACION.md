@@ -41,7 +41,35 @@ source venv/bin/activate
 
 ### 3. Instalar Dependencias del Día 1
 
-Consulta `day_1/requirements.txt` para ver qué necesitas instalar. Luego edita `pyproject.toml`:
+Consulta `day_1/requirements.txt` para ver qué necesitas instalar. 
+
+Abre `pyproject.toml` y añade las dependencias en las listas correspondientes:
+
+**En la lista `dependencies`** (dependencias de producción):
+```toml
+dependencies = [
+    "jupyter>=1.1.0",
+    "notebook>=7.0.0",
+]
+```
+
+**En la lista `dev`** dentro de `[project.optional-dependencies]` (dependencias de desarrollo):
+```toml
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.8.0",
+    "pyright>=1.1.0",
+]
+```
+
+**Importante:** 
+- Cada dependencia va entre comillas dobles
+- Usa el formato `"nombre>=version"`
+- Separa cada dependencia con coma
+- La última dependencia NO lleva coma
+
+Tu `pyproject.toml` completo debería verse así:
 
 ```toml
 [project]
@@ -101,16 +129,19 @@ El Día 3 usa las herramientas ya instaladas en el Día 1 (ruff, pyright).
 
 ## Día 4: Programación Orientada a Objetos
 
-Consulta `day_4/requirements.txt` para ver qué necesitas. Edita `pyproject.toml` añadiendo pydantic:
+Consulta `day_4/requirements.txt` para ver qué necesitas. 
+
+Abre `pyproject.toml` y añade pydantic a la lista `dependencies`:
 
 ```toml
-[project]
 dependencies = [
     "jupyter>=1.1.0",
     "notebook>=7.0.0",
-    "pydantic>=2.0.0",  # NUEVO
+    "pydantic>=2.0.0",  # AÑADE ESTA LÍNEA
 ]
 ```
+
+**Recuerda:** Añade una coma después de la línea anterior antes de añadir la nueva dependencia.
 
 Actualiza la instalación:
 
@@ -120,27 +151,33 @@ pip install -e ".[dev]"
 
 ## Día 5: Testing y Optimización de Datos
 
-Consulta `day_5/requirements.txt` para ver qué necesitas. Edita `pyproject.toml` añadiendo numpy, pandas y herramientas de profiling:
+Consulta `day_5/requirements.txt` para ver qué necesitas. 
 
+Abre `pyproject.toml` y añade las nuevas dependencias:
+
+**En la lista `dependencies`:**
 ```toml
-[project]
 dependencies = [
     "jupyter>=1.1.0",
     "notebook>=7.0.0",
     "pydantic>=2.0.0",
-    "numpy>=1.24.0",     # NUEVO
-    "pandas>=2.0.0",     # NUEVO
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.4.0",
-    "pytest-cov>=4.1.0",        # NUEVO
-    "ruff>=0.8.0",
-    "pyright>=1.1.0",
-    "memory-profiler>=0.61.0",  # NUEVO
+    "numpy>=1.24.0",     # AÑADE ESTA LÍNEA
+    "pandas>=2.0.0",     # AÑADE ESTA LÍNEA
 ]
 ```
+
+**En la lista `dev`:**
+```toml
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",        # AÑADE ESTA LÍNEA
+    "ruff>=0.8.0",
+    "pyright>=1.1.0",
+    "memory-profiler>=0.61.0",  # AÑADE ESTA LÍNEA
+]
+```
+
+**Recuerda:** Añade comas después de las líneas anteriores antes de añadir nuevas dependencias.
 
 Actualiza la instalación:
 

@@ -7,12 +7,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.4.0",
-    "pytest-cov>=4.1.0",
-    "ruff>=0.8.0",
-    "pyright>=1.1.0",
-]
+dev = []
 
 [build-system]
 requires = ["hatchling"]
