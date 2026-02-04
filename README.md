@@ -2,7 +2,7 @@
 
 Curso intensivo de 6 días enfocado en Python avanzado aplicado a Ingeniería de IA, con énfasis en Clean Code, arquitectura de software y mejores prácticas de desarrollo.
 
-## 📋 Descripción
+## Descripción
 
 Este curso está diseñado para desarrolladores que desean dominar Python avanzado aplicado a proyectos de Inteligencia Artificial. A través de 6 días intensivos, aprenderás desde la configuración profesional de proyectos hasta el desarrollo de paquetes Python production-ready, aplicando principios de Clean Code, SOLID y TDD.
 
@@ -10,7 +10,7 @@ Este curso está diseñado para desarrolladores que desean dominar Python avanza
 **Modalidad:** Presencial con proyecto integrador grupal  
 **Nivel:** Intermedio-Avanzado
 
-## 🎯 Objetivos del Curso
+## Objetivos del Curso
 
 Al finalizar este curso, serás capaz de:
 
@@ -22,7 +22,7 @@ Al finalizar este curso, serás capaz de:
 - Optimizar código para procesamiento de datos con NumPy y pandas
 - Crear paquetes Python distribuibles y production-ready
 
-## 📚 Contenido por Día
+## Contenido por Día
 
 ### Día 1: Fundamentos - Configuración de Proyectos Python
 - Entornos virtuales (venv, uv)
@@ -69,7 +69,7 @@ Al finalizar este curso, serás capaz de:
 - Documentación completa
 - Presentación de proyectos
 
-## 🚀 Inicio Rápido
+## Inicio Rápido
 
 ### Requisitos Previos
 
@@ -109,7 +109,7 @@ pip install -r requirements.txt
 cd day_1
 ```
 
-## 📁 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```
 advanced-python-for-ai-engineering/
@@ -169,7 +169,7 @@ advanced-python-for-ai-engineering/
 └── README.md                       # Este archivo
 ```
 
-## 💻 Cómo Usar Este Repositorio
+## Cómo Usar Este Repositorio
 
 ### Notebooks
 
@@ -226,7 +226,7 @@ ruff format exercises/
 ruff check exercises/ && ruff format exercises/ && pyright exercises/
 ```
 
-## 🎓 Proyecto Integrador
+## Proyecto Integrador
 
 Durante el curso, trabajarás en grupos de 3 personas en uno de estos proyectos:
 
@@ -239,7 +239,7 @@ Durante el curso, trabajarás en grupos de 3 personas en uno de estos proyectos:
 
 Cada día agregarás funcionalidad aplicando los conceptos aprendidos. Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos.
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 **Core:**
 - Python 3.11+
@@ -259,7 +259,7 @@ Cada día agregarás funcionalidad aplicando los conceptos aprendidos. Ver [proy
 - Git
 - VS Code / PyCharm
 
-## 📖 Estándares del Curso
+## Estándares del Curso
 
 Este curso sigue estándares estrictos de calidad:
 
@@ -278,7 +278,7 @@ Este curso sigue estándares estrictos de calidad:
 
 Ver [.kiro/steering/course-standards.md](.kiro/steering/course-standards.md) para detalles completos.
 
-## 📝 Evaluación
+## Evaluación
 
 El curso se evalúa mediante:
 
@@ -295,7 +295,7 @@ El curso se evalúa mediante:
 - ✅ README con instalación y ejemplos de uso
 - ✅ Paquete distribuible (wheel)
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Este es un curso en constante mejora. Si encuentras errores o tienes sugerencias:
 
@@ -303,7 +303,7 @@ Este es un curso en constante mejora. Si encuentras errores o tienes sugerencias
 2. Propón mejoras mediante pull requests
 3. Comparte feedback con los instructores
 
-## 📚 Recursos Adicionales
+## Recursos Adicionales
 
 ### Documentación Oficial
 - [Python Documentation](https://docs.python.org/3/)
@@ -322,17 +322,17 @@ Este es un curso en constante mejora. Si encuentras errores o tienes sugerencias
 - [Pyright Documentation](https://microsoft.github.io/pyright/)
 - [uv Documentation](https://docs.astral.sh/uv/)
 
-## 📧 Contacto
+## Contacto
 
 Para preguntas sobre el curso:
 - Instructor: [Nombre del instructor]
 - Email: [email@ejemplo.com]
 - Horario de consultas: [Horario]
 
-## 📄 Licencia
+## Licencia
 
 Este material educativo está disponible bajo [especificar licencia].
 
 ---
 
-**¡Bienvenido al curso!** Comienza tu viaje en `day_1/README.md` 🚀
+Comienza el curso en `day_1/README.md`.

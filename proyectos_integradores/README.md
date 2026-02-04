@@ -6,7 +6,7 @@ Este directorio contiene las guías detalladas para los proyectos integradores d
 
 ## Proyectos Disponibles
 
-### Nivel Básico (⭐⭐)
+### Nivel Básico
 
 1. **[Data Pipeline Package](01_data_pipeline_guia.md)**
    - Sistema ETL configurable
@@ -28,7 +28,7 @@ Este directorio contiene las guías detalladas para los proyectos integradores d
    - Ideal para: Enfoque en robustez y testing
    - Conceptos: Parsing, validación, conversión
 
-### Nivel Medio (⭐⭐⭐)
+### Nivel Medio
 
 5. **[Data Validator Library](05_data_validator_guia.md)**
    - Framework de validación de datos tabulares
@@ -60,11 +60,11 @@ Cada guía incluye:
 
 ## Cómo Elegir un Proyecto
 
-### Si eres nuevo en arquitectura de software:
-Elige un proyecto de nivel básico (⭐⭐). Todos son completables en 6 días con guía.
+### Si eres nuevo en arquitectura de software
+Elige un proyecto de nivel básico. Todos son completables en 6 días con guía.
 
-### Si tienes experiencia con Python:
-Considera un proyecto de nivel medio (⭐⭐⭐). Más funcionalidades pero guiadas.
+### Si tienes experiencia con Python
+Considera un proyecto de nivel medio. Más funcionalidades pero guiadas.
 
 ### Considera tus intereses:
 - **DevOps/Observabilidad**: Log Analyzer
@@ -209,4 +209,4 @@ R: Es una guía, no una regla estricta. Pero debe tener sentido y estar bien org
 
 ---
 
-¡Buena suerte con tu proyecto! Recuerda: el objetivo es aplicar principios, no crear el software perfecto.
+Recuerda: el objetivo es aplicar principios de ingeniería de software, no crear el software perfecto.
