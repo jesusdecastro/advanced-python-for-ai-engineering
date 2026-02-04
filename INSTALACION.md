@@ -195,6 +195,43 @@ Dependencias comunes ya instaladas:
 - Config Manager: Necesitarás añadir pyyaml y toml
 - Text Processing: Solo stdlib
 
+## Configuración para el Proyecto Integrador
+
+Cuando crees tu paquete para el proyecto integrador (Día 6), deberás usar src layout. Por ejemplo, si tu proyecto se llama `mi_entregable_brutal`:
+
+```
+advanced-python-for-ai-engineering/
+├── src/
+│   └── mi_entregable_brutal/
+│       ├── __init__.py
+│       ├── core.py
+│       └── utils.py
+├── tests/
+├── pyproject.toml
+└── README.md
+```
+
+El `pyproject.toml` ya está configurado para encontrar paquetes en `src/`:
+
+```toml
+[tool.setuptools.packages.find]
+where = ["src"]
+```
+
+Esto le dice a setuptools que busque paquetes Python dentro de la carpeta `src/`. No necesitas modificar nada más.
+
+Instala tu paquete en modo editable:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Ahora puedes importar tu paquete desde cualquier lugar:
+
+```python
+from mi_entregable_brutal import core
+```
+
 ## Verificación Final
 
 Al finalizar el curso, tu `pyproject.toml` debería verse así:
