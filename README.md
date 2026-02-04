@@ -82,6 +82,10 @@ Al finalizar este curso, serás capaz de:
 
 ### Instalación
 
+Este curso utiliza un enfoque incremental para la gestión de dependencias. Cada día instalarás solo las librerías necesarias, practicando la gestión de dependencias de forma realista.
+
+#### Configuración Inicial (5 minutos)
+
 1. Clona el repositorio:
 ```bash
 git clone https://github.com/tu-usuario/advanced-python-for-ai-engineering.git
@@ -90,26 +94,26 @@ cd advanced-python-for-ai-engineering
 
 2. Crea y activa un entorno virtual:
 ```bash
-# Con venv
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
+
+# Activar
 venv\Scripts\activate     # Windows
-
-# O con uv (recomendado)
-uv venv
-source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
+source venv/bin/activate  # Linux/Mac
 ```
 
-3. Instala las dependencias:
+3. Instala las dependencias del Día 1:
 ```bash
-pip install -r requirements.txt
+pip install -r day_1/requirements.txt
 ```
 
-4. Comienza con el Día 1:
+4. Verifica la instalación:
 ```bash
-cd day_1
+jupyter --version
+ruff --version
+pytest --version
 ```
+
+Para la guía completa de instalación incremental por día, consulta [INSTALACION.md](INSTALACION.md).
 
 ## Estructura del Repositorio
 

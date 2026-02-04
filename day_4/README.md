@@ -9,19 +9,26 @@
 5. **05_abstract_base_classes.ipynb** - Abstract Base Classes
 6. **06_solid_principles.ipynb** - Principios SOLID
 
-## Ejercicios
+## Dependencias
 
-Cada notebook tiene ejercicios en `exercises/` con tests en `exercises/tests/`.
+Instalar dependencias del Día 4:
+
+```bash
+pip install -r day_4/requirements.txt
+```
+
+Actualizar `pyproject.toml`:
+
+```toml
+[project]
+dependencies = [
+    "pydantic>=2.0.0",
+]
+```
+
+## Ejercicios
 
 Ejecutar tests:
 ```bash
-pytest exercises/tests/
+pytest day_4/exercises/tests/
 ```
-
-## Objetivos
-
-- Distinguir entre objetos y estructuras de datos
-- Aplicar el Principio de Responsabilidad Única
-- Elegir entre herencia y composición apropiadamente
-- Usar Abstract Base Classes para definir interfaces
-- Aplicar los principios SOLID en Python

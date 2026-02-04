@@ -1,6 +1,0 @@
-# Minimal environment for Day 1
-# This is the essential setup to run the Day 1 notebook
-# Install with: pip install -r requirements-minimal.txt
-
-jupyter==1.1.1
-notebook==7.5.3
