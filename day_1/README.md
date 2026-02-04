@@ -17,17 +17,27 @@ El Día 1 comienza con código Python elegante (notebook 01) para generar engage
 
 **Notebook 01:** No requiere instalación - usa solo Python stdlib
 
-**Notebooks 02-06:** Instalar dependencias:
+**Notebooks 02-06:** Consulta `day_1/requirements.txt` para ver qué dependencias necesitas. Edita `pyproject.toml` añadiendo:
 
-```bash
-pip install -r day_1/requirements.txt
+```toml
+[project]
+dependencies = [
+    "jupyter>=1.1.0",
+    "notebook>=7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.8.0",
+    "pyright>=1.1.0",
+]
 ```
 
-Esto instala las herramientas fundamentales:
-- Jupyter y Notebook
-- Ruff (linter y formateador)
-- Pyright (type checker)
-- Pytest (testing framework)
+Instala:
+```bash
+pip install -e ".[dev]"
+```
 
 ## Ejercicios
 

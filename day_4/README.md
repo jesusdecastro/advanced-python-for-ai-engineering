@@ -11,19 +11,18 @@
 
 ## Dependencias
 
-Instalar dependencias del Día 4:
-
-```bash
-pip install -r day_4/requirements.txt
-```
-
-Actualizar `pyproject.toml`:
+Consulta `day_4/requirements.txt` para ver qué necesitas. Edita `pyproject.toml` añadiendo pydantic:
 
 ```toml
 [project]
 dependencies = [
     "pydantic>=2.0.0",
 ]
+```
+
+Actualiza la instalación:
+```bash
+pip install -e ".[dev]"
 ```
 
 ## Ejercicios

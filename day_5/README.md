@@ -10,30 +10,25 @@
 
 ## Dependencias
 
-Instalar dependencias del Día 5:
-
-```bash
-pip install -r day_5/requirements.txt
-```
-
-Actualizar `pyproject.toml`:
+Consulta `day_5/requirements.txt` para ver qué necesitas. Edita `pyproject.toml` añadiendo:
 
 ```toml
 [project]
 dependencies = [
-    "pydantic>=2.0.0",
     "numpy>=1.24.0",
     "pandas>=2.0.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.4.0",
     "pytest-cov>=4.1.0",
-    "ruff>=0.8.0",
-    "pyright>=1.1.0",
     "memory-profiler>=0.61.0",
 ]
+```
+
+Actualiza la instalación:
+```bash
+pip install -e ".[dev]"
 ```
 
 ## Ejercicios
