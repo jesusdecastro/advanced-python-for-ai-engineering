@@ -7,7 +7,7 @@ Curso intensivo de 6 días enfocado en Python avanzado aplicado a Ingeniería de
 Este curso está diseñado para desarrolladores que desean dominar Python avanzado aplicado a proyectos de Inteligencia Artificial. A través de 6 días intensivos, aprenderás desde la configuración profesional de proyectos hasta el desarrollo de paquetes Python production-ready, aplicando principios de Clean Code, SOLID y TDD.
 
 **Duración:** 48 horas (6 días × 8 horas)  
-**Modalidad:** Presencial con proyecto integrador grupal  
+**Modalidad:** Remoto con proyecto integrador grupal  
 **Nivel:** Intermedio-Avanzado
 
 ## Objetivos del Curso
@@ -73,9 +73,11 @@ Al finalizar este curso, serás capaz de:
 
 ### Requisitos Previos
 
-- Python 3.11 o superior
+- Python 3.11 o superior instalado
 - Git instalado
-- Editor de código (VS Code, PyCharm, etc.)
+- VS Code con las siguientes extensiones:
+  - Python (Microsoft)
+  - Ruff (Astral Software)
 - Conocimientos básicos de Python
 
 ### Instalación
