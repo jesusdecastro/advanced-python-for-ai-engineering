@@ -60,6 +60,42 @@ Allí encontrarás el punto de entrada completo con instrucciones paso a paso pa
 4. Completa los notebooks en orden
 5. Practica con los ejercicios en la carpeta `exercises/`
 
+## Ejercicios Prácticos
+
+Cada notebook tiene ejercicios asociados con tests unitarios:
+
+```bash
+# Desde la carpeta day_1
+cd day_1
+
+# Completa los ejercicios en exercises/02_type_hinting.py
+code exercises/02_type_hinting.py
+
+# Ejecuta los tests para validar tu solución
+pytest exercises/tests/test_02_type_hinting.py -v
+
+# O usa el script helper
+./run_tests.sh          # En Linux/Mac
+run_tests.bat           # En Windows
+```
+
+Todos los tests deben pasar para considerar el ejercicio como completado.
+
+## Validación de Código
+
+Asegúrate de que tu código siga los estándares del curso:
+
+```bash
+# Validar type hints con Pyright
+pyright exercises/02_type_hinting.py
+
+# Verificar calidad con Ruff
+ruff check exercises/02_type_hinting.py
+
+# Formatear código
+ruff format exercises/02_type_hinting.py
+```
+
 ## Notas Importantes
 
 - Cada día tiene su propio README con instrucciones específicas
