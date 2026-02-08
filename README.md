@@ -1,73 +1,52 @@
-# Curso de Python Avanzado para IA
+# Curso de Python Avanzado para IA - Día 1
 
-Curso intensivo de 6 días enfocado en Python avanzado aplicado a Ingeniería de IA, con énfasis en Clean Code, arquitectura de software y mejores prácticas de desarrollo.
+Rama dedicada al **Día 1: Fundamentos - Configuración de Proyectos Python** del curso intensivo de Python avanzado aplicado a Ingeniería de IA.
+
+> **Nota:** Esta rama (`dia_1`) contiene únicamente el material del Día 1. El contenido de los días restantes se irá integrando progresivamente a la rama principal mediante merges.
 
 ## Descripción
 
-Este curso está diseñado para desarrolladores que desean dominar Python avanzado aplicado a proyectos de Inteligencia Artificial. A través de 6 días intensivos, aprenderás desde la configuración profesional de proyectos hasta el desarrollo de paquetes Python production-ready, aplicando principios de Clean Code, SOLID y TDD.
+Esta rama contiene todo el material necesario para el primer día del curso, enfocado en establecer las bases profesionales para proyectos Python: entornos virtuales, sistema de módulos, estructura de paquetes, gestión de dependencias y herramientas de calidad de código.
 
-**Duración:** 48 horas (6 días × 8 horas)  
-**Modalidad:** Remoto con proyecto integrador grupal  
+**Duración:** 8 horas  
+**Modalidad:** Remoto  
 **Nivel:** Intermedio-Avanzado
 
-## Objetivos del Curso
+## Contenido del Día 1
 
-Al finalizar este curso, serás capaz de:
+### Temas Cubiertos
 
-- Configurar proyectos Python profesionales con estructura modular
-- Aplicar principios de Clean Code y SOLID en Python
-- Desarrollar código pythónico usando idioms y patrones avanzados
-- Diseñar arquitecturas orientadas a objetos robustas y mantenibles
-- Implementar testing completo con pytest (TDD, fixtures, mocking)
-- Optimizar código para procesamiento de datos con NumPy y pandas
-- Crear paquetes Python distribuibles y production-ready
+1. **Python Idioms Intro** - Introducción a código pythónico
+2. **Virtual Environments** - Gestión de entornos virtuales (venv, uv)
+3. **Modules and Imports** - Sistema de módulos e imports en Python
+4. **Type Hinting** - Type hints y validación de tipos
+5. **Code Quality Tools** - Herramientas de calidad (ruff, pyright)
+6. **Package Distribution** - Distribución de paquetes Python
 
-## Contenido por Día
+### Estructura del Día 1
 
-### Día 1: Fundamentos - Configuración de Proyectos Python
-- Entornos virtuales (venv, uv)
-- Sistema de módulos e imports
-- Estructura de paquetes (src layout)
-- pyproject.toml y gestión de dependencias
-- Distribución de paquetes (wheels)
-- Herramientas de calidad (ruff, pyright)
-
-### Día 2: Código Pythónico - Idioms y Programación Funcional
-- Comprehensions (list, dict, set)
-- Generadores e iteradores
-- Decoradores prácticos
-- Programación funcional (map, filter, reduce)
-- Context managers
-- Métodos mágicos
-
-### Día 3: Código Limpio - Legibilidad y Robustez
-- Clean Functions (SRP, funciones pequeñas)
-- Meaningful Names
-- Type hints avanzados
-- Error handling y excepciones custom
-- Documentación y docstrings
-- Principios DRY y KISS
-
-### Día 4: Diseño - Programación Orientada a Objetos
-- Objects vs Data Structures
-- Pydantic vs dataclasses
-- Classes y Single Responsibility Principle
-- Herencia vs composición
-- Abstract Base Classes (ABC)
-- Principios SOLID en Python
-
-### Día 5: Procesamiento de Datos y Testing
-- NumPy vectorization
-- pandas optimization
-- Memory profiling
-- Unit testing con pytest
-- Test-Driven Development (TDD)
-
-### Día 6: Proyecto Integrador
-- Finalización del proyecto grupal
-- Integración de todos los conceptos
-- Documentación completa
-- Presentación de proyectos
+```
+day_1/
+├── 01_python_idioms_intro.ipynb      # Notebook: Introducción a idioms
+├── 02_virtual_environments.ipynb     # Notebook: Entornos virtuales
+├── 03_modules_and_imports.ipynb      # Notebook: Módulos e imports
+├── 04_type_hinting.ipynb             # Notebook: Type hints
+├── 05_code_quality_tools.ipynb       # Notebook: Herramientas de calidad
+├── 06_package_distribution.ipynb     # Notebook: Distribución de paquetes
+├── exercises/                        # Ejercicios prácticos
+│   ├── 01_python_idioms.py
+│   ├── 02_type_hinting.py
+│   ├── 04_package_distribution.py
+│   ├── 05_code_quality_tools.py
+│   └── tests/                        # Tests unitarios
+├── examples/                         # Ejemplos de código
+│   ├── regular_package/              # Ejemplo de paquete regular
+│   └── namespace_package/            # Ejemplo de namespace package
+├── example_project/                  # Proyecto de ejemplo
+├── README.md                         # Guía del día
+├── EXERCISES_GUIDE.md                # Guía de ejercicios
+└── requirements.txt                  # Dependencias del día
+```
 
 ## Inicio Rápido
 
@@ -82,90 +61,95 @@ Al finalizar este curso, serás capaz de:
 
 ### Instalación
 
-1. Clona el repositorio:
+1. Clona el repositorio y cambia a la rama `dia_1`:
 ```bash
 git clone https://github.com/tu-usuario/advanced-python-for-ai-engineering.git
 cd advanced-python-for-ai-engineering
+git checkout dia_1
 ```
 
-2. Sigue las instrucciones en `day_1/README.md` para configurar tu entorno de desarrollo.
+2. Crea y activa el entorno virtual:
 
-El curso utiliza un enfoque incremental: cada día instalarás solo las dependencias necesarias. Consulta [INSTALACION.md](INSTALACION.md) para la guía completa.
-
-## Estructura del Repositorio
-
-```
-advanced-python-for-ai-engineering/
-├── day_1/                          # Día 1: Configuración de proyectos
-├── day_2/                          # Día 2: Código pythónico
-├── day_3/                          # Día 3: Código limpio
-├── day_4/                          # Día 4: OOP y diseño
-├── day_5/                          # Día 5: Testing y optimización
-├── proyectos_integradores/         # Guías de proyectos
-├── INSTALACION.md                  # Guía de instalación incremental
-├── plan_de_formacion.md            # Plan detallado del curso
-└── pyproject.toml                  # Configuración del proyecto
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
 
-## Cómo Usar Este Repositorio
+**Linux/Mac:**
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
-### Notebooks
+3. Instala las dependencias del Día 1:
+```bash
+pip install -r day_1/requirements.txt
+```
 
-Cada día contiene notebooks Jupyter con explicaciones teóricas, ejemplos ejecutables, ejercicios prácticos y referencias oficiales.
-
+4. Inicia Jupyter Notebook:
 ```bash
 cd day_1
-```
-
-```bash
 jupyter notebook
 ```
 
-### Ejercicios
+## Cómo Usar Este Material
 
-Cada día incluye ejercicios prácticos con tests unitarios:
+### 1. Notebooks Teóricos
 
-Completa los ejercicios:
+Cada notebook contiene:
+- Explicaciones teóricas en castellano
+- Ejemplos ejecutables con código en inglés
+- Ejercicios prácticos integrados
+- Referencias oficiales
+
+Abre los notebooks en orden secuencial (01 → 06).
+
+### 2. Ejercicios Prácticos
+
+Los ejercicios están en `day_1/exercises/`:
+
 ```bash
+# Completa los ejercicios
 code day_1/exercises/02_type_hinting.py
-```
 
-Ejecuta los tests:
-```bash
+# Ejecuta los tests
 pytest day_1/exercises/tests/ -v
+
+# Ejecuta tests específicos
+pytest day_1/exercises/tests/test_02_type_hinting.py -v
 ```
 
-### Validación de Código
+### 3. Validación de Código
 
-Type checking:
+**Type checking:**
 ```bash
-pyright exercises/
+pyright day_1/exercises/
 ```
 
-Linting:
+**Linting:**
 ```bash
-ruff check exercises/
+ruff check day_1/exercises/
 ```
 
-Formateo:
+**Formateo:**
 ```bash
-ruff format exercises/
+ruff format day_1/exercises/
 ```
 
-## Proyecto Integrador
+## Objetivos de Aprendizaje
 
-Trabajarás en grupos de 3 personas en uno de estos proyectos:
+Al finalizar el Día 1, serás capaz de:
 
-1. **Data Pipeline Package** - Sistema ETL configurable
-2. **Log Analyzer Tool** - Análisis de logs con métricas
-3. **CSV Data Cleaner** - Limpieza y validación de CSV
-4. **Config File Manager** - Gestión de configuraciones
-5. **Data Validator Library** - Framework de validación
-6. **Text Processing Toolkit** - Procesamiento de texto
+- ✅ Configurar entornos virtuales profesionales con venv y uv
+- ✅ Entender el sistema de módulos e imports de Python
+- ✅ Estructurar paquetes Python siguiendo mejores prácticas (src layout)
+- ✅ Usar type hints para código más robusto
+- ✅ Aplicar herramientas de calidad (ruff, pyright)
+- ✅ Crear paquetes distribuibles con pyproject.toml
+- ✅ Escribir código pythónico siguiendo idioms estándar
 
-Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos.
-
-## Stack Tecnológico
+## Stack Tecnológico del Día 1
 
 **Core:**
 - Python 3.11+
@@ -173,33 +157,47 @@ Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para de
 - ruff (linting y formateo)
 - pyright (type checking)
 
-**Librerías principales:**
-- pydantic (validación de datos)
-- numpy (computación numérica)
-- pandas (análisis de datos)
-
 **Herramientas:**
 - Jupyter Notebook
 - Git
 - VS Code
 
-## Evaluación
+## Recursos Adicionales
 
-La evaluación se centra en la comprensión y aplicación de los conceptos en el proyecto integrador grupal. Los grupos deberán defender su proyecto demostrando:
+- **Guía de instalación completa:** [virtual_env_installation_guide.md](virtual_env_installation_guide.md)
+- **Plugins recomendados de VS Code:** [vscode_plugins.md](vscode_plugins.md)
+- **Guía de ejercicios:** [day_1/EXERCISES_GUIDE.md](day_1/EXERCISES_GUIDE.md)
+- **Plan de formación completo:** [plan_de_formacion.md](plan_de_formacion.md)
 
-- **Comprensión**: Entendimiento profundo de los principios aplicados
-- **Comunicación**: Capacidad de explicar decisiones técnicas
-- **Colaboración**: Trabajo efectivo en equipo
-- **Finalización**: Proyecto funcional y completo
+## Estándares de Código
 
-### Criterios del Proyecto
+Este curso sigue estándares estrictos:
 
-- Funcionalidad completa según especificación
-- Tests con cobertura ≥ 80%
-- Código pasa ruff y pyright sin errores
-- Docstrings completos en formato Sphinx
-- README con instalación y ejemplos de uso
-- Paquete distribuible (wheel)
+- **Documentación en Markdown:** Castellano
+- **Código Python:** Inglés
+- **Docstrings:** Inglés (formato Sphinx)
+- **Type hints:** Obligatorios en todas las funciones
+- **Linting:** Todo el código debe pasar ruff sin errores
+
+Ver [.kiro/steering/course-standards.md](.kiro/steering/course-standards.md) para detalles completos.
+
+## Próximos Pasos
+
+Una vez completado el Día 1:
+
+1. Asegúrate de que todos los ejercicios pasan los tests
+2. Verifica que tu código pasa ruff y pyright
+3. Revisa los conceptos clave en los notebooks
+4. Prepárate para el Día 2: Código Pythónico (próximamente en main)
+
+## Soporte
+
+Si encuentras problemas:
+
+1. Revisa la guía de instalación: [virtual_env_installation_guide.md](virtual_env_installation_guide.md)
+2. Verifica que tu entorno virtual esté activado
+3. Asegúrate de tener Python 3.11+ instalado
+4. Consulta los ejemplos en `day_1/examples/`
 
 ## Licencia
 
@@ -207,4 +205,4 @@ Este material educativo está disponible bajo licencia MIT para uso educativo y 
 
 ---
 
-Comienza el curso en `day_1/README.md`.
+**¡Comienza tu aprendizaje en `day_1/README.md`!**
