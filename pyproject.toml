@@ -1,0 +1,43 @@
+[project]
+name = "advanced-python-ai"
+version = "1.0.0"
+description = "Advanced Python for AI Engineering Course"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "jupyter>=1.1.0",
+    "notebook>=7.0.0",
+]
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.8.0",
+    "pyright>=1.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["mi_entregable_brutal/src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.pyright]
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false

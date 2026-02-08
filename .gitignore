@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Ruff
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+
+# Archivos del instructor (NO COMMITEAR)
+.instructor/
+GUIA_PROFESOR.md
+CHECKLIST_INSTRUCTOR.md
+MEJORAS_REALIZADAS.md
+LEE_ESTO_PRIMERO.md
+RESUMEN_PARA_PROFESOR.md
+dia_1/GUIA_PROFESOR.md
+dia_1/CHECKLIST_INSTRUCTOR.md
+dia_1/MEJORAS_REALIZADAS.md

@@ -1,0 +1,15 @@
+# Día 1: Configuración de Proyectos Python
+# Herramientas fundamentales para desarrollo profesional
+
+# Jupyter y Notebook - Entorno interactivo para notebooks
+jupyter>=1.1.0
+notebook>=7.0.0
+
+# Ruff - Linter y formateador extremadamente rápido (reemplaza flake8, black, isort)
+ruff>=0.8.0
+
+# Pyright - Type checker estático de Microsoft para validar type hints
+pyright>=1.1.0
+
+# Pytest - Framework de testing más popular en Python
+pytest>=7.4.0
