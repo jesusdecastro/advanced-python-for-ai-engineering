@@ -1,6 +1,0 @@
-# Día 4: Programación Orientada a Objetos
-# Validación de datos con modelos
-
-# Pydantic - Validación de datos usando type hints con modelos declarativos
-# Proporciona validación automática, serialización y documentación de esquemas
-pydantic>=2.0.0
