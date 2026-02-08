@@ -7,7 +7,7 @@
 ## Ejecución Rápida
 
 ```bash
-# Desde day_1/
+# Desde dia_1/
 python examples/run_namespace_package.py  # Sin __init__.py
 python examples/run_regular_package.py    # Con __init__.py
 ```

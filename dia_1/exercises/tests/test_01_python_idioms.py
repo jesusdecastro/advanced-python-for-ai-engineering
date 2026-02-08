@@ -23,7 +23,7 @@ sys.path.insert(0, str(parent_dir))
 
 # Import with try/except to handle different execution contexts
 try:
-    from day_1.exercises import idioms_01 as ex
+    from dia_1.exercises import idioms_01 as ex
 except ImportError:
     import idioms_01 as ex
 

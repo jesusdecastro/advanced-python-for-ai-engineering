@@ -3,7 +3,7 @@ Entry point for regular package example (WITH __init__.py).
 
 This demonstrates what WORKS with regular packages and the benefits of __init__.py.
 
-Run from day_1 directory:
+Run from dia_1 directory:
     python examples/run_regular_package.py
 """
 

@@ -13,7 +13,7 @@ Estos ejercicios te permitirán practicar los conceptos fundamentales de Python 
 ## Estructura de Archivos
 
 ```
-day_1/exercises/
+dia_1/exercises/
 ├── 01_python_idioms.py          # Archivo con ejercicios (completa las funciones)
 ├── tests/
 │   └── test_01_python_idioms.py # Tests unitarios
@@ -41,7 +41,7 @@ Cada función tiene:
 
 ### 3. Ejecutar Tests
 
-Desde el directorio `day_1/exercises/`, ejecuta:
+Desde el directorio `dia_1/exercises/`, ejecuta:
 
 ```bash
 # Ejecutar todos los tests
@@ -223,10 +223,10 @@ def decorator_with_param(param):
 
 ```bash
 # Asegúrate de estar en el directorio correcto
-cd day_1/exercises
+cd dia_1/exercises
 
 # O ejecuta desde la raíz del proyecto
-pytest day_1/exercises/tests/test_01_python_idioms.py -v
+pytest dia_1/exercises/tests/test_01_python_idioms.py -v
 ```
 
 ### Error: "fixture 'tmp_path' not found"

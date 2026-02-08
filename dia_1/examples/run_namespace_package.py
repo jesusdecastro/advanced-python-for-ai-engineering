@@ -3,7 +3,7 @@ Entry point for namespace package example (WITHOUT __init__.py).
 
 This demonstrates what WORKS and what DOESN'T WORK with namespace packages.
 
-Run from day_1 directory:
+Run from dia_1 directory:
     python examples/run_namespace_package.py
 """
 

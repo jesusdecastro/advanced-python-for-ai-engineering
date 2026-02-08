@@ -7,7 +7,7 @@ Para cada notebook del curso, hay ejercicios prácticos asociados con tests unit
 ## Estructura de Ejercicios
 
 ```
-day_1/
+dia_1/
 ├── exercises/
 │   ├── __init__.py
 │   ├── 02_type_hinting.py              # Ejercicios a resolver
@@ -31,7 +31,7 @@ Comienza leyendo el notebook correspondiente (ej: `02_type_hinting.ipynb`) para 
 ### 2. Abre el Archivo de Ejercicios
 
 ```bash
-# Desde la carpeta day_1
+# Desde la carpeta dia_1
 code exercises/02_type_hinting.py
 ```
 
@@ -121,10 +121,10 @@ ptw exercises/tests/test_02_type_hinting.py
 
 ### "ModuleNotFoundError: No module named 'exercises'"
 
-**Solución:** Asegúrate de estar en la carpeta `day_1`:
+**Solución:** Asegúrate de estar en la carpeta `dia_1`:
 
 ```bash
-cd day_1
+cd dia_1
 pytest exercises/tests/test_02_type_hinting.py -v
 ```
 

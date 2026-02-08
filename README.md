@@ -26,7 +26,7 @@ Esta rama contiene todo el material necesario para el primer día del curso, enf
 ### Estructura del Día 1
 
 ```
-day_1/
+dia_1/
 ├── 01_python_idioms_intro.ipynb      # Notebook: Introducción a idioms
 ├── 02_virtual_environments.ipynb     # Notebook: Entornos virtuales
 ├── 03_modules_and_imports.ipynb      # Notebook: Módulos e imports
@@ -84,12 +84,12 @@ source venv/bin/activate
 
 3. Instala las dependencias del Día 1:
 ```bash
-pip install -r day_1/requirements.txt
+pip install -r dia_1/requirements.txt
 ```
 
 4. Inicia Jupyter Notebook:
 ```bash
-cd day_1
+cd dia_1
 jupyter notebook
 ```
 
@@ -107,34 +107,34 @@ Abre los notebooks en orden secuencial (01 → 06).
 
 ### 2. Ejercicios Prácticos
 
-Los ejercicios están en `day_1/exercises/`:
+Los ejercicios están en `dia_1/exercises/`:
 
 ```bash
 # Completa los ejercicios
-code day_1/exercises/02_type_hinting.py
+code dia_1/exercises/02_type_hinting.py
 
 # Ejecuta los tests
-pytest day_1/exercises/tests/ -v
+pytest dia_1/exercises/tests/ -v
 
 # Ejecuta tests específicos
-pytest day_1/exercises/tests/test_02_type_hinting.py -v
+pytest dia_1/exercises/tests/test_02_type_hinting.py -v
 ```
 
 ### 3. Validación de Código
 
 **Type checking:**
 ```bash
-pyright day_1/exercises/
+pyright dia_1/exercises/
 ```
 
 **Linting:**
 ```bash
-ruff check day_1/exercises/
+ruff check dia_1/exercises/
 ```
 
 **Formateo:**
 ```bash
-ruff format day_1/exercises/
+ruff format dia_1/exercises/
 ```
 
 ## Objetivos de Aprendizaje
@@ -166,7 +166,7 @@ Al finalizar el Día 1, serás capaz de:
 
 - **Guía de instalación completa:** [virtual_env_installation_guide.md](virtual_env_installation_guide.md)
 - **Plugins recomendados de VS Code:** [vscode_plugins.md](vscode_plugins.md)
-- **Guía de ejercicios:** [day_1/EXERCISES_GUIDE.md](day_1/EXERCISES_GUIDE.md)
+- **Guía de ejercicios:** [dia_1/EXERCISES_GUIDE.md](dia_1/EXERCISES_GUIDE.md)
 - **Plan de formación completo:** [plan_de_formacion.md](plan_de_formacion.md)
 
 ## Estándares de Código
@@ -197,7 +197,7 @@ Si encuentras problemas:
 1. Revisa la guía de instalación: [virtual_env_installation_guide.md](virtual_env_installation_guide.md)
 2. Verifica que tu entorno virtual esté activado
 3. Asegúrate de tener Python 3.11+ instalado
-4. Consulta los ejemplos en `day_1/examples/`
+4. Consulta los ejemplos en `dia_1/examples/`
 
 ## Licencia
 
@@ -205,4 +205,4 @@ Este material educativo está disponible bajo licencia MIT para uso educativo y 
 
 ---
 
-**¡Comienza tu aprendizaje en `day_1/README.md`!**
+**¡Comienza tu aprendizaje en `dia_1/README.md`!**

@@ -30,7 +30,7 @@ Tu trabajo es agregar todos los type hints necesarios para que Pyright no report
 ### 1. Abre el archivo de ejercicios
 
 ```bash
-# Desde la carpeta day_1
+# Desde la carpeta dia_1
 code exercises/02_type_hinting.py
 ```
 
@@ -77,7 +77,7 @@ Calculate the area of a rectangle.
 ### 5. Valida con Pyright
 
 ```bash
-# Desde la carpeta day_1
+# Desde la carpeta dia_1
 pyright exercises/02_type_hinting.py
 ```
 
@@ -86,7 +86,7 @@ Pyright debe reportar **0 errores**.
 ### 6. Ejecuta los tests
 
 ```bash
-# Desde la carpeta day_1
+# Desde la carpeta dia_1
 pytest exercises/tests/test_02_type_hinting.py -v
 ```
 
@@ -219,10 +219,10 @@ ruff format exercises/02_type_hinting.py
 
 ### "ModuleNotFoundError: No module named 'exercises'"
 
-Asegúrate de estar ejecutando pytest desde la carpeta `day_1`:
+Asegúrate de estar ejecutando pytest desde la carpeta `dia_1`:
 
 ```bash
-cd day_1
+cd dia_1
 pytest exercises/tests/test_02_type_hinting.py -v
 ```
 

@@ -13,7 +13,7 @@
 
 **Notebook 01:** No requiere instalación - usa solo Python stdlib
 
-**Notebooks 02-06:** Consulta `day_1/requirements.txt` para ver qué dependencias necesitas. Edita `pyproject.toml` añadiendo:
+**Notebooks 02-06:** Consulta `dia_1/requirements.txt` para ver qué dependencias necesitas. Edita `pyproject.toml` añadiendo:
 
 ```toml
 [project]
@@ -40,15 +40,15 @@ pip install -e ".[dev]"
 Ejecutar tests:
 
 ```bash
-pytest day_1/exercises/tests/
+pytest dia_1/exercises/tests/
 ```
 
 Validar código:
 
 ```bash
-ruff check day_1/exercises/
+ruff check dia_1/exercises/
 ```
 
 ```bash
-pyright day_1/exercises/
+pyright dia_1/exercises/
 ```

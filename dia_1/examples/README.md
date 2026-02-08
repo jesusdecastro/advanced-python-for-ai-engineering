@@ -7,7 +7,7 @@ Estos ejemplos demuestran la diferencia entre **namespace packages** (sin `__ini
 ## Estructura de Archivos
 
 ```
-day_1/examples/
+dia_1/examples/
 ├── README.md                          # Este archivo
 │
 ├── namespace_package/                 # ❌ SIN __init__.py
@@ -25,7 +25,7 @@ day_1/examples/
 
 ## Cómo Ejecutar
 
-### Desde el directorio `day_1`:
+### Desde el directorio `dia_1`:
 
 ```bash
 # Ejemplo 1: Namespace Package (sin __init__.py)
@@ -39,10 +39,10 @@ python examples/run_regular_package.py
 
 ```bash
 # Ejemplo 1
-python day_1/examples/run_namespace_package.py
+python dia_1/examples/run_namespace_package.py
 
 # Ejemplo 2
-python day_1/examples/run_regular_package.py
+python dia_1/examples/run_regular_package.py
 ```
 
 ## Ejemplo 1: Namespace Package (SIN `__init__.py`)

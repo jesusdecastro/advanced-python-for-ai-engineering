@@ -41,7 +41,7 @@ source venv/bin/activate
 
 ### 3. Instalar Dependencias del Día 1
 
-Consulta `day_1/requirements.txt` para ver qué necesitas instalar. 
+Consulta `dia_1/requirements.txt` para ver qué necesitas instalar. 
 
 Abre `pyproject.toml` y añade las dependencias en las listas correspondientes:
 
