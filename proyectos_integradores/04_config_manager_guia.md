@@ -22,45 +22,45 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 configman/
-├── src/
-│   └── configman/
-│       ├── __init__.py
-│       ├── parsers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── json_parser.py
-│       │   ├── yaml_parser.py
-│       │   ├── toml_parser.py
-│       │   └── ini_parser.py
-│       ├── validators/
-│       │   ├── __init__.py
-│       │   └── schema_validator.py
-│       ├── converters/
-│       │   ├── __init__.py
-│       │   └── format_converter.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── config.py
-│       ├── merger.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── fixtures/
-│   │   ├── config.json
-│   │   ├── config.yaml
-│   │   ├── config.toml
-│   │   └── config.ini
-│   ├── test_parsers.py
-│   ├── test_validators.py
-│   ├── test_converters.py
-│   └── test_merger.py
-├── examples/
-│   ├── configs/
-│   │   ├── defaults.yaml
-│   │   └── user.yaml
-│   └── usage_example.py
-├── pyproject.toml
-└── README.md
+ src/
+    configman/
+        __init__.py
+        parsers/
+           __init__.py
+           base.py
+           json_parser.py
+           yaml_parser.py
+           toml_parser.py
+           ini_parser.py
+        validators/
+           __init__.py
+           schema_validator.py
+        converters/
+           __init__.py
+           format_converter.py
+        models/
+           __init__.py
+           config.py
+        merger.py
+        cli.py
+ tests/
+    conftest.py
+    fixtures/
+       config.json
+       config.yaml
+       config.toml
+       config.ini
+    test_parsers.py
+    test_validators.py
+    test_converters.py
+    test_merger.py
+ examples/
+    configs/
+       defaults.yaml
+       user.yaml
+    usage_example.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -242,23 +242,23 @@ configman/
 
 ## Errores Comunes a Evitar
 
-❌ **Parsers que modifican la estructura**
-✅ Preserva la estructura original
+ **Parsers que modifican la estructura**
+ Preserva la estructura original
 
-❌ **Dot notation que no maneja anidamiento**
-✅ Soporta config.db.connection.host
+ **Dot notation que no maneja anidamiento**
+ Soporta config.db.connection.host
 
-❌ **Merge que sobrescribe todo**
-✅ Deep merge inteligente
+ **Merge que sobrescribe todo**
+ Deep merge inteligente
 
-❌ **Validación que no indica QUÉ está mal**
-✅ Mensajes de error descriptivos
+ **Validación que no indica QUÉ está mal**
+ Mensajes de error descriptivos
 
-❌ **Conversión que pierde información**
-✅ Conversión lossless cuando sea posible
+ **Conversión que pierde información**
+ Conversión lossless cuando sea posible
 
-❌ **No manejar configs vacíos**
-✅ Maneja todos los casos edge
+ **No manejar configs vacíos**
+ Maneja todos los casos edge
 
 ---
 

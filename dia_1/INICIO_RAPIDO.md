@@ -1,4 +1,4 @@
-# 🚀 Inicio Rápido - Día 1
+#  Inicio Rápido - Día 1
 
 ## Para Estudiantes Impacientes
 
@@ -14,7 +14,7 @@ python --version
 
 **Debe mostrar:** `Python 3.11.x` o superior
 
-❌ **Si no:** Instala Python 3.11+ desde [python.org](https://www.python.org/downloads/)
+ **Si no:** Instala Python 3.11+ desde [python.org](https://www.python.org/downloads/)
 
 ---
 
@@ -81,7 +81,7 @@ pytest exercises/tests/test_02_type_hinting.py -v
 
 ---
 
-## ✅ ¡Listo!
+##  ¡Listo!
 
 Ya tienes todo configurado. Ahora:
 
@@ -91,7 +91,7 @@ Ya tienes todo configurado. Ahora:
 
 ---
 
-## 🆘 Problemas Comunes
+##  Problemas Comunes
 
 ### "pytest: command not found"
 
@@ -126,7 +126,7 @@ pip install -e ".[dev]"
 
 ---
 
-## 📞 Ayuda
+##  Ayuda
 
 - **Instructor:** Levanta la mano
 - **Compañeros:** Pregunta a tu lado
@@ -135,4 +135,4 @@ pip install -e ".[dev]"
 ---
 
 **Tiempo total:** ~5 minutos  
-**Siguiente paso:** Abre `01_python_idioms_intro.ipynb` y empieza a aprender 🎓
+**Siguiente paso:** Abre `01_python_idioms_intro.ipynb` y empieza a aprender 

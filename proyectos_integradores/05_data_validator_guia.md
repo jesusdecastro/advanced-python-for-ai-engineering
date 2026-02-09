@@ -22,46 +22,46 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 dataval/
-├── src/
-│   └── dataval/
-│       ├── __init__.py
-│       ├── validators/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── type_validator.py
-│       │   ├── range_validator.py
-│       │   ├── format_validator.py
-│       │   └── custom_validator.py
-│       ├── rules/
-│       │   ├── __init__.py
-│       │   └── rule_engine.py
-│       ├── reporters/
-│       │   ├── __init__.py
-│       │   ├── report.py
-│       │   └── html_reporter.py
-│       ├── correctors/
-│       │   ├── __init__.py
-│       │   ├── type_coercer.py
-│       │   └── imputer.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── validation_result.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── fixtures/
-│   │   ├── invalid_data.csv
-│   │   └── rules.yaml
-│   ├── test_validators.py
-│   ├── test_rules.py
-│   ├── test_correctors.py
-│   └── test_reporters.py
-├── examples/
-│   ├── sample_data.csv
-│   ├── validation_rules.yaml
-│   └── validate_example.py
-├── pyproject.toml
-└── README.md
+ src/
+    dataval/
+        __init__.py
+        validators/
+           __init__.py
+           base.py
+           type_validator.py
+           range_validator.py
+           format_validator.py
+           custom_validator.py
+        rules/
+           __init__.py
+           rule_engine.py
+        reporters/
+           __init__.py
+           report.py
+           html_reporter.py
+        correctors/
+           __init__.py
+           type_coercer.py
+           imputer.py
+        models/
+           __init__.py
+           validation_result.py
+        cli.py
+ tests/
+    conftest.py
+    fixtures/
+       invalid_data.csv
+       rules.yaml
+    test_validators.py
+    test_rules.py
+    test_correctors.py
+    test_reporters.py
+ examples/
+    sample_data.csv
+    validation_rules.yaml
+    validate_example.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -242,23 +242,23 @@ dataval/
 
 ## Errores Comunes a Evitar
 
-❌ **Validadores que modifican datos**
-✅ Separa validación de corrección
+ **Validadores que modifican datos**
+ Separa validación de corrección
 
-❌ **Reportes genéricos: "hay errores"**
-✅ Reportes específicos: "fila 5, columna 'age': valor -10 fuera de rango [0, 120]"
+ **Reportes genéricos: "hay errores"**
+ Reportes específicos: "fila 5, columna 'age': valor -10 fuera de rango [0, 120]"
 
-❌ **Validación lenta fila por fila**
-✅ Usa pandas vectorización cuando sea posible
+ **Validación lenta fila por fila**
+ Usa pandas vectorización cuando sea posible
 
-❌ **Rule engine inflexible**
-✅ Permite reglas custom con expresiones
+ **Rule engine inflexible**
+ Permite reglas custom con expresiones
 
-❌ **Corrección sin reportar qué se cambió**
-✅ Reporta todas las correcciones aplicadas
+ **Corrección sin reportar qué se cambió**
+ Reporta todas las correcciones aplicadas
 
-❌ **No manejar tipos de pandas (datetime64, category)**
-✅ Soporta todos los tipos de pandas
+ **No manejar tipos de pandas (datetime64, category)**
+ Soporta todos los tipos de pandas
 
 ---
 

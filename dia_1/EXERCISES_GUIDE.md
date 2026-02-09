@@ -8,18 +8,18 @@ Para cada notebook del curso, hay ejercicios prácticos asociados con tests unit
 
 ```
 dia_1/
-├── exercises/
-│   ├── __init__.py
-│   ├── 02_type_hinting.py              # Ejercicios a resolver
-│   ├── tests/
-│   │   ├── __init__.py
-│   │   ├── conftest.py                 # Configuración de pytest
-│   │   └── test_02_type_hinting.py     # Tests unitarios
-│   ├── README.md                       # Instrucciones detalladas
-│   └── SOLUTIONS.md                    # Soluciones de referencia
-├── run_tests.sh                        # Script para ejecutar tests (Linux/Mac)
-├── run_tests.bat                       # Script para ejecutar tests (Windows)
-└── EXERCISES_GUIDE.md                  # Este archivo
+ exercises/
+    __init__.py
+    02_type_hinting.py              # Ejercicios a resolver
+    tests/
+       __init__.py
+       conftest.py                 # Configuración de pytest
+       test_02_type_hinting.py     # Tests unitarios
+    README.md                       # Instrucciones detalladas
+    SOLUTIONS.md                    # Soluciones de referencia
+ run_tests.sh                        # Script para ejecutar tests (Linux/Mac)
+ run_tests.bat                       # Script para ejecutar tests (Windows)
+ EXERCISES_GUIDE.md                  # Este archivo
 ```
 
 ## Flujo de Trabajo
@@ -179,10 +179,10 @@ Tu código debe cumplir con estos estándares:
 
 Una vez completes todos los ejercicios:
 
-1. ✓ Todos los tests pasan
-2. ✓ Pyright no reporta errores
-3. ✓ Ruff no reporta problemas
-4. ✓ Código formateado correctamente
+1.  Todos los tests pasan
+2.  Pyright no reporta errores
+3.  Ruff no reporta problemas
+4.  Código formateado correctamente
 5. → Pasa al siguiente notebook
 
 ## Recursos Adicionales

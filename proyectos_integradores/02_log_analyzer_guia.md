@@ -22,41 +22,41 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 loglyzer/
-├── src/
-│   └── loglyzer/
-│       ├── __init__.py
-│       ├── parsers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── nginx.py
-│       │   └── apache.py
-│       ├── analyzers/
-│       │   ├── __init__.py
-│       │   ├── metrics.py
-│       │   └── anomaly.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── log_entry.py
-│       ├── reporters/
-│       │   ├── __init__.py
-│       │   ├── json_reporter.py
-│       │   └── html_reporter.py
-│       ├── filters.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── fixtures/
-│   │   ├── sample_nginx.log
-│   │   └── sample_apache.log
-│   ├── test_parsers.py
-│   ├── test_analyzers.py
-│   └── test_reporters.py
-├── templates/
-│   └── report.html
-├── examples/
-│   └── analyze_logs.py
-├── pyproject.toml
-└── README.md
+ src/
+    loglyzer/
+        __init__.py
+        parsers/
+           __init__.py
+           base.py
+           nginx.py
+           apache.py
+        analyzers/
+           __init__.py
+           metrics.py
+           anomaly.py
+        models/
+           __init__.py
+           log_entry.py
+        reporters/
+           __init__.py
+           json_reporter.py
+           html_reporter.py
+        filters.py
+        cli.py
+ tests/
+    conftest.py
+    fixtures/
+       sample_nginx.log
+       sample_apache.log
+    test_parsers.py
+    test_analyzers.py
+    test_reporters.py
+ templates/
+    report.html
+ examples/
+    analyze_logs.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -231,23 +231,23 @@ loglyzer/
 
 ## Errores Comunes a Evitar
 
-❌ **Cargar todo el log en memoria**
-✅ Usa generadores para streaming
+ **Cargar todo el log en memoria**
+ Usa generadores para streaming
 
-❌ **Regex complejas e ilegibles**
-✅ Usa regex con nombres de grupos y comenta
+ **Regex complejas e ilegibles**
+ Usa regex con nombres de grupos y comenta
 
-❌ **Parser monolítico de 200 líneas**
-✅ Divide en funciones pequeñas
+ **Parser monolítico de 200 líneas**
+ Divide en funciones pequeñas
 
-❌ **Ignorar líneas malformadas silenciosamente**
-✅ Logea warnings y cuenta líneas problemáticas
+ **Ignorar líneas malformadas silenciosamente**
+ Logea warnings y cuenta líneas problemáticas
 
-❌ **Métricas incorrectas**
-✅ Verifica con logs de ejemplo conocidos
+ **Métricas incorrectas**
+ Verifica con logs de ejemplo conocidos
 
-❌ **Reportes ilegibles**
-✅ Formato claro con secciones bien definidas
+ **Reportes ilegibles**
+ Formato claro con secciones bien definidas
 
 ---
 

@@ -12,7 +12,6 @@ Run with: pytest test_01_python_idioms.py -v
 
 import pytest
 import time
-import os
 from typing import List
 import sys
 from pathlib import Path

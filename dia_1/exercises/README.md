@@ -8,10 +8,10 @@ Esta carpeta contiene ejercicios prácticos para el notebook de Type Hinting. **
 
 ```
 exercises/
-├── 02_type_hinting.py          # Código SIN type hints (tu tarea: agregarlos)
-├── tests/
-│   └── test_02_type_hinting.py # Tests funcionales + validación Pyright
-└── README.md                    # Este archivo
+ 02_type_hinting.py          # Código SIN type hints (tu tarea: agregarlos)
+ tests/
+    test_02_type_hinting.py # Tests funcionales + validación Pyright
+ README.md                    # Este archivo
 ```
 
 ## Objetivo del Ejercicio
@@ -91,8 +91,8 @@ pytest exercises/tests/test_02_type_hinting.py -v
 ```
 
 Los tests validan:
-- ✓ Que el código funcione correctamente (tests funcionales)
-- ✓ Que Pyright no reporte errores (validación de type hints)
+-  Que el código funcione correctamente (tests funcionales)
+-  Que Pyright no reporte errores (validación de type hints)
 
 ## Ejercicios
 

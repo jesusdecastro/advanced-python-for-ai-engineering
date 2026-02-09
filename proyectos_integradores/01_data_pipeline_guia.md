@@ -22,39 +22,39 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 datapipe/
-├── src/
-│   └── datapipe/
-│       ├── __init__.py
-│       ├── readers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── csv_reader.py
-│       │   └── json_reader.py
-│       ├── transformers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── filter.py
-│       │   └── aggregate.py
-│       ├── writers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   └── csv_writer.py
-│       ├── validators/
-│       │   ├── __init__.py
-│       │   └── schema.py
-│       ├── pipeline.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── test_readers.py
-│   ├── test_transformers.py
-│   ├── test_writers.py
-│   └── test_pipeline.py
-├── examples/
-│   ├── sample_data.csv
-│   └── example_pipeline.py
-├── pyproject.toml
-└── README.md
+ src/
+    datapipe/
+        __init__.py
+        readers/
+           __init__.py
+           base.py
+           csv_reader.py
+           json_reader.py
+        transformers/
+           __init__.py
+           base.py
+           filter.py
+           aggregate.py
+        writers/
+           __init__.py
+           base.py
+           csv_writer.py
+        validators/
+           __init__.py
+           schema.py
+        pipeline.py
+        cli.py
+ tests/
+    conftest.py
+    test_readers.py
+    test_transformers.py
+    test_writers.py
+    test_pipeline.py
+ examples/
+    sample_data.csv
+    example_pipeline.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -242,26 +242,26 @@ Tu proyecto será evaluado en:
 
 ## Errores Comunes a Evitar
 
-❌ **Cargar archivos completos en memoria**
-✅ Usa generadores para streaming
+ **Cargar archivos completos en memoria**
+ Usa generadores para streaming
 
-❌ **Funciones de 100+ líneas**
-✅ Divide en funciones pequeñas
+ **Funciones de 100+ líneas**
+ Divide en funciones pequeñas
 
-❌ **Variables llamadas `data`, `tmp`, `x`**
-✅ Nombres descriptivos: `validated_records`, `filtered_rows`
+ **Variables llamadas `data`, `tmp`, `x`**
+ Nombres descriptivos: `validated_records`, `filtered_rows`
 
-❌ **Excepciones genéricas: `except Exception`**
-✅ Excepciones específicas y custom
+ **Excepciones genéricas: `except Exception`**
+ Excepciones específicas y custom
 
-❌ **Sin tests o tests que no prueban nada**
-✅ Tests significativos con buenos fixtures
+ **Sin tests o tests que no prueban nada**
+ Tests significativos con buenos fixtures
 
-❌ **README vacío o sin ejemplos**
-✅ Documentación completa con quick start
+ **README vacío o sin ejemplos**
+ Documentación completa con quick start
 
-❌ **Código que solo funciona en tu máquina**
-✅ Paquete instalable y portable
+ **Código que solo funciona en tu máquina**
+ Paquete instalable y portable
 
 ---
 

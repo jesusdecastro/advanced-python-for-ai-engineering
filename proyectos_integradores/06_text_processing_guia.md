@@ -22,46 +22,46 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 textkit/
-├── src/
-│   └── textkit/
-│       ├── __init__.py
-│       ├── readers/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── txt_reader.py
-│       │   └── markdown_reader.py
-│       ├── analyzers/
-│       │   ├── __init__.py
-│       │   ├── word_counter.py
-│       │   ├── frequency_analyzer.py
-│       │   └── statistics.py
-│       ├── transformers/
-│       │   ├── __init__.py
-│       │   ├── normalizer.py
-│       │   ├── cleaner.py
-│       │   └── tokenizer.py
-│       ├── extractors/
-│       │   ├── __init__.py
-│       │   ├── email_extractor.py
-│       │   ├── url_extractor.py
-│       │   └── date_extractor.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── text_document.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── fixtures/
-│   │   ├── sample_text.txt
-│   │   └── sample_markdown.md
-│   ├── test_analyzers.py
-│   ├── test_transformers.py
-│   └── test_extractors.py
-├── examples/
-│   ├── sample_document.txt
-│   └── analyze_example.py
-├── pyproject.toml
-└── README.md
+ src/
+    textkit/
+        __init__.py
+        readers/
+           __init__.py
+           base.py
+           txt_reader.py
+           markdown_reader.py
+        analyzers/
+           __init__.py
+           word_counter.py
+           frequency_analyzer.py
+           statistics.py
+        transformers/
+           __init__.py
+           normalizer.py
+           cleaner.py
+           tokenizer.py
+        extractors/
+           __init__.py
+           email_extractor.py
+           url_extractor.py
+           date_extractor.py
+        models/
+           __init__.py
+           text_document.py
+        cli.py
+ tests/
+    conftest.py
+    fixtures/
+       sample_text.txt
+       sample_markdown.md
+    test_analyzers.py
+    test_transformers.py
+    test_extractors.py
+ examples/
+    sample_document.txt
+    analyze_example.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -244,23 +244,23 @@ textkit/
 
 ## Errores Comunes a Evitar
 
-❌ **Cargar archivos completos en memoria**
-✅ Usa generadores para streaming
+ **Cargar archivos completos en memoria**
+ Usa generadores para streaming
 
-❌ **Regex complejas sin documentar**
-✅ Documenta qué busca cada regex
+ **Regex complejas sin documentar**
+ Documenta qué busca cada regex
 
-❌ **No manejar unicode**
-✅ Soporta textos en diferentes idiomas
+ **No manejar unicode**
+ Soporta textos en diferentes idiomas
 
-❌ **Análisis que no maneja casos edge**
-✅ Maneja textos vacíos, solo puntuación, etc.
+ **Análisis que no maneja casos edge**
+ Maneja textos vacíos, solo puntuación, etc.
 
-❌ **Extracción con regex incorrectas**
-✅ Testa las regex exhaustivamente
+ **Extracción con regex incorrectas**
+ Testa las regex exhaustivamente
 
-❌ **No normalizar antes de analizar**
-✅ Normaliza (lowercase, trim) antes de contar
+ **No normalizar antes de analizar**
+ Normaliza (lowercase, trim) antes de contar
 
 ---
 

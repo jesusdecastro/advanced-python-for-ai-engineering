@@ -1,19 +1,19 @@
 # Día 1: Fundamentos - Configuración de Proyectos Python
 
-## 🎯 Objetivo del Día
+##  Objetivo del Día
 
 Establecer las bases profesionales para desarrollo en Python: entornos virtuales, sistema de módulos, type hints y herramientas de calidad de código.
 
 **Al finalizar este día, serás capaz de:**
-- ✅ Crear y gestionar entornos virtuales profesionales
-- ✅ Estructurar proyectos Python siguiendo mejores prácticas
-- ✅ Usar type hints para código más robusto y mantenible
-- ✅ Aplicar herramientas de calidad (ruff, pyright) en tu flujo de trabajo
-- ✅ Entender el sistema de módulos e imports de Python
+-  Crear y gestionar entornos virtuales profesionales
+-  Estructurar proyectos Python siguiendo mejores prácticas
+-  Usar type hints para código más robusto y mantenible
+-  Aplicar herramientas de calidad (ruff, pyright) en tu flujo de trabajo
+-  Entender el sistema de módulos e imports de Python
 
 ---
 
-## 📚 Contenido del Día
+##  Contenido del Día
 
 ### 1. Python Idioms Intro (30 min)
 **Archivo:** `01_python_idioms_intro.ipynb`
@@ -30,7 +30,7 @@ Introducción motivacional al código pythónico. Verás ejemplos de código ele
 
 ---
 
-### 2. Virtual Environments (90 min) ⭐ CRÍTICO
+### 2. Virtual Environments (90 min)  CRÍTICO
 **Archivo:** `02_virtual_environments.ipynb`
 
 Por qué los entornos virtuales son esenciales y cómo usarlos correctamente.
@@ -43,7 +43,7 @@ Por qué los entornos virtuales son esenciales y cómo usarlos correctamente.
 
 **Práctica:** Crearás tu propio entorno virtual para el curso
 
-**⚠️ IMPORTANTE:** Todos deben tener su venv funcionando antes de continuar
+** IMPORTANTE:** Todos deben tener su venv funcionando antes de continuar
 
 ---
 
@@ -62,7 +62,7 @@ Cómo funciona el sistema de módulos de Python y cómo estructurar paquetes.
 
 ---
 
-### 4. Type Hinting (90 min) ⭐ CRÍTICO
+### 4. Type Hinting (90 min)  CRÍTICO
 **Archivo:** `04_type_hinting.ipynb`
 
 Type hints para código más seguro, legible y mantenible.
@@ -75,11 +75,11 @@ Type hints para código más seguro, legible y mantenible.
 
 **Práctica:** Ejercicios con 30 tests unitarios
 
-**⚠️ EJERCICIO OBLIGATORIO:** `exercises/02_type_hinting.py`
+** EJERCICIO OBLIGATORIO:** `exercises/02_type_hinting.py`
 
 ---
 
-### 5. Code Quality Tools (75 min) ⭐ CRÍTICO
+### 5. Code Quality Tools (75 min)  CRÍTICO
 **Archivo:** `05_code_quality_tools.ipynb`
 
 Herramientas profesionales para mantener calidad de código.
@@ -109,7 +109,7 @@ Cómo crear paquetes Python distribuibles.
 
 ---
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 
 ### Paso 1: Verificar Requisitos
 
@@ -165,7 +165,7 @@ Se abrirá tu navegador con la lista de notebooks.
 
 ---
 
-## 📝 Ejercicios Prácticos
+##  Ejercicios Prácticos
 
 ### Ejercicio Principal: Type Hinting
 
@@ -188,9 +188,9 @@ Se abrirá tu navegador con la lista de notebooks.
    ```
 
 **Criterio de éxito:**
-- ✅ Todos los tests pasan (30/30)
-- ✅ Pyright sin errores
-- ✅ Ruff sin warnings
+-  Todos los tests pasan (30/30)
+-  Pyright sin errores
+-  Ruff sin warnings
 
 ### Ejercicio Opcional: Python Idioms
 
@@ -200,7 +200,7 @@ Para alumnos que terminen rápido o quieran práctica extra.
 
 ---
 
-## 🛠️ Herramientas y Comandos
+##  Herramientas y Comandos
 
 ### Ejecutar Tests
 
@@ -239,7 +239,7 @@ python examples/run_namespace_package.py
 
 ---
 
-## 🐛 Solución de Problemas
+##  Solución de Problemas
 
 ### Problema: "pytest: command not found"
 
@@ -292,7 +292,7 @@ Significa: Tu función devuelve 0 en lugar de 20.0
 
 ---
 
-## 📖 Recursos Adicionales
+##  Recursos Adicionales
 
 ### Documentación Oficial
 
@@ -319,18 +319,18 @@ Significa: Tu función devuelve 0 en lugar de 20.0
 
 ---
 
-## ⏱️ Distribución del Tiempo
+## ⏱ Distribución del Tiempo
 
 | Horario | Actividad | Duración |
 |---------|-----------|----------|
 | 9:00 - 9:30 | Bienvenida y setup | 30 min |
 | 9:30 - 10:30 | Notebook 01: Python Idioms | 60 min |
-| 10:30 - 10:45 | ☕ Descanso | 15 min |
+| 10:30 - 10:45 |  Descanso | 15 min |
 | 10:45 - 12:15 | Notebook 02: Virtual Environments | 90 min |
 | 12:15 - 13:00 | Notebook 03: Modules & Imports | 45 min |
-| 13:00 - 14:00 | 🍽️ Almuerzo | 60 min |
+| 13:00 - 14:00 |  Almuerzo | 60 min |
 | 14:00 - 15:30 | Notebook 04: Type Hinting + Ejercicios | 90 min |
-| 15:30 - 15:45 | ☕ Descanso | 15 min |
+| 15:30 - 15:45 |  Descanso | 15 min |
 | 15:45 - 17:00 | Notebook 05: Code Quality Tools | 75 min |
 | 17:00 - 17:45 | Notebook 06: Package Distribution | 45 min |
 | 17:45 - 18:00 | Cierre y Q&A | 15 min |
@@ -339,7 +339,7 @@ Significa: Tu función devuelve 0 en lugar de 20.0
 
 ---
 
-## ✅ Checklist de Finalización
+##  Checklist de Finalización
 
 Al terminar el Día 1, debes haber:
 
@@ -357,7 +357,7 @@ Al terminar el Día 1, debes haber:
 
 ---
 
-## 🎓 Próximos Pasos
+##  Próximos Pasos
 
 **Tarea para casa (opcional):**
 - Revisar los conceptos del día
@@ -374,7 +374,7 @@ Al terminar el Día 1, debes haber:
 
 ---
 
-## 💬 Soporte
+##  Soporte
 
 **Durante el curso:**
 - Preguntar al instructor

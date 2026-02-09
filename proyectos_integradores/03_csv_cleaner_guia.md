@@ -21,47 +21,47 @@ Al finalizar este proyecto, habrás aplicado:
 
 ```
 csvclean/
-├── src/
-│   └── csvclean/
-│       ├── __init__.py
-│       ├── readers/
-│       │   ├── __init__.py
-│       │   └── csv_reader.py
-│       ├── validators/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── null_validator.py
-│       │   ├── type_validator.py
-│       │   └── duplicate_validator.py
-│       ├── cleaners/
-│       │   ├── __init__.py
-│       │   ├── base.py
-│       │   ├── null_cleaner.py
-│       │   └── duplicate_cleaner.py
-│       ├── transformers/
-│       │   ├── __init__.py
-│       │   ├── normalizer.py
-│       │   └── type_converter.py
-│       ├── reporters/
-│       │   ├── __init__.py
-│       │   └── cleaning_report.py
-│       ├── models/
-│       │   ├── __init__.py
-│       │   └── config.py
-│       └── cli.py
-├── tests/
-│   ├── conftest.py
-│   ├── fixtures/
-│   │   ├── dirty_data.csv
-│   │   └── expected_clean.csv
-│   ├── test_validators.py
-│   ├── test_cleaners.py
-│   └── test_transformers.py
-├── examples/
-│   ├── sample_dirty.csv
-│   └── clean_example.py
-├── pyproject.toml
-└── README.md
+ src/
+    csvclean/
+        __init__.py
+        readers/
+           __init__.py
+           csv_reader.py
+        validators/
+           __init__.py
+           base.py
+           null_validator.py
+           type_validator.py
+           duplicate_validator.py
+        cleaners/
+           __init__.py
+           base.py
+           null_cleaner.py
+           duplicate_cleaner.py
+        transformers/
+           __init__.py
+           normalizer.py
+           type_converter.py
+        reporters/
+           __init__.py
+           cleaning_report.py
+        models/
+           __init__.py
+           config.py
+        cli.py
+ tests/
+    conftest.py
+    fixtures/
+       dirty_data.csv
+       expected_clean.csv
+    test_validators.py
+    test_cleaners.py
+    test_transformers.py
+ examples/
+    sample_dirty.csv
+    clean_example.py
+ pyproject.toml
+ README.md
 ```
 
 ---
@@ -241,23 +241,23 @@ csvclean/
 
 ## Errores Comunes a Evitar
 
-❌ **Modificar el CSV original**
-✅ Siempre escribe en un archivo nuevo
+ **Modificar el CSV original**
+ Siempre escribe en un archivo nuevo
 
-❌ **Perder datos sin avisar**
-✅ Reporta qué se eliminó y por qué
+ **Perder datos sin avisar**
+ Reporta qué se eliminó y por qué
 
-❌ **Validadores que hacen limpieza**
-✅ Separa detección de corrección
+ **Validadores que hacen limpieza**
+ Separa detección de corrección
 
-❌ **Limpieza sin configuración**
-✅ Permite configurar qué limpiar y cómo
+ **Limpieza sin configuración**
+ Permite configurar qué limpiar y cómo
 
-❌ **Reportes vacíos o inútiles**
-✅ Reportes detallados y accionables
+ **Reportes vacíos o inútiles**
+ Reportes detallados y accionables
 
-❌ **No manejar encodings**
-✅ Detecta y maneja diferentes encodings
+ **No manejar encodings**
+ Detecta y maneja diferentes encodings
 
 ---
 
