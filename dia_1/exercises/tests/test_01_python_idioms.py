@@ -21,10 +21,19 @@ parent_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(parent_dir))
 
 # Import with try/except to handle different execution contexts
-try:
-    from dia_1.exercises import idioms_01 as ex
-except ImportError:
-    import idioms_01 as ex
+# Note: Module name starts with number, so we use importlib
+import importlib.util
+import sys
+from pathlib import Path
+
+# Add parent directory to path
+parent_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(parent_dir))
+
+# Import module with numeric prefix
+_spec = importlib.util.spec_from_file_location("python_idioms", parent_dir / "01_python_idioms.py")
+ex = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(ex)
 
 # Assign functions for easier access
 square_evens = ex.square_evens
