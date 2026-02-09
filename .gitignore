@@ -52,6 +52,9 @@ Thumbs.db
 # Cache
 .cache/
 
+# Kiro (IDE configuration)
+.kiro/
+
 # Archivos del instructor (NO COMMITEAR)
 .instructor/
 GUIA_PROFESOR.md
