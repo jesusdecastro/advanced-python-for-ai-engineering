@@ -16,6 +16,8 @@ python --version
 
 ❌ **Si no:** Instala Python 3.11+ desde [python.org](https://www.python.org/downloads/)
 
+**Si tenéis ordenador de empresa probar con el portal de empresa.**
+
 ---
 
 ## Paso 2: Crear Entorno Virtual (1 minuto)
