@@ -12,15 +12,11 @@
 
 **Contenido:**
 1. Python Idioms Intro - Introducción motivacional al código pythónico
-2. Virtual Environments - Entornos virtuales con venv (CRÍTICO)
+2. Virtual Environments - Entornos virtuales con venv
 3. Modules and Imports - Sistema de módulos e imports
-4. Type Hinting - Type hints y pyright (CRÍTICO)
-5. Code Quality Tools - Ruff y pyright (CRÍTICO)
+4. Type Hinting - Type hints
+5. Code Quality Tools - Ruff y pyright
 6. Package Distribution - pyproject.toml y distribución
-
-**Ejercicios:**
-- Obligatorio: `exercises/02_type_hinting.py` (30 tests)
-- Opcional: `exercises/01_python_idioms.py`
 
 **Para el proyecto integrador:**
 - Crear estructura de paquete con src layout
