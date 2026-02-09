@@ -124,7 +124,7 @@ Los tests validan:
 **Pistas:**
 - El parámetro puede ser int O str
 - Siempre retorna str
-- Usa la sintaxis `int | str` (Python 3.10+)
+- Usa la sintaxis `int | str` (Python 3.11+)
 
 ---
 
@@ -173,7 +173,7 @@ Necesitarás importar tipos del módulo `typing`:
 from typing import Optional
 ```
 
-Para Python 3.10+, puedes usar la sintaxis moderna:
+Para Python 3.11+, puedes usar la sintaxis moderna:
 - `int | str` en lugar de `Union[int, str]`
 - `dict[str, str] | None` en lugar de `Optional[dict[str, str]]`
 

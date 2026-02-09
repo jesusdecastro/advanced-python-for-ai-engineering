@@ -20,10 +20,11 @@ git --version     # Cualquier versión reciente
 
 **No recomendado.** El curso usa características de Python 3.11+:
 - Mejor sintaxis de type hints (`int | str` en lugar de `Union[int, str]`)
-- Mejoras de rendimiento
-- Mensajes de error más claros
+- Mejoras de rendimiento significativas (10-60% más rápido que 3.10)
+- Mensajes de error más claros y detallados
+- Mejor soporte para tipos genéricos
 
-**Si solo tienes 3.10:** El código funcionará, pero algunos ejemplos pueden necesitar ajustes.
+**Si solo tienes 3.10:** El código funcionará en su mayoría, pero te perderás las mejoras de rendimiento y algunos ejemplos pueden necesitar ajustes menores.
 
 ### ¿Qué sistema operativo necesito?
 
@@ -232,7 +233,7 @@ def find_user(user_id: int) -> Optional[User]:
     # Puede devolver User o None
 ```
 
-**Equivalente en Python 3.10+:** `User | None`
+**Equivalente en Python 3.11+:** `User | None`
 
 ### ¿Qué es `Union[int, str]`?
 
@@ -249,7 +250,7 @@ process_id("123")  # OK
 process_id(12.3)   # Pyright: Error! Expected int or str, got float
 ```
 
-**Equivalente en Python 3.10+:** `int | str`
+**Equivalente en Python 3.11+:** `int | str`
 
 ---
 
