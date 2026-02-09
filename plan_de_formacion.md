@@ -10,20 +10,92 @@
 ### DÍA 1: Fundamentos - Configuración de Proyectos Python
 **Duración:** 8 horas
 
-**Conceptos clave:**
-- Entornos virtuales (venv, uv)
-- Sistema de módulos e imports en Python
-- Estructura de paquetes Python (src layout)
-- pyproject.toml y gestión de dependencias
-- Wheels y distribución de paquetes
-- Code quality tools (ruff, pyright)
+#### Distribución del Tiempo
 
-**Para el proyecto integrador:**
+| Horario | Actividad | Duración | Notebook |
+|---------|-----------|----------|----------|
+| 9:00 - 9:30 | Bienvenida y setup | 30 min | - |
+| 9:30 - 10:30 | Python Idioms Intro | 60 min | 01_python_idioms_intro.ipynb |
+| 10:30 - 10:45 | Descanso | 15 min | - |
+| 10:45 - 12:15 | Virtual Environments | 90 min | 02_virtual_environments.ipynb |
+| 12:15 - 13:00 | Modules & Imports | 45 min | 03_modules_and_imports.ipynb |
+| 13:00 - 14:00 | Almuerzo | 60 min | - |
+| 14:00 - 15:30 | Type Hinting + Ejercicios | 90 min | 04_type_hinting.ipynb |
+| 15:30 - 15:45 | Descanso | 15 min | - |
+| 15:45 - 17:00 | Code Quality Tools | 75 min | 05_code_quality_tools.ipynb |
+| 17:00 - 17:45 | Package Distribution | 45 min | 06_package_distribution.ipynb |
+| 17:45 - 18:00 | Cierre y Q&A | 15 min | - |
+
+#### Contenido Detallado
+
+**1. Python Idioms Intro (30 min)**
+- Introducción motivacional al código pythónico
+- Comprehensions vs loops tradicionales
+- Generadores para eficiencia de memoria
+- Context managers
+- Decoradores básicos
+- Solo Python stdlib (no requiere instalación)
+
+**2. Virtual Environments (90 min) - CRÍTICO**
+- El problema de las dependencias conflictivas
+- Crear y activar entornos virtuales con venv
+- Gestión de dependencias con pip
+- requirements.txt y buenas prácticas
+- Práctica: Crear entorno virtual propio
+- IMPORTANTE: Todos deben tener venv funcionando antes de continuar
+
+**3. Modules and Imports (75 min)**
+- Diferencia entre módulo y paquete
+- `__init__.py`: cuándo y por qué usarlo
+- Imports absolutos vs relativos
+- Namespace packages vs regular packages
+- Práctica: Ejecutar ejemplos en `examples/`
+
+**4. Type Hinting (90 min) - CRÍTICO**
+- Sintaxis básica de type hints
+- Tipos complejos (List, Dict, Optional, Union)
+- Type checking con pyright
+- Beneficios reales en proyectos grandes
+- EJERCICIO OBLIGATORIO: `exercises/02_type_hinting.py` (30 tests unitarios)
+
+**5. Code Quality Tools (75 min) - CRÍTICO**
+- Ruff: linting y formateo ultrarrápido
+- Pyright: type checking estático
+- Integración con VS Code
+- Configuración en pyproject.toml
+- Práctica: Configurar herramientas en entorno propio
+
+**6. Package Distribution (45 min)**
+- pyproject.toml moderno
+- Src layout
+- Crear wheels
+- Publicar en PyPI (conceptual)
+- Introducción conceptual para profundizar en días posteriores
+
+#### Ejercicios Disponibles
+
+**Obligatorio:**
+- `exercises/02_type_hinting.py` - 30 tests unitarios
+
+**Opcionales:**
+- `exercises/01_python_idioms.py` - Para práctica extra
+
+#### Requisitos Técnicos
+
+- Python 3.11 o superior
+- Git
+- VS Code (recomendado)
+- Conexión a internet
+
+#### Para el Proyecto Integrador
+
+Al finalizar el Día 1, los estudiantes podrán:
 - Crear estructura de paquete con src layout
 - Configurar pyproject.toml con dependencias
 - Configurar ruff y pyright
-- Crear módulos base vacíos (readers, writers, parsers, etc.)
-- Implementar imports básicos entre módulos
+- Crear módulos base con imports correctos
+- Aplicar type hints a todas las funciones
+- Usar entornos virtuales profesionalmente
 
 ---
 
@@ -167,8 +239,8 @@ Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles complet
 ## STACK TECNOLÓGICO
 
 **Core:**
-- Python 3.11+
-- uv o venv para entornos virtuales
+- Python 3.11+ (versión estándar del curso)
+- venv para entornos virtuales
 - pytest para testing
 - ruff para formateo y linting
 - pyright para type checking
@@ -177,7 +249,7 @@ Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles complet
 - pydantic, dataclasses
 - functools, itertools
 - numpy, pandas
-- requests, FastAPI
+- requests, FastAPI (opcional)
 
 **Librerías según proyecto:**
 - Ver [proyectos_integradores.md](proyectos_integradores.md) para dependencias específicas de cada proyecto
