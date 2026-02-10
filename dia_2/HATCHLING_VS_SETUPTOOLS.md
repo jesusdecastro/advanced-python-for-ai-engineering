@@ -26,18 +26,34 @@ build-backend = "setuptools.build_meta"
 name = "mi-paquete"
 version = "0.1.0"
 
-# ✅ Setuptools busca automáticamente paquetes en src/
+# Setuptools necesita que le digas dónde buscar
 [tool.setuptools.packages.find]
 where = ["src"]
 ```
 
-**Ventaja**: Auto-descubre paquetes como Hatchling. El parámetro `where` indica dónde buscar.
+**Ventaja**: Auto-descubre todos los paquetes en `src/`. El parámetro `where` indica dónde buscar.
 
 **Nota**: No necesitas `package-dir` cuando usas `packages.find` con `where`. Son redundantes en pyproject.toml moderno.
 
 ---
 
-### Con Hatchling (Auto-descubrimiento)
+### Con Hatchling (Auto-descubrimiento Inteligente)
+
+**Opción 1: Sin configuración (recomendado si el nombre coincide)**
+
+```toml
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mi-paquete"  # Hatchling buscará src/mi_paquete/__init__.py
+version = "0.1.0"
+
+# ✅ ¡ESO ES TODO! Hatchling auto-descubre si el nombre coincide
+```
+
+**Opción 2: Con configuración explícita (más control)**
 
 ```toml
 [build-system]
@@ -48,10 +64,46 @@ build-backend = "hatchling.build"
 name = "mi-paquete"
 version = "0.1.0"
 
-# ✅ ¡ESO ES TODO! Hatchling encuentra automáticamente src/mi_paquete/
+# Usa esto cuando:
+# - El nombre del paquete NO coincide con project.name
+# - Tienes múltiples paquetes
+# - Quieres control explícito
+[tool.hatchling.build.targets.wheel]
+packages = ["src/mi_paquete"]
 ```
 
-**Ventaja**: Hatchling detecta automáticamente todos los paquetes dentro de `src/`. No necesitas listar nada.
+**Cómo funciona el auto-descubrimiento de Hatchling:**
+
+Hatchling busca tu paquete en este orden (usando `project.name` como referencia):
+1. `<NAME>/__init__.py` (flat layout)
+2. `src/<NAME>/__init__.py` (src layout) ← Más común
+3. `<NAME>.py` (módulo único)
+4. `<NAMESPACE>/<NAME>/__init__.py` (namespace package)
+
+**Importante**: El nombre del directorio del paquete debe coincidir con `project.name` (con guiones convertidos a guiones bajos).
+
+**Ejemplo**: Si `project.name = "mi-paquete"`, Hatchling busca `src/mi_paquete/` (nota el guion bajo).
+
+---
+
+## Cuándo Usar Cada Opción
+
+### Usa Hatchling sin configuración cuando:
+- Tu paquete está en `src/<nombre_paquete>/`
+- El nombre del directorio coincide con `project.name` (con guiones → guiones bajos)
+- Solo tienes un paquete principal
+- Quieres la configuración más simple
+
+### Usa Hatchling con `packages` explícito cuando:
+- El nombre del paquete NO coincide con `project.name`
+- Tienes múltiples paquetes en `src/`
+- Quieres control explícito sobre qué se incluye
+- Estás migrando desde setuptools y quieres mantener control
+
+### Usa Setuptools cuando:
+- Trabajas en un proyecto legacy que ya usa setuptools
+- Necesitas características específicas de setuptools
+- Tu equipo ya está familiarizado con setuptools
 
 ---
 
@@ -104,3 +156,28 @@ pip install -e .
 from mi_paquete.utils.helpers import mi_funcion
 from mi_paquete.models.data import MiClase
 ```
+
+---
+
+## Nota sobre el Proyecto de Ejercicios del Curso
+
+En `dia_2/exercises/pyproject.toml`, usamos configuración explícita:
+
+```toml
+[project]
+name = "dia2-exercises"  # Nombre con guion
+
+[tool.hatchling.build.targets.wheel]
+packages = ["src/dia2_exercises"]  # Paquete con guion bajo
+```
+
+**¿Por qué usamos configuración explícita aquí?**
+
+Aunque Hatchling podría auto-descubrir `src/dia2_exercises/` (porque coincide con el nombre del proyecto), usamos `packages` explícito por:
+
+1. **Claridad educativa**: Los estudiantes ven exactamente qué se está incluyendo
+2. **Documentación**: Hace explícito el mapeo nombre-proyecto → nombre-paquete
+3. **Robustez**: Funciona incluso si cambiamos el nombre del proyecto más adelante
+4. **Mejores prácticas**: En proyectos profesionales, la configuración explícita evita sorpresas
+
+**Ambas opciones funcionan**, pero para un curso es mejor ser explícito.
