@@ -18,50 +18,68 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
-```
-datapipe/
- src/
-    datapipe/
-        __init__.py
-        readers/
-           __init__.py
-           base.py
-           csv_reader.py
-           json_reader.py
-        transformers/
-           __init__.py
-           base.py
-           filter.py
-           aggregate.py
-        writers/
-           __init__.py
-           base.py
-           csv_writer.py
-        validators/
-           __init__.py
-           schema.py
-        pipeline.py
-        cli.py
- tests/
-    conftest.py
-    test_readers.py
-    test_transformers.py
-    test_writers.py
-    test_pipeline.py
- examples/
-    sample_data.csv
-    example_pipeline.py
- pyproject.toml
- README.md
-```
+### Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué responsabilidades tiene mi sistema?**
+- Leer datos de diferentes fuentes
+- Transformar esos datos
+- Escribir resultados
+- Validar que los datos son correctos
+- Orquestar todo el proceso
+
+**2. ¿Cómo agrupo código relacionado?**
+- Piensa en "familias" de funcionalidad
+- Cada familia debería vivir en su propio módulo/paquete
+- Ejemplo: Si tienes múltiples formas de leer datos, ¿dónde las agruparías?
+
+**3. ¿Qué necesita ser extensible?**
+- Si mañana necesitas leer desde una API, ¿dónde añadirías ese código?
+- Si necesitas una nueva transformación, ¿modificarías código existente o añadirías nuevo?
+
+### Pistas de Organización
+
+**Sobre la estructura src:**
+- Recuerda de los fundamentos: `src/package_name/` es el estándar
+- Tu paquete principal contiene submódulos por responsabilidad
+- Cada submódulo puede ser un archivo `.py` o una carpeta con `__init__.py`
+
+**Sobre agrupación lógica:**
+- Agrupa por **qué hace**, no por **cómo lo hace**
+- Ejemplo: "readers" es mejor que "csv_json_files"
+- Piensa en verbos: read, transform, write, validate
+
+**Sobre extensibilidad:**
+- Si tienes código que otros módulos heredarán, ¿dónde lo pones?
+- Hint: Un archivo `base.py` con clases abstractas es común
+- Las implementaciones concretas pueden estar en el mismo paquete
+
+### Checklist de Estructura
+
+Antes de empezar a programar, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal dentro
+- [ ] Submódulos/paquetes para cada responsabilidad principal
+- [ ] Carpeta `tests/` al mismo nivel que `src/`
+- [ ] Carpeta `examples/` con datos de ejemplo
+- [ ] `pyproject.toml` configurado
+- [ ] `README.md` con descripción del proyecto
+
+### Enfoque Recomendado
+
+1. **Empieza simple**: Crea la estructura mínima que necesitas HOY
+2. **Itera**: Añade carpetas/módulos cuando realmente los necesites
+3. **Refactoriza**: Si un módulo crece mucho, divídelo
+
+**Pregunta guía**: "Si alguien nuevo mira mi estructura, ¿entiende qué hace cada parte?"
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Estructura del proyecto funcionando
 
 **Tareas:**
@@ -75,7 +93,7 @@ datapipe/
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Implementar lectura eficiente de datos
 
 **Tareas:**
@@ -94,7 +112,7 @@ datapipe/
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Código legible y robusto
 
 **Tareas:**
@@ -114,7 +132,7 @@ datapipe/
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Arquitectura extensible con OOP
 
 **Tareas:**
@@ -134,7 +152,7 @@ datapipe/
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Código confiable y eficiente
 
 **Tareas:**
@@ -154,7 +172,7 @@ datapipe/
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** Paquete production-ready
 
 **Tareas:**

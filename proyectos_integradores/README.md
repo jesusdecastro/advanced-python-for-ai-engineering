@@ -49,7 +49,7 @@ Cada guía incluye:
 - **Visión General**: Qué vas a construir y por qué
 - **Objetivos de Aprendizaje**: Qué principios aplicarás
 - **Estructura Sugerida**: Organización de carpetas y módulos
-- **Roadmap Día a Día**: Qué hacer cada día del curso
+- **Roadmap por Fases**: Progresión incremental del proyecto
 - **Funcionalidades Mínimas**: Checklist de lo que debe funcionar
 - **Criterios de Evaluación**: Cómo se evaluará tu proyecto
 - **Errores Comunes**: Qué evitar
@@ -78,37 +78,37 @@ Considera un proyecto de nivel medio. Más funcionalidades pero guiadas.
 
 Independientemente del proyecto que elijas, aplicarás:
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 - Estructura de paquetes con src layout
 - Configuración de pyproject.toml
 - Herramientas de calidad (ruff, pyright)
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 - Generadores e iteradores
 - Comprehensions
 - Decoradores
 - Context managers
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 - Funciones pequeñas y enfocadas
 - Meaningful names
 - Type hints
 - Error handling robusto
 - Docstrings completos
 
-### Día 4: Diseño
+### Fase 4: Diseño
 - Abstract Base Classes (ABCs)
 - Herencia vs composición
 - Modelos Pydantic
 - Principios SOLID
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 - Unit testing con pytest
 - Fixtures y mocking
 - Cobertura 80%+
 - Optimización con pandas/numpy
 
-### Día 6: Integración
+### Fase 6: Integración
 - CLI funcional
 - Documentación completa
 - Ejemplos de uso
@@ -200,7 +200,7 @@ R: Es una guía, no una regla estricta. Pero debe tener sentido y estar bien org
 ## Consejos Finales
 
 1. **Lee la guía completa antes de empezar**: Entiende el proyecto completo
-2. **Sigue el roadmap día a día**: No te adelantes ni te atrases
+2. **Sigue el roadmap por fases**: Progresa de forma incremental
 3. **Prioriza calidad sobre cantidad**: Mejor poco y bien hecho
 4. **Haz commits frecuentes**: Facilita el trabajo en equipo
 5. **Pide ayuda cuando la necesites**: Los instructores están para ayudar

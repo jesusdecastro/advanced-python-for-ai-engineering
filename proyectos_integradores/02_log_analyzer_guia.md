@@ -18,52 +18,78 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
-```
-loglyzer/
- src/
-    loglyzer/
-        __init__.py
-        parsers/
-           __init__.py
-           base.py
-           nginx.py
-           apache.py
-        analyzers/
-           __init__.py
-           metrics.py
-           anomaly.py
-        models/
-           __init__.py
-           log_entry.py
-        reporters/
-           __init__.py
-           json_reporter.py
-           html_reporter.py
-        filters.py
-        cli.py
- tests/
-    conftest.py
-    fixtures/
-       sample_nginx.log
-       sample_apache.log
-    test_parsers.py
-    test_analyzers.py
-    test_reporters.py
- templates/
-    report.html
- examples/
-    analyze_logs.py
- pyproject.toml
- README.md
-```
+### Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué responsabilidades tiene mi sistema?**
+- Parsear diferentes formatos de logs (nginx, apache, custom)
+- Analizar logs para extraer métricas
+- Generar reportes en diferentes formatos
+- Filtrar logs por criterios
+- Representar una entrada de log
+
+**2. ¿Cómo organizo código que hace cosas similares?**
+- Si tengo múltiples parsers (nginx, apache), ¿los pongo juntos?
+- Si tengo múltiples tipos de análisis (métricas, anomalías), ¿cómo los agrupo?
+- ¿Los reportes JSON y HTML van en el mismo lugar?
+
+**3. ¿Qué patrones de diseño necesito?**
+- Cada formato de log necesita su propio parser → Piensa en herencia/ABCs
+- Los reportes pueden ser de varios tipos → Piensa en estrategia
+- Las entradas de log tienen estructura → Piensa en modelos de datos
+
+### Pistas de Organización
+
+**Sobre parsers:**
+- Cada formato de log (nginx, apache) tiene su propia lógica de parsing
+- Pero todos los parsers hacen lo mismo: convertir texto → objeto estructurado
+- Hint: Una clase base abstracta define el contrato, las subclases implementan
+
+**Sobre modelos de datos:**
+- Una entrada de log tiene: timestamp, IP, status code, latency, etc.
+- ¿Dónde defines esta estructura?
+- Hint: Pydantic es perfecto para validar y estructurar datos
+
+**Sobre análisis:**
+- Calcular métricas (requests/sec, percentiles) es una responsabilidad
+- Detectar anomalías es otra responsabilidad
+- ¿Van en el mismo módulo o separados?
+
+**Sobre reportes:**
+- Generar JSON es diferente a generar HTML
+- Pero ambos toman los mismos datos de entrada
+- Hint: Piensa en una interfaz común con implementaciones específicas
+
+### Checklist de Estructura
+
+Antes de empezar a programar, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal dentro
+- [ ] Módulo/paquete para parsers de logs
+- [ ] Módulo/paquete para modelos de datos
+- [ ] Módulo/paquete para análisis/métricas
+- [ ] Módulo/paquete para generación de reportes
+- [ ] Carpeta `tests/` con fixtures de logs de ejemplo
+- [ ] Carpeta `examples/` con scripts de uso
+- [ ] `pyproject.toml` configurado
+- [ ] `README.md` con descripción
+
+### Enfoque Recomendado
+
+1. **Empieza con un parser**: Implementa parsing de un formato (nginx o apache)
+2. **Define tu modelo**: Crea la estructura de LogEntry
+3. **Añade análisis básico**: Cuenta requests, calcula promedios
+4. **Extiende**: Añade más parsers, más métricas, más reportes
+
+**Pregunta guía**: "Si necesito añadir soporte para logs de PostgreSQL, ¿dónde va ese código?"
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Estructura y parsing básico
 
 **Tareas:**
@@ -76,7 +102,7 @@ loglyzer/
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Streaming eficiente de logs
 
 **Tareas:**
@@ -94,7 +120,7 @@ loglyzer/
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Parsing robusto y legible
 
 **Tareas:**
@@ -112,7 +138,7 @@ loglyzer/
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Sistema extensible de parsers y analyzers
 
 **Tareas:**
@@ -131,7 +157,7 @@ loglyzer/
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Tests completos y análisis eficiente
 
 **Tareas:**
@@ -150,7 +176,7 @@ loglyzer/
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** CLI y reportes
 
 **Tareas:**

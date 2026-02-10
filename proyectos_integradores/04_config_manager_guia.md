@@ -18,56 +18,98 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
+### Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué hace mi gestor de configuraciones?**
+- Lee archivos en diferentes formatos (JSON, YAML, TOML, INI)
+- Valida que la configuración tenga la estructura correcta
+- Permite acceso intuitivo a los valores (dot notation)
+- Convierte entre formatos
+- Combina múltiples archivos de configuración (merge)
+
+**2. ¿Qué tienen en común todos los formatos?**
+- Todos representan datos estructurados (diccionarios/objetos)
+- Todos necesitan ser parseados: texto → estructura de datos
+- Todos pueden ser escritos: estructura de datos → texto
+- Hint: ¿Necesitas una interfaz común?
+
+**3. ¿Cómo quiero que se use mi librería?**
+```python
+# ¿Así?
+config = Config.from_file("config.yaml")
+print(config.database.host)  # dot notation
+
+# ¿O así?
+config = load_config("config.yaml")
+print(config["database"]["host"])  # dict access
 ```
-configman/
- src/
-    configman/
-        __init__.py
-        parsers/
-           __init__.py
-           base.py
-           json_parser.py
-           yaml_parser.py
-           toml_parser.py
-           ini_parser.py
-        validators/
-           __init__.py
-           schema_validator.py
-        converters/
-           __init__.py
-           format_converter.py
-        models/
-           __init__.py
-           config.py
-        merger.py
-        cli.py
- tests/
-    conftest.py
-    fixtures/
-       config.json
-       config.yaml
-       config.toml
-       config.ini
-    test_parsers.py
-    test_validators.py
-    test_converters.py
-    test_merger.py
- examples/
-    configs/
-       defaults.yaml
-       user.yaml
-    usage_example.py
- pyproject.toml
- README.md
-```
+Tu decisión afecta el diseño
+
+### Pistas de Organización
+
+**Sobre parsers:**
+- Cada formato necesita su propia lógica de parsing
+- JSON: `json.load()`, YAML: `yaml.safe_load()`, TOML: `tomllib.load()`, INI: `configparser`
+- Pero todos hacen lo mismo: archivo → diccionario
+- Hint: Clase base abstracta con `parse()` y `dump()`
+- ¿Cómo decides qué parser usar según la extensión del archivo?
+
+**Sobre acceso a datos:**
+- Quieres `config.database.host` en lugar de `config['database']['host']`
+- Hint: Métodos mágicos `__getattr__`, `__setattr__`, `__getitem__`
+- ¿Cómo manejas diccionarios anidados?
+- Hint: Recursión o una clase wrapper
+
+**Sobre validación:**
+- El usuario define un esquema: "database debe tener host, port, user"
+- Tu código valida que la config cumpla el esquema
+- Hint: Pydantic es perfecto para esto
+- ¿Validas al cargar o bajo demanda?
+
+**Sobre conversión:**
+- Leer YAML → escribir JSON
+- Leer JSON → escribir TOML
+- Hint: Si todos los parsers devuelven diccionarios, la conversión es: parse(formato1) → dump(formato2)
+
+**Sobre merge:**
+- Combinar `defaults.yaml` + `user.yaml` → config final
+- Estrategias: sobrescribir, combinar listas, deep merge
+- ¿Cómo manejas conflictos?
+
+### Checklist de Estructura
+
+Antes de empezar a programar, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal
+- [ ] Módulo/paquete para parsers (uno por formato)
+- [ ] Módulo/paquete para validación de esquemas
+- [ ] Módulo/paquete para conversión entre formatos
+- [ ] Módulo/paquete para modelos de datos (la clase Config principal)
+- [ ] Módulo para merge de configuraciones
+- [ ] Carpeta `tests/` con fixtures de configs en cada formato
+- [ ] Carpeta `examples/` con ejemplos de uso
+- [ ] `pyproject.toml` con dependencias (pyyaml, tomli para Python <3.11)
+- [ ] `README.md`
+
+### Enfoque Recomendado
+
+1. **Empieza con un formato**: Implementa parsing de JSON (el más simple)
+2. **Añade acceso intuitivo**: Implementa métodos mágicos para dot notation
+3. **Generaliza**: Crea la abstracción cuando añadas el segundo parser (YAML)
+4. **Añade validación**: Integra Pydantic para validar esquemas
+5. **Añade conversión**: Usa los parsers existentes para convertir
+6. **Añade merge**: Implementa lógica de combinación
+
+**Pregunta guía**: "Si necesito añadir soporte para XML, ¿dónde va ese código y qué necesito modificar?"
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Parsing básico de formatos
 
 **Tareas:**
@@ -80,7 +122,7 @@ configman/
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Acceso intuitivo con dot notation
 
 **Tareas:**
@@ -99,7 +141,7 @@ configman/
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Validación y error handling robusto
 
 **Tareas:**
@@ -117,7 +159,7 @@ configman/
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Sistema extensible de parsers
 
 **Tareas:**
@@ -136,7 +178,7 @@ configman/
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Tests exhaustivos para todos los formatos
 
 **Tareas:**
@@ -155,7 +197,7 @@ configman/
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** CLI y conversión entre formatos
 
 **Tareas:**

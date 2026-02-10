@@ -18,57 +18,107 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
+### Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué hace mi framework de validación?**
+- Valida datos tabulares (DataFrames de pandas)
+- Aplica reglas de validación (tipo, rango, formato, custom)
+- Genera reportes detallados de errores
+- Opcionalmente corrige errores automáticamente
+- Permite definir reglas custom por el usuario
+
+**2. ¿Qué tipos de validaciones necesito?**
+- **Tipo**: ¿Esta columna es int/float/str?
+- **Rango**: ¿Los valores están entre min y max?
+- **Formato**: ¿Los emails son válidos? ¿Las fechas tienen el formato correcto?
+- **Nulos**: ¿Hay valores faltantes donde no deberían?
+- **Custom**: Reglas específicas del negocio
+- Cada tipo necesita su propia lógica
+
+**3. ¿Cómo quiero que se use?**
+```python
+# ¿Así?
+validator = DataValidator()
+validator.add_rule(TypeRule("age", int))
+validator.add_rule(RangeRule("age", 0, 120))
+result = validator.validate(df)
+
+# ¿O así?
+rules = load_rules("rules.yaml")
+result = validate(df, rules)
 ```
-dataval/
- src/
-    dataval/
-        __init__.py
-        validators/
-           __init__.py
-           base.py
-           type_validator.py
-           range_validator.py
-           format_validator.py
-           custom_validator.py
-        rules/
-           __init__.py
-           rule_engine.py
-        reporters/
-           __init__.py
-           report.py
-           html_reporter.py
-        correctors/
-           __init__.py
-           type_coercer.py
-           imputer.py
-        models/
-           __init__.py
-           validation_result.py
-        cli.py
- tests/
-    conftest.py
-    fixtures/
-       invalid_data.csv
-       rules.yaml
-    test_validators.py
-    test_rules.py
-    test_correctors.py
-    test_reporters.py
- examples/
-    sample_data.csv
-    validation_rules.yaml
-    validate_example.py
- pyproject.toml
- README.md
-```
+
+### Pistas de Organización
+
+**Sobre validadores:**
+- Cada validador verifica UNA cosa (tipo, rango, formato)
+- Todos devuelven el mismo tipo de resultado: ValidationResult(is_valid, errors)
+- Hint: Clase base abstracta con método `validate(data)`
+- ¿Cómo pasas parámetros a cada validador? (ej: RangeValidator necesita min/max)
+
+**Sobre reglas:**
+- Una regla combina: columna + validador + parámetros
+- Ejemplo: "La columna 'age' debe ser int entre 0 y 120"
+- ¿Cómo representas esto? ¿Clase? ¿Diccionario? ¿Pydantic model?
+- El usuario debe poder definir reglas en YAML/JSON
+
+**Sobre el rule engine:**
+- Aplica múltiples reglas a un DataFrame
+- Recolecta todos los errores
+- ¿Validas todas las reglas o paras en el primer error?
+- ¿Validas fila por fila o columna por columna?
+
+**Sobre reportes:**
+- El reporte debe mostrar: qué regla falló, en qué fila, qué valor, por qué
+- Formatos: texto, JSON, HTML
+- Hint: Un modelo Pydantic para ValidationResult
+- ¿Cómo agregas errores por tipo?
+
+**Sobre corrección automática:**
+- Algunos errores son corregibles: tipo incorrecto → convertir, null → imputar
+- Otros no: valor fuera de rango → ¿qué haces?
+- Hint: Patrón Strategy para diferentes estrategias de corrección
+- ¿Cómo relacionas un validador con su corrector?
+
+**Sobre integración con pandas:**
+- Trabajas con DataFrames, no con listas
+- pandas tiene métodos útiles: `df.dtypes`, `df.isnull()`, `df.apply()`
+- ¿Validas el DataFrame completo o por chunks para eficiencia?
+
+### Checklist de Estructura
+
+Antes de empezar a programar, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal
+- [ ] Módulo/paquete para validadores (uno por tipo de validación)
+- [ ] Módulo/paquete para el rule engine (aplica reglas)
+- [ ] Módulo/paquete para modelos de datos (ValidationResult, Rule)
+- [ ] Módulo/paquete para reportes (diferentes formatos)
+- [ ] Módulo/paquete para correctores (opcional)
+- [ ] Carpeta `tests/` con fixtures de datos inválidos
+- [ ] Carpeta `examples/` con reglas de ejemplo en YAML
+- [ ] `pyproject.toml` con pandas, pydantic
+- [ ] `README.md`
+
+### Enfoque Recomendado
+
+1. **Empieza con un validador**: Implementa TypeValidator
+2. **Define tu modelo de resultado**: ValidationResult con Pydantic
+3. **Añade más validadores**: Range, Format, Null
+4. **Crea el rule engine**: Aplica múltiples reglas a un DataFrame
+5. **Añade reportes**: Genera reportes legibles
+6. **Añade corrección**: Implementa correctores automáticos
+
+**Pregunta guía**: "Si necesito validar que una columna 'email' contiene emails válidos, ¿dónde va ese código?"
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Validadores básicos
 
 **Tareas:**
@@ -81,7 +131,7 @@ dataval/
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Procesamiento eficiente
 
 **Tareas:**
@@ -99,7 +149,7 @@ dataval/
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Validación robusta y reporting
 
 **Tareas:**
@@ -117,7 +167,7 @@ dataval/
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Sistema extensible de validadores
 
 **Tareas:**
@@ -136,7 +186,7 @@ dataval/
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Tests exhaustivos y optimización
 
 **Tareas:**
@@ -155,7 +205,7 @@ dataval/
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** CLI y reportes HTML
 
 **Tareas:**
