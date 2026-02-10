@@ -5,6 +5,24 @@
 
 ---
 
+## HORARIO GENERAL
+
+Cada día de formación sigue esta estructura:
+
+| Bloque | Franja | Actividad |
+|--------|--------|-----------|
+| 1 | 9:00 – 10:30 | Sesión teórica/práctica |
+| ☕ | 10:30 – 10:45 | Descanso |
+| 2 | 10:45 – 12:15 | Sesión teórica/práctica |
+| ☕ | 12:15 – 12:30 | Descanso |
+| 3 | 12:30 – 14:00 | Sesión teórica/práctica |
+| 🍽️ | 14:00 – 15:00 | Comida |
+| 4 | 15:00 – 16:30 | Sesión práctica/ejercicios |
+| ☕ | 16:30 – 16:45 | Descanso |
+| 5 | 16:45 – 18:00 | Trabajo en proyecto + cierre |
+
+---
+
 ## ÍNDICE DE CONTENIDOS POR DÍA
 
 ### DÍA 1: Fundamentos - Configuración de Proyectos Python
@@ -28,24 +46,26 @@
 
 ---
 
-### DÍA 2: Código Pythónico - Idioms y Programación Funcional
+### DÍA 2: Formación de Equipos, Consolidación y Clean Code
 **Duración:** 8 horas
 
 **Conceptos clave:**
-- List/dict/set comprehensions
-- Generadores e iteradores
-- yield y lazy evaluation
-- Decoradores prácticos
-- Programación funcional (map, filter, reduce, functools)
-- Context managers
-- Métodos mágicos básicos
+- Hatchling vs setuptools (build backends)
+- Módulos e imports avanzados
+- Clean Functions (pequeñas, una responsabilidad)
+- Meaningful Names (Clean Code)
+- SRP (Single Responsibility Principle)
+- DRY (Don't Repeat Yourself)
+- KISS (Keep It Simple, Stupid)
 
 **Para el proyecto integrador:**
-- Implementar generadores para lectura de archivos grandes (streaming)
-- Usar comprehensions para transformaciones de datos
-- Crear decoradores para logging/timing
-- Implementar context managers para manejo de recursos (archivos, conexiones)
-- Usar functools (lru_cache, partial) para optimización
+- Formar equipos de 3 personas
+- Elegir proyecto integrador del catálogo
+- Montar estructura de paquete con src layout
+- Configurar pyproject.toml con Hatchling
+- Refactorizar funciones grandes en funciones pequeñas y específicas
+- Renombrar variables/funciones con nombres descriptivos
+- Aplicar DRY eliminando código duplicado
 
 ---
 
@@ -53,21 +73,27 @@
 **Duración:** 8 horas
 
 **Conceptos clave:**
-- Clean Functions (pequeñas, una responsabilidad)
-- Meaningful Names (Clean Code)
-- Type hints (básicos y avanzados)
+- Type hints avanzados (Union, Optional, Generic, Protocol, TypeVar)
 - Error handling y excepciones custom
-- Comments y documentación (docstrings)
-- DRY, KISS principles
+- Logging estratégico (niveles, formateo, handlers)
+- Comments y documentación (docstrings en formato Sphinx)
+- Code smells y refactoring patterns
+- Defensive programming (validación de inputs, assertions)
+- Separation of Concerns
+- Law of Demeter (principio de mínimo conocimiento)
+- Fail Fast principle
+- Magic numbers y constantes
 
 **Para el proyecto integrador:**
-- Refactorizar funciones grandes en funciones pequeñas y específicas
-- Renombrar variables/funciones con nombres descriptivos
-- Añadir type hints a todas las funciones
+- Añadir type hints avanzados a todas las funciones
 - Crear excepciones custom (InvalidDataError, ParsingError, etc.)
+- Implementar sistema de logging estructurado
 - Añadir docstrings completos en formato Sphinx
 - Implementar validación de inputs con error handling robusto
-- Aplicar DRY eliminando código duplicado
+- Identificar y eliminar code smells
+- Extraer magic numbers a constantes con nombres descriptivos
+- Aplicar defensive programming en puntos críticos
+- Separar concerns (lógica de negocio vs I/O vs presentación)
 
 ---
 
