@@ -43,7 +43,7 @@ Antes de crear carpetas, piensa en estas preguntas:
 ### Pistas de Organización
 
 **Sobre la estructura src:**
-- Recuerda del Día 1: `src/package_name/` es el estándar
+- Recuerda de los fundamentos: `src/package_name/` es el estándar
 - Tu paquete principal contiene submódulos por responsabilidad
 - Cada submódulo puede ser un archivo `.py` o una carpeta con `__init__.py`
 
@@ -77,9 +77,9 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Estructura del proyecto funcionando
 
 **Tareas:**
@@ -93,7 +93,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Implementar lectura eficiente de datos
 
 **Tareas:**
@@ -112,7 +112,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Código legible y robusto
 
 **Tareas:**
@@ -132,7 +132,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Arquitectura extensible con OOP
 
 **Tareas:**
@@ -152,7 +152,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Código confiable y eficiente
 
 **Tareas:**
@@ -172,7 +172,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** Paquete production-ready
 
 **Tareas:**

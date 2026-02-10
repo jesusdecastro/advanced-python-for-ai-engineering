@@ -87,9 +87,9 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Estructura y parsing básico
 
 **Tareas:**
@@ -102,7 +102,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Streaming eficiente de logs
 
 **Tareas:**
@@ -120,7 +120,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Parsing robusto y legible
 
 **Tareas:**
@@ -138,7 +138,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Sistema extensible de parsers y analyzers
 
 **Tareas:**
@@ -157,7 +157,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Tests completos y análisis eficiente
 
 **Tareas:**
@@ -176,7 +176,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** CLI y reportes
 
 **Tareas:**

@@ -109,9 +109,9 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-## Roadmap Día a Día
+## Roadmap por Fases
 
-### Día 1: Fundamentos
+### Fase 1: Fundamentos
 **Objetivo:** Lectura y estructura básica
 
 **Tareas:**
@@ -124,7 +124,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 2: Código Pythónico
+### Fase 2: Código Pythónico
 **Objetivo:** Procesamiento eficiente con generadores
 
 **Tareas:**
@@ -143,7 +143,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 3: Código Limpio
+### Fase 3: Código Limpio
 **Objetivo:** Análisis y transformación robusta
 
 **Tareas:**
@@ -161,7 +161,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 4: Diseño
+### Fase 4: Diseño
 **Objetivo:** Sistema extensible de analyzers y extractors
 
 **Tareas:**
@@ -181,7 +181,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 5: Testing y Optimización
+### Fase 5: Testing y Optimización
 **Objetivo:** Tests exhaustivos y optimización
 
 **Tareas:**
@@ -200,7 +200,7 @@ Antes de empezar a programar, asegúrate de tener:
 
 ---
 
-### Día 6: Integración
+### Fase 6: Integración
 **Objetivo:** CLI y reportes de análisis
 
 **Tareas:**
