@@ -19,7 +19,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -42,7 +42,7 @@ Antes de crear carpetas, piensa en estas preguntas:
 - Formatos inconsistentes (fechas, mayúsculas/minúsculas)
 - Cada tipo de problema necesita su propia lógica
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre validadores:**
 - Cada validador detecta UN tipo de problema
@@ -71,9 +71,9 @@ Antes de crear carpetas, piensa en estas preguntas:
 - ¿Dónde defines la configuración?
 - Hint: Un modelo Pydantic con valores por defecto
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal
 - [ ] Módulo/paquete para lectura de CSV
 - [ ] Módulo/paquete para validadores (detectar problemas)
@@ -86,7 +86,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` configurado
 - [ ] `README.md`
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza con un problema**: Implementa detección y limpieza de nulls
 2. **Generaliza**: Crea la abstracción (clase base) cuando tengas 2 implementaciones

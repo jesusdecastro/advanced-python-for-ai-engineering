@@ -20,7 +20,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -41,7 +41,7 @@ Antes de crear carpetas, piensa en estas preguntas:
 - Los reportes pueden ser de varios tipos → Piensa en estrategia
 - Las entradas de log tienen estructura → Piensa en modelos de datos
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre parsers:**
 - Cada formato de log (nginx, apache) tiene su propia lógica de parsing
@@ -63,9 +63,9 @@ Antes de crear carpetas, piensa en estas preguntas:
 - Pero ambos toman los mismos datos de entrada
 - Hint: Piensa en una interfaz común con implementaciones específicas
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal dentro
 - [ ] Módulo/paquete para parsers de logs
 - [ ] Módulo/paquete para modelos de datos
@@ -76,7 +76,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` configurado
 - [ ] `README.md` con descripción
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza con un parser**: Implementa parsing de un formato (nginx o apache)
 2. **Define tu modelo**: Crea la estructura de LogEntry

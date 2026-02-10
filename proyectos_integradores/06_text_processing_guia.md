@@ -20,7 +20,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -43,7 +43,7 @@ Antes de crear carpetas, piensa en estas preguntas:
 - ¿Texto + análisis pre-calculado?
 - Hint: Un modelo de datos (clase o Pydantic) es útil
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre lectura:**
 - Diferentes formatos de texto: TXT plano, Markdown, HTML
@@ -82,9 +82,9 @@ Antes de crear carpetas, piensa en estas preguntas:
 - ¿Cómo estructuras esto?
 - Hint: Pydantic o dataclass
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal
 - [ ] Módulo/paquete para readers (lectura de archivos)
 - [ ] Módulo/paquete para analyzers (análisis estadístico)
@@ -96,7 +96,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` (solo stdlib, pandas opcional)
 - [ ] `README.md`
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza con lectura**: Implementa un reader básico para TXT
 2. **Añade análisis simple**: Cuenta palabras, calcula frecuencias

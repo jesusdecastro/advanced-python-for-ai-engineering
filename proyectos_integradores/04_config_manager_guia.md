@@ -20,7 +20,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -49,7 +49,7 @@ print(config["database"]["host"])  # dict access
 ```
 Tu decisión afecta el diseño
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre parsers:**
 - Cada formato necesita su propia lógica de parsing
@@ -80,9 +80,9 @@ Tu decisión afecta el diseño
 - Estrategias: sobrescribir, combinar listas, deep merge
 - ¿Cómo manejas conflictos?
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal
 - [ ] Módulo/paquete para parsers (uno por formato)
 - [ ] Módulo/paquete para validación de esquemas
@@ -94,7 +94,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` con dependencias (pyyaml, tomli para Python <3.11)
 - [ ] `README.md`
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza con un formato**: Implementa parsing de JSON (el más simple)
 2. **Añade acceso intuitivo**: Implementa métodos mágicos para dot notation

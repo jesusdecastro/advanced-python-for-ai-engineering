@@ -20,7 +20,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -52,7 +52,7 @@ rules = load_rules("rules.yaml")
 result = validate(df, rules)
 ```
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre validadores:**
 - Cada validador verifica UNA cosa (tipo, rango, formato)
@@ -89,9 +89,9 @@ result = validate(df, rules)
 - pandas tiene métodos útiles: `df.dtypes`, `df.isnull()`, `df.apply()`
 - ¿Validas el DataFrame completo o por chunks para eficiencia?
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal
 - [ ] Módulo/paquete para validadores (uno por tipo de validación)
 - [ ] Módulo/paquete para el rule engine (aplica reglas)
@@ -103,7 +103,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` con pandas, pydantic
 - [ ] `README.md`
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza con un validador**: Implementa TypeValidator
 2. **Define tu modelo de resultado**: ValidationResult con Pydantic

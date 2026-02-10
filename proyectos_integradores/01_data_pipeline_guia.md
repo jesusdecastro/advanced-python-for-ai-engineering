@@ -20,7 +20,7 @@ Al finalizar este proyecto, habrás aplicado:
 
 ## Diseñando la Estructura del Proyecto
 
-### 🤔 Preguntas Clave para Diseñar tu Estructura
+### Preguntas Clave para Diseñar tu Estructura
 
 Antes de crear carpetas, piensa en estas preguntas:
 
@@ -40,26 +40,26 @@ Antes de crear carpetas, piensa en estas preguntas:
 - Si mañana necesitas leer desde una API, ¿dónde añadirías ese código?
 - Si necesitas una nueva transformación, ¿modificarías código existente o añadirías nuevo?
 
-### 💡 Pistas de Organización
+### Pistas de Organización
 
 **Sobre la estructura src:**
-- Recuerda del Día 1: `src/nombre_paquete/` es el estándar
+- Recuerda del Día 1: `src/package_name/` es el estándar
 - Tu paquete principal contiene submódulos por responsabilidad
 - Cada submódulo puede ser un archivo `.py` o una carpeta con `__init__.py`
 
 **Sobre agrupación lógica:**
 - Agrupa por **qué hace**, no por **cómo lo hace**
-- Ejemplo: "lectores" es mejor que "archivos_csv_json"
-- Piensa en verbos: leer, transformar, escribir, validar
+- Ejemplo: "readers" es mejor que "csv_json_files"
+- Piensa en verbos: read, transform, write, validate
 
 **Sobre extensibilidad:**
 - Si tienes código que otros módulos heredarán, ¿dónde lo pones?
 - Hint: Un archivo `base.py` con clases abstractas es común
 - Las implementaciones concretas pueden estar en el mismo paquete
 
-### 🎯 Checklist de Estructura
+### Checklist de Estructura
 
-Antes de empezar a codear, asegúrate de tener:
+Antes de empezar a programar, asegúrate de tener:
 - [ ] Carpeta `src/` con tu paquete principal dentro
 - [ ] Submódulos/paquetes para cada responsabilidad principal
 - [ ] Carpeta `tests/` al mismo nivel que `src/`
@@ -67,7 +67,7 @@ Antes de empezar a codear, asegúrate de tener:
 - [ ] `pyproject.toml` configurado
 - [ ] `README.md` con descripción del proyecto
 
-### 🚀 Enfoque Recomendado
+### Enfoque Recomendado
 
 1. **Empieza simple**: Crea la estructura mínima que necesitas HOY
 2. **Itera**: Añade carpetas/módulos cuando realmente los necesites
