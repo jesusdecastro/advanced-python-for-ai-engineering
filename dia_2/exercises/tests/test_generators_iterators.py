@@ -3,40 +3,32 @@ Unit tests for generators and iterators exercises.
 
 These tests validate both functionality and proper use of generators.
 
-Run with: pytest tests/test_02_generators_iterators.py -v
+Run with: uv run pytest tests/test_generators_iterators.py -v
 """
 
-import importlib.util
 import subprocess
-import sys
 from pathlib import Path
 
 import pytest
 
-# Import the module to test functionality
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-# Dynamically import module with numeric prefix
-_module_path = Path(__file__).parent.parent / "02_generators_iterators.py"
-_spec = importlib.util.spec_from_file_location("generators_exercises", _module_path)
-_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_module)
-
-chain_iterables = _module.chain_iterables
-chunk_data = _module.chunk_data
-countdown = _module.countdown
-drop = _module.drop
-fibonacci = _module.fibonacci
-filter_even = _module.filter_even
-flatten_nested_list = _module.flatten_nested_list
-infinite_sequence = _module.infinite_sequence
-process_csv_stream = _module.process_csv_stream
-read_lines_stream = _module.read_lines_stream
-read_multiple_sources = _module.read_multiple_sources
-running_average = _module.running_average
-sliding_window = _module.sliding_window
-square_numbers = _module.square_numbers
-take = _module.take
+# Import from the installed package
+from dia2_exercises.generators_iterators import (
+    chain_iterables,
+    chunk_data,
+    countdown,
+    drop,
+    fibonacci,
+    filter_even,
+    flatten_nested_list,
+    infinite_sequence,
+    process_csv_stream,
+    read_lines_stream,
+    read_multiple_sources,
+    running_average,
+    sliding_window,
+    square_numbers,
+    take,
+)
 
 
 class TestTypeHintsWithPyright:
@@ -44,7 +36,7 @@ class TestTypeHintsWithPyright:
 
     def test_pyright_passes(self) -> None:
         """Test that Pyright validation passes for the exercises file."""
-        exercises_file = Path(__file__).parent.parent / "02_generators_iterators.py"
+        exercises_file = Path(__file__).parent.parent / "src" / "dia2_exercises" / "generators_iterators.py"
 
         result = subprocess.run(
             ["pyright", str(exercises_file), "--outputjson"],

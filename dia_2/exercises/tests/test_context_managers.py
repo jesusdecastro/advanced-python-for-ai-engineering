@@ -1,25 +1,17 @@
 """Tests for context managers exercises."""
 
-import importlib.util
-import sys
 import time
 from pathlib import Path
 
 import pytest
 
-# Import the module to test functionality
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-# Dynamically import module with numeric prefix
-_module_path = Path(__file__).parent.parent / "05_context_managers.py"
-_spec = importlib.util.spec_from_file_location("context_managers_exercises", _module_path)
-_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_module)
-
-LoggingContext = _module.LoggingContext
-ExecutionTimer = _module.ExecutionTimer
-temporary_file_writer = _module.temporary_file_writer
-SuppressException = _module.SuppressException
+# Import from the installed package
+from dia2_exercises.context_managers import (
+    ExecutionTimer,
+    LoggingContext,
+    SuppressException,
+    temporary_file_writer,
+)
 
 
 class TestLoggingContext:

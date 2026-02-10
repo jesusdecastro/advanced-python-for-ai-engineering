@@ -15,6 +15,10 @@ UV es una herramienta moderna para gestionar paquetes y entornos virtuales en Py
 ### Windows (PowerShell)
 ```powershell
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# o
+
+irm https://astral.sh/uv/install.ps1 | iex
 ```
 
 ### macOS/Linux
@@ -41,7 +45,6 @@ UV ofrece dos workflows. Para entenderlos, imagina que estás organizando tu coc
 - **Comandos**: `uv pip install`, `uv pip list`
 - **Control**: Tú gestionas todo manualmente
 - **Cuándo usarlo**: Proyectos simples, scripts, aprendizaje
-- **Para este curso**: ✅ **Usaremos este modo**
 
 ### Modo 2: Proyecto Moderno (`uv add`, `uv sync`)
 **Analogía**: Tienes un sistema automatizado que gestiona tu lista de compras y verifica que todo esté en orden.
@@ -49,7 +52,6 @@ UV ofrece dos workflows. Para entenderlos, imagina que estás organizando tu coc
 - **Comandos**: `uv add`, `uv remove`, `uv sync`
 - **Control**: UV gestiona automáticamente archivos de configuración
 - **Cuándo usarlo**: Proyectos profesionales, equipos, producción
-- **Para este curso**: Lo veremos al final como "siguiente paso"
 
 ---
 
@@ -156,18 +158,6 @@ uv pip list --format=json
 uv pip show pandas
 
 # Muestra: versión, ubicación, dependencias, etc.
-```
-
-### Generar requirements.txt
-
-**¿Para qué?**
-Para compartir tu proyecto con otros. El archivo lista todos los paquetes necesarios.
-
-```bash
-# Exportar paquetes instalados
-uv pip freeze > requirements.txt
-
-# Resultado: Archivo con todas las dependencias y versiones exactas
 ```
 
 **Ejemplo de requirements.txt:**
@@ -298,13 +288,13 @@ uv run -m pytest
 
 **Ventaja**: No necesitas activar el entorno manualmente. UV lo hace por ti.
 
-### Remover Dependencias
+### Eliminar Dependencias
 
 ```bash
-# Remover paquete
+# Eliminar paquete
 uv remove pandas
 
-# Remover dependencia de desarrollo
+# Eliminar dependencia de desarrollo
 uv remove --dev pytest
 ```
 
@@ -461,7 +451,7 @@ wheels = [
 
 ---
 
-## Comparación Lado a Lado
+## Comparación directa
 
 ### Instalar Pandas
 
@@ -481,21 +471,6 @@ uv add pandas
 
 ### Compartir Proyecto
 
-**Modo pip:**
-```bash
-# Desarrollador A
-uv pip freeze > requirements.txt
-git add requirements.txt
-git commit -m "Add dependencies"
-
-# Desarrollador B
-git pull
-uv venv
-.venv\Scripts\activate
-uv pip install -r requirements.txt
-```
-
-**Modo moderno:**
 ```bash
 # Desarrollador A
 uv add pandas
@@ -540,42 +515,6 @@ uv sync
 | `uv sync --upgrade` | Actualizar dependencias |
 | `uv run python script.py` | Ejecutar script |
 | `uv run pytest` | Ejecutar comando |
-
----
-
-## Workflow Recomendado para el Curso
-
-### Configuración Inicial (Una Vez)
-
-```bash
-# 1. Instalar UV
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-# 2. Verificar instalación
-uv --version
-```
-
-### Para Cada Proyecto de Ejercicios
-
-```bash
-# 1. Navegar a carpeta de ejercicios
-cd dia_2/exercises
-
-# 2. Crear entorno virtual
-uv venv
-
-# 3. Activar entorno
-.venv\Scripts\activate  # Windows
-
-# 4. Instalar paquete en modo editable
-uv pip install -e ".[dev]"
-
-# 5. Ejecutar tests
-pytest
-
-# 6. Al terminar
-deactivate
-```
 
 ---
 

@@ -2,115 +2,50 @@
 
 Ejercicios prácticos para dominar los conceptos avanzados de Python del Día 2.
 
-## El Problema: Cómo Ejecutar los Tests
+## Inicio Rápido
 
-Los tests necesitan importar tus ejercicios:
+El proyecto ya está configurado con `pyproject.toml`. Solo necesitas:
 
-```python
-# tests/test_comprehensions.py
-from dia2_exercises.comprehensions import filter_even_numbers
-```
-
-Pero Python no encuentra `dia2_exercises` porque está en `src/`. La solución profesional es crear un **paquete instalable**.
-
-## Configuración del Entorno (Paso a Paso)
-
-### 1. Instalar UV
+### 1. Configurar el Entorno
 
 ```bash
-# Windows (PowerShell)
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-# macOS/Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-### 2. Crear Entorno Virtual
-
-```bash
+# Navega al directorio de ejercicios
 cd dia_2/exercises
-uv venv
+
+# Sincroniza dependencias (crea .venv e instala todo automáticamente)
+uv sync
 ```
 
-### 3. Activar Entorno
+**¿Qué hace `uv sync`?**
+- Crea el entorno virtual `.venv/` si no existe
+- Lee `pyproject.toml` y `uv.lock`
+- Instala todas las dependencias (pytest, ruff, etc.)
+- Instala tu paquete `dia2-exercises` en modo editable
+- Todo en un solo comando, sin necesidad de activar el entorno
+
+### 2. Ejecutar Tests
 
 ```bash
-# Windows (CMD)
-.venv\Scripts\activate
+# Ejecutar un test específico
+uv run pytest tests/test_comprehensions.py
 
-# Windows (PowerShell)
-.venv\Scripts\Activate.ps1
+# Ejecutar todos los tests
+uv run pytest
 
-# macOS/Linux
-source .venv/bin/activate
+# Ejecutar un test individual
+uv run pytest tests/test_comprehensions.py::test_filter_even_numbers
 ```
 
-### 4. Crear pyproject.toml
-
-Crea el archivo `pyproject.toml` en `dia_2/exercises/`:
-
-```toml
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[project]
-name = "dia2-exercises"
-version = "0.1.0"
-description = "Ejercicios prácticos del Día 2"
-requires-python = ">=3.10"
-dependencies = []
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "ruff>=0.1.0",
-]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-addopts = "-v"
-
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-```
-
-**¿Qué hace este archivo?**
-- Define un paquete Python llamado `dia2-exercises`
-- Usa Hatchling como build backend (moderno y simple)
-- Declara pytest y ruff como dependencias de desarrollo
-- Configura pytest para buscar tests en `tests/`
-
-### 5. Instalar el Paquete en Modo Editable
-
-```bash
-uv pip install -e ".[dev]"
-```
-
-**¿Qué hace `-e`?**
-- Instala el paquete en modo "editable"
-- Los cambios en tu código se reflejan inmediatamente
-- Python puede importar `dia2_exercises` desde cualquier lugar
-
-**¿Qué hace `[dev]`?**
-- Instala también pytest y ruff
-
-**Resultado**: Python crea un link en `site-packages/` que apunta a `src/dia2_exercises/`
-
-### 6. Verificar Instalación
-
-```bash
-python -c "import dia2_exercises; print(dia2_exercises.__version__)"
-# Output: 0.1.0
-```
+**¿Por qué `uv run`?**
+- Ejecuta comandos dentro del entorno virtual automáticamente
+- No necesitas activar/desactivar el entorno manualmente
+- Más rápido y conveniente
 
 ## Estructura del Proyecto
 
 ```
 dia_2/exercises/
-├── .venv/                  # Entorno virtual (creado por UV)
+├── .venv/                  # Entorno virtual (creado por uv sync)
 ├── src/
 │   └── dia2_exercises/     # Tu paquete
 │       ├── __init__.py
@@ -121,7 +56,8 @@ dia_2/exercises/
 ├── tests/
 │   ├── __init__.py
 │   └── test_*.py           # Tests unitarios
-├── pyproject.toml          # Configuración del paquete (TÚ LO CREAS)
+├── pyproject.toml          # Ya configurado
+├── uv.lock                 # Lock file con versiones exactas
 └── README.md
 ```
 
@@ -155,66 +91,65 @@ def filter_even_numbers(numbers: list[int]) -> list[int]:
 ### 3. Ejecutar Tests
 
 ```bash
+# Test específico del ejercicio que estás haciendo
+uv run pytest tests/test_comprehensions.py
+
 # Todos los tests
-pytest
+uv run pytest
 
-# Un módulo específico
-pytest tests/test_comprehensions.py
+# Un test individual
+uv run pytest tests/test_comprehensions.py::test_filter_even_numbers
 
-# Un test específico
-pytest tests/test_comprehensions.py::test_filter_even_numbers
+# Con más detalle
+uv run pytest -v
 ```
 
-### 4. Verificar Calidad
+### 4. Verificar Calidad del Código
 
 ```bash
 # Verificar estilo
-ruff check src/
+uv run ruff check src/
 
-# Formatear código
-ruff format src/
+# Formatear código automáticamente
+uv run ruff format src/
 ```
 
 ## Cómo Funcionan los Imports
 
-**Antes de instalar el paquete:**
+**El problema original:**
 ```python
 from dia2_exercises.comprehensions import filter_even_numbers
 # ModuleNotFoundError: No module named 'dia2_exercises'
 ```
 
-**Después de `uv pip install -e .`:**
+**Después de `uv sync`:**
 ```python
 from dia2_exercises.comprehensions import filter_even_numbers
-# ✓ Funciona porque Python encuentra el paquete en site-packages
+# Funciona porque el paquete está instalado en modo editable
 ```
 
 **¿Por qué funciona?**
 
-1. `uv pip install -e .` crea un link simbólico:
-   ```
-   .venv/lib/site-packages/dia2_exercises -> ../../src/dia2_exercises/
-   ```
-
-2. Python busca módulos en `site-packages/`
-
-3. Encuentra el link y carga tu código
-
-4. Los cambios se reflejan inmediatamente (modo editable)
+1. `uv sync` instala el paquete en modo editable (`-e`)
+2. Crea un link en `.venv/lib/site-packages/` que apunta a `src/dia2_exercises/`
+3. Python encuentra el módulo cuando lo importas
+4. Los cambios en tu código se reflejan inmediatamente (no necesitas reinstalar)
 
 ## Comandos Rápidos
 
 ```bash
 # Configuración inicial (una vez)
-uv venv
-# Crear pyproject.toml (ver arriba)
-uv pip install -e ".[dev]"
+cd dia_2/exercises
+uv sync
 
-# Trabajo diario
-pytest                              # Ejecutar tests
-pytest tests/test_comprehensions.py # Test específico
-ruff check src/                     # Verificar código
-ruff format src/                    # Formatear código
+# Ejecutar tests mientras trabajas
+uv run pytest tests/test_comprehensions.py      # Test del ejercicio actual
+uv run pytest tests/test_decorators.py          # Otro ejercicio
+uv run pytest                                    # Todos los tests
+
+# Verificar código
+uv run ruff check src/                           # Verificar estilo
+uv run ruff format src/                          # Formatear código
 ```
 
 ## Módulos de Ejercicios
@@ -227,16 +162,34 @@ ruff format src/                    # Formatear código
 ## Solución de Problemas
 
 **Error: `ModuleNotFoundError: No module named 'dia2_exercises'`**
-- Solución: `uv pip install -e ".[dev]"`
+- Solución: Ejecuta `uv sync` desde `dia_2/exercises/`
 
-**Error: `pytest: command not found`**
-- Solución: Activa el entorno virtual
+**Error: `uv: command not found`**
+- Solución: Instala UV siguiendo las instrucciones del paso 1
 
-**Tests pasan pero el código está mal**
-- Los tests son simples, verifica el docstring y prueba casos adicionales
+**Los tests no se ejecutan**
+- Verifica que estás en el directorio correcto: `cd dia_2/exercises`
+- Ejecuta: `uv sync` para asegurar que todo está instalado
+
+**Quiero usar el entorno virtual manualmente**
+```bash
+# Activar entorno (opcional, uv run lo hace automáticamente)
+# Windows (CMD)
+.venv\Scripts\activate
+
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# macOS/Linux
+source .venv/bin/activate
+
+# Luego puedes usar pytest directamente
+pytest tests/test_comprehensions.py
+```
 
 ## Recursos
 
 - **UV**: https://docs.astral.sh/uv/
 - **pytest**: https://docs.pytest.org/
 - **Hatchling**: https://hatch.pypa.io/latest/
+- **Ruff**: https://docs.astral.sh/ruff/

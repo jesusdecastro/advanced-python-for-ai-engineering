@@ -3,37 +3,29 @@ Unit tests for comprehensions exercises.
 
 These tests validate both functionality and proper use of comprehensions.
 
-Run with: pytest tests/test_01_comprehensions.py -v
+Run with: uv run pytest tests/test_comprehensions.py -v
 """
 
-import importlib.util
 import subprocess
-import sys
 from pathlib import Path
 
 import pytest
 
-# Import the module to test functionality
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-# Dynamically import module with numeric prefix
-_module_path = Path(__file__).parent.parent / "01_comprehensions.py"
-_spec = importlib.util.spec_from_file_location("comprehensions_exercises", _module_path)
-_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_module)
-
-create_number_to_cube_dict = _module.create_number_to_cube_dict
-extract_names_from_users = _module.extract_names_from_users
-filter_dict_by_value = _module.filter_dict_by_value
-filter_even_numbers = _module.filter_even_numbers
-flatten_matrix = _module.flatten_matrix
-get_squares = _module.get_squares
-get_unique_characters = _module.get_unique_characters
-get_unique_numbers = _module.get_unique_numbers
-get_word_lengths = _module.get_word_lengths
-invert_dictionary = _module.invert_dictionary
-uppercase_strings = _module.uppercase_strings
-word_frequency = _module.word_frequency
+# Import from the installed package
+from dia2_exercises.comprehensions import (
+    create_number_to_cube_dict,
+    extract_names_from_users,
+    filter_dict_by_value,
+    filter_even_numbers,
+    flatten_matrix,
+    get_squares,
+    get_unique_characters,
+    get_unique_numbers,
+    get_word_lengths,
+    invert_dictionary,
+    uppercase_strings,
+    word_frequency,
+)
 
 
 class TestTypeHintsWithPyright:
@@ -41,7 +33,7 @@ class TestTypeHintsWithPyright:
 
     def test_pyright_passes(self) -> None:
         """Test that Pyright validation passes for the exercises file."""
-        exercises_file = Path(__file__).parent.parent / "01_comprehensions.py"
+        exercises_file = Path(__file__).parent.parent / "src" / "dia2_exercises" / "comprehensions.py"
 
         result = subprocess.run(
             ["pyright", str(exercises_file), "--outputjson"],

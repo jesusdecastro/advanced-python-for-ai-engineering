@@ -1,24 +1,12 @@
 """Tests for decorators exercises."""
 
-import importlib.util
-import sys
 from datetime import datetime
 from pathlib import Path
 
 import pytest
 
-# Import the module to test functionality
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
-# Dynamically import module with numeric prefix
-_module_path = Path(__file__).parent.parent / "03_decorators.py"
-_spec = importlib.util.spec_from_file_location("decorators_exercises", _module_path)
-_module = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_module)
-
-BankAccount = _module.BankAccount
-Date = _module.Date
-validate_types = _module.validate_types
+# Import from the installed package
+from dia2_exercises.decorators import BankAccount, Date, validate_types
 
 
 class TestBankAccount:
