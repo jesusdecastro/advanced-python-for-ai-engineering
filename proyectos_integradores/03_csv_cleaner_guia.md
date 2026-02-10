@@ -17,52 +17,84 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
-```
-csvclean/
- src/
-    csvclean/
-        __init__.py
-        readers/
-           __init__.py
-           csv_reader.py
-        validators/
-           __init__.py
-           base.py
-           null_validator.py
-           type_validator.py
-           duplicate_validator.py
-        cleaners/
-           __init__.py
-           base.py
-           null_cleaner.py
-           duplicate_cleaner.py
-        transformers/
-           __init__.py
-           normalizer.py
-           type_converter.py
-        reporters/
-           __init__.py
-           cleaning_report.py
-        models/
-           __init__.py
-           config.py
-        cli.py
- tests/
-    conftest.py
-    fixtures/
-       dirty_data.csv
-       expected_clean.csv
-    test_validators.py
-    test_cleaners.py
-    test_transformers.py
- examples/
-    sample_dirty.csv
-    clean_example.py
- pyproject.toml
- README.md
-```
+### 🤔 Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué hace mi herramienta de limpieza?**
+- Lee archivos CSV (potencialmente con problemas)
+- Detecta problemas (nulls, duplicados, tipos incorrectos)
+- Aplica correcciones automáticas
+- Transforma datos (normalización, conversión de tipos)
+- Genera reportes de lo que se limpió
+
+**2. ¿Cuál es la diferencia entre validar y limpiar?**
+- **Validar**: Detectar que algo está mal ("esta columna tiene nulls")
+- **Limpiar**: Corregir el problema ("relleno los nulls con el promedio")
+- ¿Van en el mismo módulo o separados?
+
+**3. ¿Qué tipos de problemas puedo encontrar?**
+- Valores nulos/vacíos
+- Duplicados (filas completas o por clave)
+- Tipos incorrectos (texto donde debería haber números)
+- Formatos inconsistentes (fechas, mayúsculas/minúsculas)
+- Cada tipo de problema necesita su propia lógica
+
+### 💡 Pistas de Organización
+
+**Sobre validadores:**
+- Cada validador detecta UN tipo de problema
+- Todos los validadores hacen lo mismo: reciben datos → devuelven problemas encontrados
+- Hint: Piensa en una clase base abstracta con método `validate()`
+- Las implementaciones concretas: `NullValidator`, `DuplicateValidator`, `TypeValidator`
+
+**Sobre limpiadores:**
+- Cada limpiador corrige UN tipo de problema
+- Estrategias diferentes para el mismo problema: nulls → rellenar con promedio vs eliminar fila
+- Hint: Patrón Strategy es perfecto aquí
+- ¿Cómo relacionas un validador con su limpiador?
+
+**Sobre transformaciones:**
+- Normalizar texto (lowercase, trim) es diferente a convertir tipos
+- Pero ambas transforman datos de A → B
+- ¿Necesitas una interfaz común?
+
+**Sobre reportes:**
+- El reporte debe decir: qué problemas se encontraron, qué se corrigió, estadísticas
+- ¿Es un modelo de datos o una clase que genera el reporte?
+- Hint: Pydantic es excelente para estructurar reportes
+
+**Sobre configuración:**
+- El usuario debe poder configurar: qué validadores usar, qué estrategia de limpieza, etc.
+- ¿Dónde defines la configuración?
+- Hint: Un modelo Pydantic con valores por defecto
+
+### 🎯 Checklist de Estructura
+
+Antes de empezar a codear, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal
+- [ ] Módulo/paquete para lectura de CSV
+- [ ] Módulo/paquete para validadores (detectar problemas)
+- [ ] Módulo/paquete para limpiadores (corregir problemas)
+- [ ] Módulo/paquete para transformaciones
+- [ ] Módulo/paquete para reportes
+- [ ] Módulo/paquete para modelos de datos/configuración
+- [ ] Carpeta `tests/` con fixtures de CSVs sucios
+- [ ] Carpeta `examples/` con CSVs de ejemplo
+- [ ] `pyproject.toml` configurado
+- [ ] `README.md`
+
+### 🚀 Enfoque Recomendado
+
+1. **Empieza con un problema**: Implementa detección y limpieza de nulls
+2. **Generaliza**: Crea la abstracción (clase base) cuando tengas 2 implementaciones
+3. **Añade más validadores**: Duplicados, tipos, etc.
+4. **Conecta todo**: Una clase orquestadora que usa validadores + limpiadores
+5. **Reporta**: Genera un reporte de lo que se hizo
+
+**Pregunta guía**: "Si necesito añadir validación de rangos (ej: edad entre 0-120), ¿dónde va ese código?"
 
 ---
 

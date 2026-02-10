@@ -18,51 +18,94 @@ Al finalizar este proyecto, habrás aplicado:
 
 ---
 
-## Estructura Sugerida del Proyecto
+## Diseñando la Estructura del Proyecto
 
-```
-textkit/
- src/
-    textkit/
-        __init__.py
-        readers/
-           __init__.py
-           base.py
-           txt_reader.py
-           markdown_reader.py
-        analyzers/
-           __init__.py
-           word_counter.py
-           frequency_analyzer.py
-           statistics.py
-        transformers/
-           __init__.py
-           normalizer.py
-           cleaner.py
-           tokenizer.py
-        extractors/
-           __init__.py
-           email_extractor.py
-           url_extractor.py
-           date_extractor.py
-        models/
-           __init__.py
-           text_document.py
-        cli.py
- tests/
-    conftest.py
-    fixtures/
-       sample_text.txt
-       sample_markdown.md
-    test_analyzers.py
-    test_transformers.py
-    test_extractors.py
- examples/
-    sample_document.txt
-    analyze_example.py
- pyproject.toml
- README.md
-```
+### 🤔 Preguntas Clave para Diseñar tu Estructura
+
+Antes de crear carpetas, piensa en estas preguntas:
+
+**1. ¿Qué hace mi toolkit de procesamiento de texto?**
+- Lee archivos de texto (TXT, Markdown, etc.)
+- Analiza el texto (frecuencias, estadísticas, sentimiento básico)
+- Transforma el texto (normalización, limpieza, tokenización)
+- Extrae información (emails, URLs, fechas, entidades)
+
+**2. ¿Cuáles son las operaciones principales?**
+- **Leer**: Cargar texto desde archivos
+- **Analizar**: Calcular métricas (palabras más frecuentes, longitud promedio)
+- **Transformar**: Modificar el texto (lowercase, quitar puntuación, tokenizar)
+- **Extraer**: Encontrar patrones específicos (emails, URLs)
+- Cada operación es una responsabilidad diferente
+
+**3. ¿Cómo represento un documento?**
+- ¿Solo el texto crudo?
+- ¿Texto + metadata (autor, fecha, fuente)?
+- ¿Texto + análisis pre-calculado?
+- Hint: Un modelo de datos (clase o Pydantic) es útil
+
+### 💡 Pistas de Organización
+
+**Sobre lectura:**
+- Diferentes formatos de texto: TXT plano, Markdown, HTML
+- Todos devuelven texto, pero el parsing es diferente
+- Hint: Clase base abstracta con método `read()`
+- ¿Cómo manejas diferentes encodings (UTF-8, Latin-1)?
+
+**Sobre análisis:**
+- Contar palabras es diferente a calcular frecuencias
+- Calcular estadísticas (promedio de palabras por oración) es otra cosa
+- Análisis de sentimiento básico (positivo/negativo) es otra
+- ¿Cada análisis es una clase o una función?
+- Hint: Si el análisis tiene estado o configuración → clase
+
+**Sobre transformaciones:**
+- Normalizar: lowercase, quitar acentos, trim
+- Limpiar: quitar puntuación, números, stopwords
+- Tokenizar: dividir en palabras, oraciones, n-gramas
+- Todas transforman texto → texto (o texto → lista)
+- ¿Necesitas una interfaz común?
+
+**Sobre extracción:**
+- Emails: regex `\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b`
+- URLs: regex para http/https
+- Fechas: múltiples formatos posibles
+- Cada extractor busca un patrón específico
+- Hint: Todos devuelven lista de matches
+
+**Sobre eficiencia:**
+- Archivos de texto pueden ser enormes (logs, libros, datasets)
+- ¿Cargas todo en memoria o usas generadores?
+- Hint: `yield` línea por línea o token por token
+
+**Sobre modelos de datos:**
+- Un documento tiene: texto, metadata, análisis
+- ¿Cómo estructuras esto?
+- Hint: Pydantic o dataclass
+
+### 🎯 Checklist de Estructura
+
+Antes de empezar a codear, asegúrate de tener:
+- [ ] Carpeta `src/` con tu paquete principal
+- [ ] Módulo/paquete para readers (lectura de archivos)
+- [ ] Módulo/paquete para analyzers (análisis estadístico)
+- [ ] Módulo/paquete para transformers (modificación de texto)
+- [ ] Módulo/paquete para extractors (extracción de patrones)
+- [ ] Módulo/paquete para modelos de datos (Document, AnalysisResult)
+- [ ] Carpeta `tests/` con fixtures de textos de ejemplo
+- [ ] Carpeta `examples/` con scripts de uso
+- [ ] `pyproject.toml` (solo stdlib, pandas opcional)
+- [ ] `README.md`
+
+### 🚀 Enfoque Recomendado
+
+1. **Empieza con lectura**: Implementa un reader básico para TXT
+2. **Añade análisis simple**: Cuenta palabras, calcula frecuencias
+3. **Añade transformaciones**: Normalización, tokenización
+4. **Añade extracción**: Implementa extractor de emails con regex
+5. **Generaliza**: Crea abstracciones cuando tengas 2+ implementaciones
+6. **Optimiza**: Usa generadores para archivos grandes
+
+**Pregunta guía**: "Si necesito añadir extracción de números de teléfono, ¿dónde va ese código?"
 
 ---
 
