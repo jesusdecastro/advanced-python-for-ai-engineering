@@ -1,1 +1,1 @@
-"""Tests for Day 2 exercises."""
+"""Tests for Día 2 exercises."""

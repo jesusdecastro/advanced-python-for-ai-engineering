@@ -20,8 +20,7 @@ Run the tests with: pytest tests/test_01_comprehensions.py
 # Exercise 1: Basic List Comprehensions
 # TODO: Add type hints and implement using list comprehension
 def get_squares(n):
-    """
-    Generate a list of squares from 1 to n.
+    """Generate a list of squares from 1 to n.
 
     TODO: Add :param, :type, :return, :rtype annotations
 
@@ -29,7 +28,7 @@ def get_squares(n):
         >>> get_squares(5)
         [1, 4, 9, 16, 25]
     """
-    pass
+    
 
 
 # TODO: Add type hints and implement using list comprehension
