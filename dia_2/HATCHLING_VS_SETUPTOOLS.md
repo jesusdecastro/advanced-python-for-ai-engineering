@@ -116,7 +116,10 @@ version = "0.1.0"
 ### Paso 1: Instala tu Paquete en Modo Desarrollo
 
 ```bash
-# Desde la raíz del proyecto (donde está pyproject.toml)
+# Con UV (recomendado)
+uv pip install -e .
+
+# Sin UV (alternativa con pip)
 pip install -e .
 ```
 
@@ -165,6 +168,10 @@ version = "1.0.0"
 
 ### Reinstala el Paquete
 ```bash
+# Con UV
+uv pip install -e .
+
+# Sin UV
 pip install -e .
 ```
 
@@ -201,14 +208,19 @@ pip install -e .
 ## Comandos Esenciales
 
 ```bash
-# Instalar en modo desarrollo (ambos backends)
-pip install -e .
+# Instalar en modo desarrollo (recomendado: UV)
+uv pip install -e .
 
 # Instalar con dependencias de desarrollo
+uv pip install -e ".[dev]"
+
+# Sin UV (alternativa)
+pip install -e .
 pip install -e ".[dev]"
 
 # Verificar que el paquete está instalado
-pip list | grep mi-paquete
+uv pip list | grep mi-paquete
+# o sin UV: pip list | grep mi-paquete
 
 # Construir el paquete (opcional, para distribución)
 python -m build
@@ -219,7 +231,7 @@ python -m build
 ## Preguntas Frecuentes
 
 ### ¿Por qué mis imports no funcionan?
-1. Verifica que instalaste el paquete: `pip install -e .`
+1. Verifica que instalaste el paquete: `uv pip install -e .` (o `pip install -e .`)
 2. Verifica que tu estructura tiene `__init__.py` en cada carpeta
 3. Verifica que el nombre en `pyproject.toml` coincide con la carpeta en `src/`
 
@@ -227,7 +239,7 @@ python -m build
 No. El build backend solo afecta la configuración, no tu código.
 
 ### ¿Puedo cambiar de Setuptools a Hatchling?
-Sí. Solo cambia el `[build-system]` y elimina `[tool.setuptools]`, luego reinstala con `pip install -e .`
+Sí. Solo cambia el `[build-system]` y elimina `[tool.setuptools]`, luego reinstala con `uv pip install -e .`
 
 ### ¿Qué pasa si añado un nuevo submódulo?
 - **Setuptools (find_packages)**: Se detecta automáticamente
@@ -266,4 +278,10 @@ dev = [
 ]
 ```
 
-Luego instala: `pip install -e ".[dev]"` y tus imports funcionarán.
+Luego instala: `uv pip install -e ".[dev]"` y tus imports funcionarán.
+
+---
+
+## Referencia Rápida: UV vs pip
+
+Para más detalles sobre comandos UV, consulta [UV_COMANDOS.md](UV_COMANDOS.md).
