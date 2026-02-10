@@ -15,7 +15,7 @@ El **build backend** en `pyproject.toml` le dice a Python dónde buscar tus paqu
 
 ## Comparación Rápida: Lo que Necesitas Cambiar
 
-### Con Setuptools (Configuración Manual)
+### Con Setuptools (Auto-descubrimiento)
 
 ```toml
 [build-system]
@@ -26,17 +26,20 @@ build-backend = "setuptools.build_meta"
 name = "mi-paquete"
 version = "0.1.0"
 
-# ⚠️ TIENES QUE DECIRLE DÓNDE ESTÁN TUS PAQUETES
+# ✅ Setuptools busca automáticamente paquetes en src/
+[tool.setuptools.packages.find]
+where = ["src"]
+```
+
+**Ventaja**: Auto-descubre paquetes como Hatchling, pero requiere configuración explícita.
+
+**Alternativa manual (no recomendada)**:
+```toml
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["mi_paquete", "mi_paquete.utils", "mi_paquete.models"]
-
-# Alternativa: usar find_packages() para auto-descubrimiento
-# [tool.setuptools.packages.find]
-# where = ["src"]
 ```
-
-**Problema**: Si añades un nuevo submódulo, tienes que actualizar manualmente la lista de `packages` (a menos que uses `find_packages()`).
+Si añades un nuevo submódulo, tienes que actualizar manualmente la lista.
 
 ---
 
@@ -77,23 +80,7 @@ mi-proyecto/
 └── README.md
 ```
 
-### Opción 1: Setuptools (Manual)
-
-```toml
-[build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "mi-paquete"
-version = "0.1.0"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["mi_paquete", "mi_paquete.utils", "mi_paquete.models"]
-```
-
-### Opción 1b: Setuptools (Auto-descubrimiento)
+### Opción 1: Setuptools (Recomendado con find_packages)
 
 ```toml
 [build-system]
@@ -151,7 +138,7 @@ from mi_paquete.models.data import MiClase
 
 Si tu proyecto usa Setuptools y quieres cambiarlo a Hatchling:
 
-### Antes (Setuptools)
+### Antes (Setuptools con find_packages)
 ```toml
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
@@ -161,9 +148,8 @@ build-backend = "setuptools.build_meta"
 name = "data-processor"
 version = "1.0.0"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["data_processor", "data_processor.readers", "data_processor.writers"]
+[tool.setuptools.packages.find]
+where = ["src"]
 ```
 
 ### Después (Hatchling)
@@ -188,13 +174,14 @@ pip install -e .
 
 ## Tabla Comparativa: Lo Esencial
 
-| Aspecto | Setuptools (Manual) | Setuptools (find_packages) | Hatchling |
-|---------|---------------------|---------------------------|-----------|
-| **Configuración para src/ layout** | Manual: `package-dir` + `packages` | `packages.find` + `where` | Automática |
-| **Añadir nuevo submódulo** | Actualizar lista de `packages` | Nada, se detecta automáticamente | Nada, se detecta automáticamente |
-| **Líneas de configuración** | ~5 líneas extra | ~3 líneas extra | 0 líneas extra |
-| **Riesgo de error** | Alto (olvidar añadir paquete) | Bajo (auto-detecta) | Bajo (auto-detecta) |
-| **Simplicidad** | Baja | Media | Alta |
+| Aspecto | Setuptools (find_packages) | Hatchling |
+|---------|---------------------------|-----------|
+| **Configuración para src/ layout** | `packages.find` + `where` | Automática (sin config) |
+| **Añadir nuevo submódulo** | Nada, se detecta automáticamente | Nada, se detecta automáticamente |
+| **Líneas de configuración** | ~2 líneas extra | 0 líneas extra |
+| **Riesgo de error** | Bajo (auto-detecta) | Bajo (auto-detecta) |
+| **Simplicidad** | Media | Alta |
+| **Madurez** | Muy estable (años en producción) | Moderno (más reciente) |
 
 ---
 
@@ -245,9 +232,10 @@ No. El build backend solo afecta la configuración, no tu código.
 Sí. Solo cambia el `[build-system]` y elimina `[tool.setuptools]`, luego reinstala con `pip install -e .`
 
 ### ¿Qué pasa si añado un nuevo submódulo?
-- **Setuptools (manual)**: Tienes que añadirlo a la lista de `packages`
 - **Setuptools (find_packages)**: Se detecta automáticamente
 - **Hatchling**: Se detecta automáticamente, no haces nada
+
+**Nota**: Ambos usan auto-descubrimiento, la diferencia es que Hatchling no requiere configuración explícita.
 
 ---
 
