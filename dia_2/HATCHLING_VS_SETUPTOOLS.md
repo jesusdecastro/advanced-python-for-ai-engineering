@@ -31,15 +31,9 @@ version = "0.1.0"
 where = ["src"]
 ```
 
-**Ventaja**: Auto-descubre paquetes como Hatchling, pero requiere configuración explícita.
+**Ventaja**: Auto-descubre paquetes como Hatchling. El parámetro `where` indica dónde buscar.
 
-**Alternativa manual (no recomendada)**:
-```toml
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["mi_paquete", "mi_paquete.utils", "mi_paquete.models"]
-```
-Si añades un nuevo submódulo, tienes que actualizar manualmente la lista.
+**Nota**: No necesitas `package-dir` cuando usas `packages.find` con `where`. Son redundantes en pyproject.toml moderno.
 
 ---
 
@@ -116,14 +110,19 @@ version = "0.1.0"
 ### Paso 1: Instala tu Paquete en Modo Desarrollo
 
 ```bash
-# Con UV (recomendado)
+# Con UV (recomendado - más rápido)
 uv pip install -e .
 
-# Sin UV (alternativa con pip)
+# Sin UV (alternativa tradicional)
 pip install -e .
 ```
 
-El flag `-e` (editable) instala tu paquete en modo desarrollo. Los cambios en tu código se reflejan inmediatamente sin reinstalar.
+**¿Qué hace `-e` (editable)?**
+- Crea un enlace al código fuente en lugar de copiarlo
+- Los cambios en tu código se reflejan inmediatamente
+- No necesitas reinstalar después de cada cambio
+
+**Más detalles**: Ver [UV.md](UV.md) para entender cómo funciona internamente.
 
 ### Paso 2: Verifica que los Imports Funcionan
 
@@ -168,12 +167,14 @@ version = "1.0.0"
 
 ### Reinstala el Paquete
 ```bash
-# Con UV
+# Con UV (recomendado)
 uv pip install -e .
 
-# Sin UV
+# Sin UV (alternativa)
 pip install -e .
 ```
+
+**Nota**: Asegúrate de tener el entorno virtual activado antes de instalar.
 
 ---
 
@@ -208,23 +209,36 @@ pip install -e .
 ## Comandos Esenciales
 
 ```bash
-# Instalar en modo desarrollo (recomendado: UV)
+# Crear entorno virtual (recomendado: UV)
+uv venv
+
+# Activar entorno
+.venv\Scripts\activate  # Windows
+source .venv/bin/activate  # macOS/Linux
+
+# Instalar en modo desarrollo
 uv pip install -e .
 
 # Instalar con dependencias de desarrollo
 uv pip install -e ".[dev]"
 
-# Sin UV (alternativa)
-pip install -e .
-pip install -e ".[dev]"
-
 # Verificar que el paquete está instalado
 uv pip list | grep mi-paquete
-# o sin UV: pip list | grep mi-paquete
 
 # Construir el paquete (opcional, para distribución)
 python -m build
 ```
+
+**Sin UV (alternativa tradicional)**:
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -e .
+pip install -e ".[dev]"
+pip list | grep mi-paquete
+```
+
+**Nota**: UV es 10-100x más rápido que pip. Ver [UV.md](UV.md) para más detalles.
 
 ---
 
@@ -241,15 +255,28 @@ No. El build backend solo afecta la configuración, no tu código.
 ### ¿Puedo cambiar de Setuptools a Hatchling?
 Sí. Solo cambia el `[build-system]` y elimina `[tool.setuptools]`, luego reinstala con `uv pip install -e .`
 
-### ¿Qué pasa si añado un nuevo submódulo?
-- **Setuptools (find_packages)**: Se detecta automáticamente
-- **Hatchling**: Se detecta automáticamente, no haces nada
+### ¿Por qué no necesito package-dir con packages.find?
 
-**Nota**: Ambos usan auto-descubrimiento, la diferencia es que Hatchling no requiere configuración explícita.
+El parámetro `where` en `packages.find` ya le dice a setuptools dónde buscar. `package-dir` es para configuración manual de paquetes, no para auto-descubrimiento.
+
+**Correcto (auto-descubrimiento)**:
+```toml
+[tool.setuptools.packages.find]
+where = ["src"]  # Busca automáticamente en src/
+```
+
+**Incorrecto (redundante)**:
+```toml
+[tool.setuptools]
+package-dir = {"" = "src"}  # ❌ No necesario con packages.find
+
+[tool.setuptools.packages.find]
+where = ["src"]  # Ya indica dónde buscar
+```
 
 ---
 
-## Recomendación para el Curso
+## Preguntas Frecuentes
 
 **Usa Hatchling** en tus proyectos integradores:
 - Menos configuración = menos errores
@@ -284,4 +311,4 @@ Luego instala: `uv pip install -e ".[dev]"` y tus imports funcionarán.
 
 ## Referencia Rápida: UV vs pip
 
-Para más detalles sobre comandos UV, consulta [UV_COMANDOS.md](UV_COMANDOS.md).
+Para más detalles sobre comandos UV, consulta [UV.md](UV.md).
