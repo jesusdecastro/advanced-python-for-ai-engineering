@@ -915,7 +915,7 @@ def split_data_for_training(
 5. PEP 484 – Type Hints: <https://peps.python.org/pep-0484/>
 6. Google Python Style Guide - Comments: <https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings>
 
-## Ejercicio Práctico
+## Ejercicio Práctico Individual
 
 Refactoriza el siguiente código eliminando comentarios innecesarios y mejorando la claridad:
 
@@ -940,4 +940,395 @@ def train(d, l, e=100, b=32):
     return m
 ```
 
-Solución: Aplicar principios de nombres significativos, type hints, y documentación apropiada sin comentarios redundantes.
+**Solución**: Aplicar principios de nombres significativos, type hints, y documentación apropiada sin comentarios redundantes.
+
+---
+
+## 🏋️ Ejercicio Grupal: Limpiar Comentarios en Código Real
+
+**Objetivo**: Identificar y eliminar comentarios malos, reemplazándolos con código auto-explicativo.
+
+**Contexto**: Has heredado un módulo de preprocesamiento de datos para un proyecto de NLP. El código está lleno de comentarios que más confunden que ayudan. El equipo necesita mantener este código pero nadie entiende qué hace realmente.
+
+**Tiempo estimado**: 30-45 minutos
+
+**Dinámica**:
+1. **Análisis individual** (5 min): Lee el código y clasifica los comentarios
+2. **Discusión en grupo** (10 min): Identifiquen tipos de comentarios malos
+3. **Refactorización colaborativa** (20 min): Eliminen comentarios y mejoren código
+4. **Presentación** (10 min): Compartan antes/después con otros grupos
+
+---
+
+### Código a Refactorizar
+
+```python
+"""
+Text preprocessing module for NLP pipeline.
+
+Author: John Doe
+Date: 2023-01-15
+Last modified: 2024-02-20 by Alice Smith
+Changes:
+- 2023-01-15: Initial version
+- 2023-03-10: Added emoji removal
+- 2023-06-15: Fixed bug in URL detection
+- 2023-09-01: Added support for multiple languages
+- 2024-01-10: Refactored tokenization
+- 2024-02-20: Added lemmatization
+"""
+
+import re
+import string
+from typing import List
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import emoji
+
+# Download required NLTK data
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+
+class TextPreprocessor:
+    """Class for preprocessing text."""  # Obvious comment
+    
+    def __init__(self, lang='english'):
+        """Constructor."""  # Useless comment
+        # Initialize the lemmatizer
+        self.lem = WordNetLemmatizer()  # The lemmatizer
+        # Set the language
+        self.lang = lang  # Language parameter
+        # Get stopwords for the language
+        self.sw = set(stopwords.words(lang))  # Stopwords set
+    
+    def clean(self, txt):
+        """Clean the text."""  # Doesn't explain what cleaning means
+        # First, convert to lowercase
+        txt = txt.lower()  # Make lowercase
+        
+        # Remove URLs - this regex matches http/https URLs
+        # Pattern explanation: https?:// matches http:// or https://
+        # [^\s]+ matches any non-whitespace characters
+        txt = re.sub(r'https?://[^\s]+', '', txt)  # Remove URLs
+        
+        # Remove email addresses
+        # Pattern: word characters, dots, hyphens @ word characters, dots
+        txt = re.sub(r'\S+@\S+', '', txt)  # Remove emails
+        
+        # Remove mentions (Twitter style)
+        txt = re.sub(r'@\w+', '', txt)  # Remove @mentions
+        
+        # Remove hashtags but keep the text
+        # Example: #MachineLearning becomes MachineLearning
+        txt = re.sub(r'#(\w+)', r'\1', txt)  # Remove # but keep text
+        
+        # Remove emojis - using emoji library
+        txt = emoji.replace_emoji(txt, '')  # Remove emojis
+        
+        # Remove punctuation
+        # string.punctuation contains !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+        txt = txt.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
+        
+        # Remove extra whitespace
+        txt = ' '.join(txt.split())  # Normalize whitespace
+        
+        # Return cleaned text
+        return txt  # Return the result
+    
+    def tokenize(self, txt):
+        """Tokenize text."""  # Obvious
+        # Split on whitespace
+        tokens = txt.split()  # Split into tokens
+        # Return tokens
+        return tokens  # Return the list
+    
+    def remove_stopwords(self, tokens):
+        """Remove stopwords."""  # Obvious
+        # Filter out stopwords
+        # Keep only tokens that are not in stopwords set
+        filtered = [t for t in tokens if t not in self.sw]  # Filter stopwords
+        # Return filtered tokens
+        return filtered  # Return result
+    
+    def lemmatize(self, tokens):
+        """Lemmatize tokens."""  # Obvious
+        # Apply lemmatization to each token
+        # Lemmatization reduces words to their base form
+        # Example: running -> run, better -> good
+        lemmatized = [self.lem.lemmatize(t) for t in tokens]  # Lemmatize
+        # Return lemmatized tokens
+        return lemmatized  # Return result
+    
+    def process(self, txt, rm_sw=True, lem=True):
+        """
+        Process text through full pipeline.
+        
+        txt: input text
+        rm_sw: whether to remove stopwords
+        lem: whether to lemmatize
+        """
+        # Step 1: Clean the text
+        txt = self.clean(txt)  # Clean
+        
+        # Step 2: Tokenize
+        tokens = self.tokenize(txt)  # Tokenize
+        
+        # Step 3: Remove stopwords if flag is True
+        if rm_sw:  # Check flag
+            tokens = self.remove_stopwords(tokens)  # Remove stopwords
+        
+        # Step 4: Lemmatize if flag is True
+        if lem:  # Check flag
+            tokens = self.lemmatize(tokens)  # Lemmatize
+        
+        # Return processed tokens
+        return tokens  # Return final result
+    
+    def process_batch(self, texts):
+        """Process multiple texts."""  # Obvious
+        # Initialize results list
+        results = []  # Empty list for results
+        
+        # Loop through each text
+        for txt in texts:  # Iterate over texts
+            # Process the text
+            processed = self.process(txt)  # Process each text
+            # Add to results
+            results.append(processed)  # Append to results
+        
+        # Return all results
+        return results  # Return the list
+    
+    # TODO: Add support for custom stopwords
+    # TODO: Add support for stemming as alternative to lemmatization
+    # TODO: Optimize batch processing with multiprocessing
+    # TODO: Add caching for repeated texts
+    # TODO: Add support for more languages
+    # TODO: Add spell checking
+    # TODO: Add named entity recognition
+    
+    def get_stats(self, txt):
+        """Get statistics about text."""
+        # Count characters
+        n_chars = len(txt)  # Character count
+        
+        # Count words
+        n_words = len(txt.split())  # Word count
+        
+        # Count sentences - split on period, exclamation, question mark
+        n_sents = len(re.findall(r'[.!?]+', txt))  # Sentence count
+        
+        # Calculate average word length
+        # Sum of all word lengths divided by number of words
+        words = txt.split()
+        if len(words) > 0:  # Avoid division by zero
+            avg_len = sum(len(w) for w in words) / len(words)  # Average word length
+        else:
+            avg_len = 0  # Default to 0 if no words
+        
+        # Return dictionary with stats
+        return {
+            'characters': n_chars,  # Total characters
+            'words': n_words,  # Total words
+            'sentences': n_sents,  # Total sentences
+            'avg_word_length': avg_len  # Average word length
+        }  # Return stats dict
+
+
+# Helper function to clean HTML
+def clean_html(txt):
+    """Remove HTML tags."""  # Obvious
+    # Use regex to remove HTML tags
+    # Pattern: < followed by anything except >, then >
+    txt = re.sub(r'<[^>]+>', '', txt)  # Remove HTML tags
+    # Return cleaned text
+    return txt  # Return result
+
+
+################################################################################
+# UTILITY FUNCTIONS
+################################################################################
+
+def load_texts(path):
+    """Load texts from file."""  # Obvious
+    # Open file in read mode
+    with open(path, 'r', encoding='utf-8') as f:  # Open file
+        # Read all lines
+        texts = f.readlines()  # Read lines
+    # Return texts
+    return texts  # Return list
+
+
+def save_processed(texts, path):
+    """Save processed texts."""  # Obvious
+    # Open file in write mode
+    with open(path, 'w', encoding='utf-8') as f:  # Open file
+        # Write each text on new line
+        for txt in texts:  # Iterate texts
+            # Join tokens with space and write
+            f.write(' '.join(txt) + '\n')  # Write line
+
+
+# Main execution
+if __name__ == '__main__':
+    # Create preprocessor instance
+    prep = TextPreprocessor()  # Initialize preprocessor
+    
+    # Example text
+    example = "Check out https://example.com! @user #NLP is amazing 😀"  # Test text
+    
+    # Process the text
+    result = prep.process(example)  # Process
+    
+    # Print result
+    print(result)  # Output
+```
+
+---
+
+### Instrucciones para el Grupo
+
+**Paso 1: Clasificar Comentarios** (10 minutos)
+
+Identifiquen y clasifiquen cada comentario como:
+
+1. **Comentario de Registro** (journal): Historial de cambios
+2. **Comentario Redundante**: Repite lo que el código ya dice
+3. **Comentario Ruidoso**: No añade información
+4. **Comentario Mandatorio**: Docstring inútil por obligación
+5. **Comentario de Posición**: Marcadores como `###########`
+6. **TODO Acumulado**: TODOs que nunca se harán
+7. **Comentario Bueno**: Realmente añade valor (si hay alguno)
+
+**Paso 2: Planificar Mejoras** (10 minutos)
+
+Para cada tipo de comentario malo, decidan:
+
+1. **Eliminar**: ¿Se puede simplemente borrar?
+2. **Reemplazar con código**: ¿Función con nombre descriptivo?
+3. **Reemplazar con type hints**: ¿Los tipos explican mejor?
+4. **Reemplazar con constantes**: ¿Números mágicos que necesitan nombre?
+5. **Mejorar docstring**: ¿Necesita documentación real?
+
+**Paso 3: Refactorizar** (20 minutos)
+
+Dividan el trabajo:
+
+- **Persona 1**: Limpiar `__init__` y métodos de limpieza
+- **Persona 2**: Limpiar métodos de tokenización y stopwords
+- **Persona 3**: Limpiar métodos de procesamiento y batch
+- **Persona 4**: Limpiar funciones auxiliares y main
+
+**Criterios de Éxito**:
+
+- [ ] Cero comentarios redundantes
+- [ ] Cero comentarios ruidosos
+- [ ] Código auto-explicativo con nombres descriptivos
+- [ ] Type hints en todas las funciones
+- [ ] Docstrings útiles (no obvios)
+- [ ] Constantes nombradas para valores mágicos
+- [ ] Funciones extraídas donde sea necesario
+- [ ] Eliminar historial de cambios (usar Git)
+
+---
+
+### Pistas
+
+**Para Comentarios Redundantes**:
+```python
+# Antes
+txt = txt.lower()  # Make lowercase
+
+# Después
+text = text.lower()
+```
+
+**Para Nombres Crípticos**:
+```python
+# Antes
+self.lem = WordNetLemmatizer()  # The lemmatizer
+self.sw = set(stopwords.words(lang))  # Stopwords set
+
+# Después
+self.lemmatizer = WordNetLemmatizer()
+self.stopwords = set(stopwords.words(language))
+```
+
+**Para Comentarios que Explican Lógica**:
+```python
+# Antes
+# Remove hashtags but keep the text
+# Example: #MachineLearning becomes MachineLearning
+txt = re.sub(r'#(\w+)', r'\1', txt)
+
+# Después
+def remove_hashtag_symbol_but_keep_text(text: str) -> str:
+    """
+    Remove # symbol from hashtags while preserving the text.
+    
+    Example:
+        >>> remove_hashtag_symbol_but_keep_text("#MachineLearning")
+        "MachineLearning"
+    """
+    return re.sub(r'#(\w+)', r'\1', text)
+```
+
+**Para Flag Arguments**:
+```python
+# Antes
+def process(self, txt, rm_sw=True, lem=True):
+    if rm_sw:
+        tokens = self.remove_stopwords(tokens)
+    if lem:
+        tokens = self.lemmatize(tokens)
+
+# Después
+def process_with_stopword_removal(self, text: str) -> list[str]:
+    """Process text including stopword removal."""
+    pass
+
+def process_with_lemmatization(self, text: str) -> list[str]:
+    """Process text including lemmatization."""
+    pass
+
+def process_full_pipeline(self, text: str) -> list[str]:
+    """Process text with all transformations."""
+    pass
+```
+
+**Para Docstrings Obvios**:
+```python
+# Antes
+def tokenize(self, txt):
+    """Tokenize text."""
+    return txt.split()
+
+# Después
+def tokenize_on_whitespace(self, text: str) -> list[str]:
+    """
+    Split text into tokens using whitespace as delimiter.
+    
+    :param text: Input text to tokenize
+    :return: List of tokens
+    
+    Example:
+        >>> tokenize_on_whitespace("hello world")
+        ["hello", "world"]
+    """
+    return text.split()
+```
+
+---
+
+### Preguntas para Reflexión
+
+Después de refactorizar, discutan:
+
+1. ¿Cuántos comentarios eliminaron vs cuántos mejoraron?
+2. ¿El código es más claro sin los comentarios?
+3. ¿Qué técnicas usaron para reemplazar comentarios?
+4. ¿Encontraron algún comentario que SÍ añadía valor?
+5. ¿Qué fue más difícil: eliminar comentarios o mejorar el código?
+6. ¿Cómo manejarían los TODOs en un proyecto real?
