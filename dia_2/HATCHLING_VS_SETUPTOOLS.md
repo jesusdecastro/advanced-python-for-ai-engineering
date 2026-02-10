@@ -31,15 +31,9 @@ version = "0.1.0"
 where = ["src"]
 ```
 
-**Ventaja**: Auto-descubre paquetes como Hatchling, pero requiere configuración explícita.
+**Ventaja**: Auto-descubre paquetes como Hatchling. El parámetro `where` indica dónde buscar.
 
-**Alternativa manual (no recomendada)**:
-```toml
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["mi_paquete", "mi_paquete.utils", "mi_paquete.models"]
-```
-Si añades un nuevo submódulo, tienes que actualizar manualmente la lista.
+**Nota**: No necesitas `package-dir` cuando usas `packages.find` con `where`. Son redundantes en pyproject.toml moderno.
 
 ---
 
@@ -231,11 +225,24 @@ No. El build backend solo afecta la configuración, no tu código.
 ### ¿Puedo cambiar de Setuptools a Hatchling?
 Sí. Solo cambia el `[build-system]` y elimina `[tool.setuptools]`, luego reinstala con `pip install -e .`
 
-### ¿Qué pasa si añado un nuevo submódulo?
-- **Setuptools (find_packages)**: Se detecta automáticamente
-- **Hatchling**: Se detecta automáticamente, no haces nada
+### ¿Por qué no necesito package-dir con packages.find?
 
-**Nota**: Ambos usan auto-descubrimiento, la diferencia es que Hatchling no requiere configuración explícita.
+El parámetro `where` en `packages.find` ya le dice a setuptools dónde buscar. `package-dir` es para configuración manual de paquetes, no para auto-descubrimiento.
+
+**Correcto (auto-descubrimiento)**:
+```toml
+[tool.setuptools.packages.find]
+where = ["src"]  # Busca automáticamente en src/
+```
+
+**Incorrecto (redundante)**:
+```toml
+[tool.setuptools]
+package-dir = {"" = "src"}  # ❌ No necesario con packages.find
+
+[tool.setuptools.packages.find]
+where = ["src"]  # Ya indica dónde buscar
+```
 
 ---
 
