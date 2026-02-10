@@ -117,9 +117,7 @@ dia_2/exercises/
 │       ├── comprehensions.py
 │       ├── generators_iterators.py
 │       ├── decorators.py
-│       ├── functional_programming.py
-│       ├── context_managers.py
-│       └── magic_methods.py
+│       └── context_managers.py
 ├── tests/
 │   ├── __init__.py
 │   └── test_*.py           # Tests unitarios
@@ -224,9 +222,7 @@ ruff format src/                    # Formatear código
 1. **comprehensions.py** - List, dict y set comprehensions
 2. **generators_iterators.py** - Generadores e iteradores
 3. **decorators.py** - Decoradores
-4. **functional_programming.py** - map, filter, reduce
-5. **context_managers.py** - Context managers
-6. **magic_methods.py** - Métodos mágicos
+4. **context_managers.py** - Context managers
 
 ## Solución de Problemas
 
