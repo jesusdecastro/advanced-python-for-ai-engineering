@@ -19,8 +19,9 @@ uv sync
 **¿Qué hace `uv sync`?**
 - Crea el entorno virtual `.venv/` si no existe
 - Lee `pyproject.toml` y `uv.lock`
-- Instala todas las dependencias (pytest, ruff, etc.)
-- Instala tu paquete `dia2-exercises` en modo editable
+- Instala todas las dependencias del proyecto
+- Instala las dependencias de desarrollo (pytest, ruff, pyright) automáticamente
+- Instala tu paquete `exercises` en modo editable
 - Todo en un solo comando, sin necesidad de activar el entorno
 
 ### 2. Ejecutar Tests
@@ -41,13 +42,16 @@ uv run pytest tests/test_comprehensions.py::test_filter_even_numbers
 - No necesitas activar/desactivar el entorno manualmente
 - Más rápido y conveniente
 
+**Nota sobre dependencias de desarrollo:**
+El proyecto usa `[dependency-groups]` en lugar de `[project.optional-dependencies]`. Esto significa que `uv sync` instala automáticamente las herramientas de desarrollo (pytest, ruff, pyright) sin necesidad de flags adicionales.
+
 ## Estructura del Proyecto
 
 ```
 dia_2/exercises/
 ├── .venv/                  # Entorno virtual (creado por uv sync)
 ├── src/
-│   └── dia2_exercises/     # Tu paquete
+│   └── exercises/          # Tu paquete
 │       ├── __init__.py
 │       ├── comprehensions.py
 │       ├── generators_iterators.py
@@ -66,7 +70,7 @@ dia_2/exercises/
 ### 1. Leer el Ejercicio
 
 ```python
-# src/dia2_exercises/comprehensions.py
+# src/exercises/comprehensions.py
 
 def filter_even_numbers(numbers: list[int]) -> list[int]:
     """
@@ -118,20 +122,20 @@ uv run ruff format src/
 
 **El problema original:**
 ```python
-from dia2_exercises.comprehensions import filter_even_numbers
-# ModuleNotFoundError: No module named 'dia2_exercises'
+from exercises.comprehensions import filter_even_numbers
+# ModuleNotFoundError: No module named 'exercises'
 ```
 
 **Después de `uv sync`:**
 ```python
-from dia2_exercises.comprehensions import filter_even_numbers
+from exercises.comprehensions import filter_even_numbers
 # Funciona porque el paquete está instalado en modo editable
 ```
 
 **¿Por qué funciona?**
 
 1. `uv sync` instala el paquete en modo editable (`-e`)
-2. Crea un link en `.venv/lib/site-packages/` que apunta a `src/dia2_exercises/`
+2. Crea un link en `.venv/lib/site-packages/` que apunta a `src/exercises/`
 3. Python encuentra el módulo cuando lo importas
 4. Los cambios en tu código se reflejan inmediatamente (no necesitas reinstalar)
 
@@ -161,7 +165,7 @@ uv run ruff format src/                          # Formatear código
 
 ## Solución de Problemas
 
-**Error: `ModuleNotFoundError: No module named 'dia2_exercises'`**
+**Error: `ModuleNotFoundError: No module named 'exercises'`**
 - Solución: Ejecuta `uv sync` desde `dia_2/exercises/`
 
 **Error: `uv: command not found`**

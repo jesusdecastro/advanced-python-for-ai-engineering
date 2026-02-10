@@ -28,7 +28,7 @@ def get_squares(n):
         >>> get_squares(5)
         [1, 4, 9, 16, 25]
     """
-    
+    return [number ** 2 for number in n]
 
 
 # TODO: Add type hints and implement using list comprehension

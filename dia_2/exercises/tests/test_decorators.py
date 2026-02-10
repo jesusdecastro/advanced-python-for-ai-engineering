@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 # Import from the installed package
-from dia2_exercises.decorators import BankAccount, Date, validate_types
+from exercises.decorators import BankAccount, Date, validate_types
 
 
 class TestBankAccount:

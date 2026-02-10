@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 
 # Import from the installed package
-from dia2_exercises.comprehensions import (
+from exercises.comprehensions import (
     create_number_to_cube_dict,
     extract_names_from_users,
     filter_dict_by_value,
@@ -33,7 +33,7 @@ class TestTypeHintsWithPyright:
 
     def test_pyright_passes(self) -> None:
         """Test that Pyright validation passes for the exercises file."""
-        exercises_file = Path(__file__).parent.parent / "src" / "dia2_exercises" / "comprehensions.py"
+        exercises_file = Path(__file__).parent.parent / "src" / "exercises" / "comprehensions.py"
 
         result = subprocess.run(
             ["pyright", str(exercises_file), "--outputjson"],

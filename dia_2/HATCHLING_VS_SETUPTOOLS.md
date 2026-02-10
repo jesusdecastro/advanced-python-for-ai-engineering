@@ -161,23 +161,110 @@ from mi_paquete.models.data import MiClase
 
 ## Nota sobre el Proyecto de Ejercicios del Curso
 
-En `dia_2/exercises/pyproject.toml`, usamos configuración explícita:
+En `dia_2/exercises/pyproject.toml`, usamos auto-descubrimiento de Hatchling:
 
 ```toml
 [project]
-name = "dia2-exercises"  # Nombre con guion
+name = "exercises"  # Nombre del proyecto
 
-[tool.hatchling.build.targets.wheel]
-packages = ["src/dia2_exercises"]  # Paquete con guion bajo
+# Hatchling auto-descubre src/exercises/ automáticamente
+# No necesitamos [tool.hatchling.build.targets.wheel]
 ```
 
-**¿Por qué usamos configuración explícita aquí?**
+**¿Por qué funciona sin configuración explícita?**
 
-Aunque Hatchling podría auto-descubrir `src/dia2_exercises/` (porque coincide con el nombre del proyecto), usamos `packages` explícito por:
+Hatchling busca automáticamente `src/exercises/` porque:
+1. El nombre del directorio (`exercises`) coincide con `project.name`
+2. Está en la ubicación estándar `src/`
+3. Tiene un `__init__.py`
 
-1. **Claridad educativa**: Los estudiantes ven exactamente qué se está incluyendo
-2. **Documentación**: Hace explícito el mapeo nombre-proyecto → nombre-paquete
-3. **Robustez**: Funciona incluso si cambiamos el nombre del proyecto más adelante
-4. **Mejores prácticas**: En proyectos profesionales, la configuración explícita evita sorpresas
+**Ventajas del auto-descubrimiento**:
+- Configuración más simple y limpia
+- Menos lugares donde pueden ocurrir errores
+- Sigue las convenciones estándar de Python
 
-**Ambas opciones funcionan**, pero para un curso es mejor ser explícito.
+---
+
+## Dependencias de Desarrollo con UV
+
+UV ofrece dos formas de manejar dependencias de desarrollo. Para proyectos educativos que no se publican, recomendamos `[dependency-groups]`.
+
+### Opción 1: Dependency Groups (Recomendado para Desarrollo)
+
+**Configuración:**
+```toml
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "pyright",
+]
+```
+
+**Comandos:**
+```bash
+# Añadir dependencia de desarrollo
+uv add --dev pytest
+
+# Instalar todas las dependencias (incluye dev por defecto)
+uv sync
+
+# Instalar SIN dependencias de desarrollo
+uv sync --no-dev
+
+# Instalar SOLO dependencias de desarrollo
+uv sync --only-dev
+```
+
+**Características:**
+- Basado en PEP 735 (estándar moderno)
+- Se instalan por defecto con `uv sync`
+- NO se publican en PyPI
+- Ideal para herramientas de desarrollo (pytest, ruff, etc.)
+
+### Opción 2: Optional Dependencies (Para Extras Publicables)
+
+**Configuración:**
+```toml
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "pyright",
+]
+```
+
+**Comandos:**
+```bash
+# Añadir dependencia opcional
+uv add --optional dev pytest
+
+# Instalar con extras específicos
+uv sync --extra dev
+
+# Instalar con TODOS los extras
+uv sync --all-extras
+
+# Instalar SIN extras
+uv sync
+```
+
+**Características:**
+- Basado en PEP 621 (estándar tradicional)
+- NO se instalan por defecto con `uv sync`
+- SÍ se publican en PyPI como extras opcionales
+- Ideal para funcionalidades opcionales de librerías (ej: `pandas[excel]`)
+
+### ¿Cuál Usar?
+
+| Caso de Uso | Usar |
+|-------------|------|
+| Herramientas de desarrollo (pytest, ruff, mypy) | `[dependency-groups]` |
+| Proyecto que NO se publica (ejercicios, scripts) | `[dependency-groups]` |
+| Funcionalidades opcionales de librería publicada | `[project.optional-dependencies]` |
+| Extras que usuarios pueden instalar (ej: `pkg[gpu]`) | `[project.optional-dependencies]` |
+
+**Para el proyecto de ejercicios del curso**, usamos `[dependency-groups]` porque:
+1. Es más simple para estudiantes (solo `uv sync`)
+2. No vamos a publicar el paquete
+3. Son herramientas de desarrollo, no funcionalidades opcionales

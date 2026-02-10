@@ -12,7 +12,7 @@ wheels = [
 ]
 
 [[package]]
-name = "dia2-exercises"
+name = "exercises"
 version = "0.1.0"
 source = { editable = "." }
 

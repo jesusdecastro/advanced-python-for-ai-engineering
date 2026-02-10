@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 # Import from the installed package
-from dia2_exercises.context_managers import (
+from exercises.context_managers import (
     ExecutionTimer,
     LoggingContext,
     SuppressException,

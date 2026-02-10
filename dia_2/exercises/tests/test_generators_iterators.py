@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 
 # Import from the installed package
-from dia2_exercises.generators_iterators import (
+from exercises.generators_iterators import (
     chain_iterables,
     chunk_data,
     countdown,
@@ -36,7 +36,7 @@ class TestTypeHintsWithPyright:
 
     def test_pyright_passes(self) -> None:
         """Test that Pyright validation passes for the exercises file."""
-        exercises_file = Path(__file__).parent.parent / "src" / "dia2_exercises" / "generators_iterators.py"
+        exercises_file = Path(__file__).parent.parent / "src" / "exercises" / "generators_iterators.py"
 
         result = subprocess.run(
             ["pyright", str(exercises_file), "--outputjson"],
