@@ -399,55 +399,147 @@ def process_sales_pipeline(csv_path: str, output_dir: str) -> dict:
 
 ### Principio de Dependencia
 
-**Regla fundamental**: Las dependencias apuntan hacia adentro.
+**Regla fundamental**: El Core (lógica de negocio) NO debe depender de nada. Las capas externas dependen del Core.
 
 ```
-┌─────────────────────────────────────┐
-│   Capa I/O (Adaptadores)            │
-│   - load_data()                     │
-│   - save_model()                    │
-└──────────────┬──────────────────────┘
-               │ depende de ↓
-┌──────────────▼──────────────────────┐
-│   Capa Lógica (Core)                │
-│   - normalize_features()            │
-│   - train_model()                   │
-│   - calculate_metrics()             │
-└──────────────┬──────────────────────┘
-               │ NO depende de ↑
-┌──────────────▼──────────────────────┐
-│   Capa Presentación                 │
-│   - format_report()                 │
-│   - create_plot()                   │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│                    ORQUESTADOR                          │
+│              (Coordina todas las capas)                 │
+└────────┬──────────────────────┬─────────────────────────┘
+         │                      │
+         ↓                      ↓
+┌────────────────────┐  ┌──────────────────────┐
+│   Capa I/O         │  │  Capa Presentación   │
+│                    │  │                      │
+│  - load_csv()      │  │  - format_report()   │
+│  - save_csv()      │  │  - create_plot()     │
+└────────┬───────────┘  └──────┬───────────────┘
+         │                     │
+         │  Ambas dependen de  │
+         │         ↓           │
+         └────────────┬────────┘
+                      ↓
+         ┌────────────────────────────┐
+         │   Capa CORE (Lógica)       │
+         │   NO DEPENDE DE NADA       │
+         │                            │
+         │  - clean_data()            │
+         │  - calculate_totals()      │
+         │  - validate_rules()        │
+         └────────────────────────────┘
 ```
 
-**Reglas**:
-1. **Core NO importa de I/O**: Lógica de negocio es independiente
-2. **Core NO importa de Presentación**: Lógica no sabe cómo se presenta
-3. **I/O puede importar de Core**: Para usar tipos y estructuras
-4. **Presentación puede importar de Core**: Para formatear resultados
+**Reglas clave**:
+
+1. **Core NO importa de I/O**: 
+   - ❌ `def clean_data(csv_path: str)` → Depende de CSV
+   - ✅ `def clean_data(data: pd.DataFrame)` → Independiente
+
+2. **Core NO importa de Presentación**: 
+   - ❌ `def calculate_total() -> str` → Retorna formato presentación
+   - ✅ `def calculate_total() -> float` → Retorna dato puro
+
+3. **I/O puede usar tipos de Core**: 
+   - ✅ I/O puede recibir/retornar DataFrames que Core usa
+   - ✅ I/O puede llamar funciones de validación de Core
+
+4. **Presentación puede usar tipos de Core**: 
+   - ✅ Presentación recibe resultados de Core para formatear
+   - ✅ Presentación puede llamar funciones de Core para obtener datos
+
+5. **Orquestador coordina todo**:
+   - ✅ Llama I/O para cargar datos
+   - ✅ Llama Core para procesar
+   - ✅ Llama Presentación para formatear
+   - ✅ Llama I/O para guardar resultados
 
 ---
 
-### Violación de Dependencia
+### Ejemplo: Violación de Dependencia
 
 ```python
-# MAL: Lógica de negocio depende de I/O
-def normalize_features(csv_path: str) -> pd.DataFrame:
+# ❌ MAL: Core depende de I/O
+def calculate_monthly_sales(csv_path: str) -> pd.Series:
     """Lógica acoplada a formato de archivo."""
-    data = pd.read_csv(csv_path)  # I/O en lógica
-    return (data - data.mean()) / data.std()
-```
+    data = pd.read_csv(csv_path)  # ❌ I/O dentro de lógica
+    return data.groupby('month')['amount'].sum()
 
-**Problema**: No puedes testear sin archivo CSV. No puedes reusar con otros formatos.
+# Problemas:
+# - No puedes testear sin archivo CSV
+# - No puedes reusar con datos de API o DB
+# - Cambiar formato requiere modificar lógica
+```
 
 ---
 
-### Dependencia Correcta
+### Ejemplo: Dependencia Correcta
 
 ```python
-# BIEN: Lógica pura, I/O separado
+# ✅ BIEN: Core es puro, I/O separado
+
+# CORE: Lógica pura (NO depende de nada)
+def calculate_monthly_sales(data: pd.DataFrame) -> pd.Series:
+    """
+    Calculate monthly sales totals.
+    
+    Pure function - testeable sin I/O.
+    """
+    return data.groupby('month')['amount'].sum()
+
+
+# I/O: Adaptador que usa Core
+def calculate_monthly_sales_from_csv(csv_path: str) -> pd.Series:
+    """
+    Load CSV and calculate monthly sales.
+    
+    Adaptador que combina I/O + lógica de Core.
+    """
+    data = pd.read_csv(csv_path)  # I/O
+    return calculate_monthly_sales(data)  # Llama a Core
+
+
+# ORQUESTADOR: Coordina capas
+def process_sales_pipeline(csv_path: str, output_path: str) -> None:
+    """Orchestrate the complete pipeline."""
+    # I/O: Load
+    data = pd.read_csv(csv_path)
+    
+    # Core: Process
+    monthly_sales = calculate_monthly_sales(data)
+    
+    # Presentación: Format
+    report = format_sales_report(monthly_sales)
+    
+    # I/O: Save
+    monthly_sales.to_csv(output_path)
+    print(report)
+```
+
+**Ventajas**:
+- `calculate_monthly_sales` es testeable sin archivos
+- Puedes reusar con datos de cualquier fuente (CSV, API, DB)
+- Cambiar formato de archivo no afecta lógica
+- Core es completamente independiente
+
+---
+
+### Por Qué Esta Arquitectura
+
+**Pregunta**: ¿Por qué Core no debe depender de I/O?
+
+**Respuesta**: Porque la lógica de negocio es lo más valioso y estable:
+
+1. **Lógica de negocio cambia poco**: "Calcular total de ventas" es siempre lo mismo
+2. **I/O cambia mucho**: Hoy CSV, mañana API, pasado DB
+3. **Testing**: Core sin I/O es fácil de testear
+4. **Reutilización**: Core puro se puede usar en múltiples contextos
+
+**Analogía**: 
+- Core = Motor del coche (lo importante, no cambia)
+- I/O = Gasolina vs Eléctrico (puede cambiar, pero motor sigue igual)
+- Presentación = Color y diseño exterior (puede cambiar, motor sigue igual)
+
+
 def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
     """Lógica pura, testeable sin I/O."""
     return (data - data.mean()) / data.std()
