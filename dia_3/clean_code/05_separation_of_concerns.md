@@ -720,64 +720,10 @@ def test_format_training_report():
 - Código reutilizable
 - Mantenimiento más fácil
 - Cambios menos riesgosos
-    """Train model - TODO mezclado en una función."""
-    # I/O mezclado con lógica
-    data = pd.read_csv(csv_path)
-    
-    # Validación mezclada
-    if 'target' not in data.columns:
-        print("Error: missing target column")
-        return
-    
-    # Transformación mezclada
-    data = data.dropna()
-    data['normalized'] = (data['value'] - data['value'].mean()) / data['value'].std()
-    
-    # Entrenamiento mezclado
-    X = data.drop('target', axis=1)
-    y = data['target']
-    model = RandomForestClassifier()
-    model.fit(X, y)
-    
-    # Evaluación mezclada
-    accuracy = model.score(X, y)
-    
-    # Visualización mezclada
-    plt.figure()
-    plt.plot(y, model.predict(X))
-    plt.savefig(f"{output_dir}/predictions.png")
-    
-    # Más I/O mezclado
-    joblib.dump(model, f"{output_dir}/model.pkl")
-    
-    # Presentación mezclada
-    print(f"Model trained with accuracy: {accuracy:.2f}")
-```
-
-**Problemas**:
-
-- **No testeable**: Necesitas archivos reales para testear
-- **No reutilizable**: No puedes usar solo la transformación
-- **Frágil**: Cambiar formato de archivo afecta todo
-- **Difícil de mantener**: 200 líneas haciendo todo
-- **Acoplamiento alto**: Todas las capas mezcladas
 
 ---
 
-### Ejemplo Correcto: Capas Separadas
-
-```python
-# ============================================
-# CAPA 1: I/O
-# ============================================
-
-def load_training_data(csv_path: str) -> pd.DataFrame:
-    """
-    Load training data from CSV.
-    
-    :param csv_path: Path to CSV file
-    :type csv_path: str
-    :return: Raw dataframe
+## 2. Capa de I/O: Input/Output
     :rtype: pd.DataFrame
     :raises FileNotFoundError: If file doesn't exist
     """
