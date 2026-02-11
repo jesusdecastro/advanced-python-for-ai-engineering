@@ -7,7 +7,7 @@
 3. [Tipos Compuestos y Genéricos](#2-tipos-compuestos-y-genéricos)
 4. [Optional y Union](#3-optional-y-union)
 5. [Type Aliases y NewType](#4-type-aliases-y-newtype)
-6. [Verificación Estática con mypy](#5-verificación-estática-con-mypy)
+6. [Verificación Estática con Pyright](#5-verificación-estática-con-pyright)
 7. [Resumen](#resumen-de-principios)
 
 ---
@@ -46,17 +46,17 @@ Los type hints eliminan la ambigüedad sobre qué tipos espera y retorna una fun
 ### El Concepto
 
 **Definición técnica**:
-Los type hints son anotaciones opcionales que especifican los tipos esperados de variables, parámetros de funciones, y valores de retorno. Python no los verifica en runtime, pero herramientas como mypy pueden verificarlos estáticamente.
+Los type hints son anotaciones opcionales que especifican los tipos esperados de variables, parámetros de funciones, y valores de retorno. Python no los verifica en runtime, pero herramientas como pyright pueden verificarlos estáticamente.
 
 **Cómo funciona internamente**:
 1. **Anotaciones**: Python almacena type hints en `__annotations__`
 2. **Sin verificación runtime**: Python ignora los hints durante ejecución
-3. **Verificación estática**: Herramientas como mypy analizan el código sin ejecutarlo
-4. **Inferencia de tipos**: mypy deduce tipos cuando no están explícitos
+3. **Verificación estática**: Herramientas como pyright analizan el código sin ejecutarlo
+4. **Inferencia de tipos**: pyright deduce tipos cuando no están explícitos
 
 **Terminología clave**:
 - **Type hint**: Anotación que especifica un tipo esperado
-- **Static type checker**: Herramienta que verifica tipos sin ejecutar código (mypy, pyright)
+- **Static type checker**: Herramienta que verifica tipos sin ejecutar código (pyright, mypy)
 - **Type inference**: Deducción automática de tipos por el checker
 - **Generic types**: Tipos parametrizados como `List[int]`, `Dict[str, float]`
 - **Type alias**: Nombre personalizado para un tipo complejo
@@ -180,7 +180,7 @@ def train_model(
 
 - **Claridad**: Tipos explícitos y obvios
 - **Autocompletado**: Editor sugiere métodos correctos
-- **Detección temprana**: mypy detecta errores antes de ejecutar
+- **Detección temprana**: pyright detecta errores antes de ejecutar
 - **Documentación viva**: Los tipos son parte del código
 
 ---
@@ -408,7 +408,7 @@ def load_model(path):
 **Problemas**:
 
 - **Ambigüedad**: No está claro si None es válido
-- **Sin verificación**: mypy no puede ayudar
+- **Sin verificación**: pyright no puede ayudar
 - **Errores silenciosos**: Código puede fallar después
 
 ---
@@ -446,7 +446,7 @@ else:
 **Ventajas**:
 
 - **Claridad**: None es explícitamente parte del contrato
-- **Verificación**: mypy verifica que manejes None
+- **Verificación**: pyright verifica que manejes None
 - **Sin sorpresas**: Comportamiento documentado
 
 ---
@@ -506,7 +506,7 @@ def compare_experiments(
 
 ### NewType: Tipos Distintos
 
-`NewType` crea un tipo distinto que mypy trata como diferente, previniendo mezclas accidentales.
+`NewType` crea un tipo distinto que pyright trata como diferente, previniendo mezclas accidentales.
 
 ```python
 from typing import NewType
@@ -550,7 +550,7 @@ model_id = ModelId(456)
 get_user(user_id)  # OK
 get_model(model_id)  # OK
 
-# mypy detecta error
+# pyright detecta error
 get_user(model_id)  # Error: Expected UserId, got ModelId
 get_model(user_id)  # Error: Expected ModelId, got UserId
 
@@ -566,13 +566,13 @@ get_user(123)  # Error: Expected UserId, got int
 
 ---
 
-## 5. Verificación Estática con mypy
+## 5. Verificación Estática con Pyright
 
 ### Por Qué Importa
 
-Los type hints solo son útiles si los verificas. mypy es el verificador estático estándar de Python que detecta errores de tipos antes de ejecutar el código.
+Los type hints solo son útiles si los verificas. Pyright es un verificador estático de tipos rápido y moderno desarrollado por Microsoft que detecta errores de tipos antes de ejecutar el código. Es el motor detrás de Pylance en VS Code.
 
-**Referencia**: mypy Documentation: <https://mypy.readthedocs.io/>
+**Referencia**: Pyright Documentation: <https://microsoft.github.io/pyright/>
 
 ---
 
@@ -580,53 +580,93 @@ Los type hints solo son útiles si los verificas. mypy es el verificador estáti
 
 **Instalación**:
 ```bash
-pip install mypy
+pip install pyright
+```
+
+**Nota importante**: Pyright está escrito en TypeScript y requiere Node.js. El paquete de Python es un wrapper que descarga automáticamente Node.js si no está disponible. Para una instalación más confiable, se recomienda:
+
+```bash
+pip install pyright[nodejs]
 ```
 
 **Uso básico**:
 ```bash
 # Verificar un archivo
-mypy script.py
+pyright script.py
 
 # Verificar un directorio
-mypy src/
+pyright src/
 
-# Verificar con configuración estricta
-mypy --strict src/
+# Verificar todo el proyecto
+pyright
 ```
 
 ---
 
 ### Configuración
 
-**Archivo** `mypy.ini` o `pyproject.toml`:
+**Archivo** `pyrightconfig.json` o `pyproject.toml`:
+
+**Opción 1: pyrightconfig.json** (recomendado por la documentación oficial):
+
+```json
+{
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    ".venv"
+  ],
+  "typeCheckingMode": "strict",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Linux"
+}
+```
+
+**Opción 2: pyproject.toml**:
 
 ```toml
-[tool.mypy]
-python_version = "3.11"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_any_generics = true
-disallow_subclassing_any = true
-disallow_untyped_calls = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_no_return = true
-warn_unreachable = true
-strict_equality = true
+[tool.pyright]
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__", ".venv"]
+typeCheckingMode = "strict"
+reportMissingImports = true
+reportMissingTypeStubs = false
+pythonVersion = "3.11"
+pythonPlatform = "Linux"
+```
 
-# Ignorar librerías sin stubs
-[[tool.mypy.overrides]]
-module = [
-    "sklearn.*",
-    "pandas.*",
-]
-ignore_missing_imports = true
+**Configuraciones importantes**:
+- `typeCheckingMode`: Nivel de verificación ("basic" o "strict")
+- `pythonVersion`: Versión de Python del proyecto
+- `include`/`exclude`: Directorios a verificar o ignorar
+- `reportMissingImports`: Reportar imports no encontrados
+- `reportMissingTypeStubs`: Reportar librerías sin type stubs
+
+---
+
+### Modos de Verificación
+
+Pyright ofrece dos modos principales de verificación:
+
+1. **basic**: Verificación básica (por defecto), menos estricta
+   - Permite funciones sin type hints
+   - Inferencia de tipos implícita
+   - Reglas de tipos más relajadas
+
+2. **strict**: Verificación estricta, máxima seguridad
+   - Requiere type hints en todos los parámetros y retornos
+   - Detecta variables sin tipo
+   - Previene conversiones implícitas de tipos
+
+```json
+{
+  "typeCheckingMode": "strict"
+}
 ```
 
 ---
@@ -639,15 +679,15 @@ def calculate_average(numbers: list[int]) -> float:
     return sum(numbers) / len(numbers)
 
 
-# mypy detecta estos errores:
+# pyright detecta estos errores:
 
-# Error: Argument 1 has incompatible type "list[str]"; expected "list[int]"
+# Error: Argument of type "list[str]" cannot be assigned to parameter "numbers" of type "list[int]"
 calculate_average(["1", "2", "3"])
 
-# Error: Argument 1 has incompatible type "str"; expected "list[int]"
+# Error: Argument of type "str" cannot be assigned to parameter "numbers" of type "list[int]"
 calculate_average("123")
 
-# Error: Incompatible return value type (got "int", expected "float")
+# Error: Expression of type "int" cannot be assigned to return type "float"
 def bad_function(x: int) -> float:
     return x  # Debería ser float(x)
 ```
@@ -656,19 +696,42 @@ def bad_function(x: int) -> float:
 
 ### Integración con VS Code
 
+Pyright está integrado en VS Code a través de la extensión Pylance, que proporciona verificación de tipos en tiempo real mientras escribes.
+
 **Configuración** (`.vscode/settings.json`):
 ```json
 {
-  "python.linting.mypyEnabled": true,
-  "python.linting.enabled": true,
-  "python.linting.mypyArgs": [
-    "--config-file=mypy.ini"
-  ]
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": true
 }
 ```
 
 **Extensión recomendada**:
-- **Pylance**: Proporciona type checking en tiempo real
+- **Pylance**: Proporciona type checking en tiempo real con pyright
+
+---
+
+### Ventajas de Pyright
+
+**Performance**:
+- Escrito en TypeScript/Node.js, extremadamente rápido
+- Verificación incremental eficiente
+- Ideal para proyectos grandes
+
+**Características modernas**:
+- Soporte completo para Python 3.11+
+- Inferencia de tipos avanzada
+- Mejor manejo de tipos genéricos
+- Integración nativa con VS Code
+
+**Experiencia de desarrollo**:
+- Mensajes de error claros y precisos
+- Sugerencias de autocompletado inteligentes
+- Inlay hints para tipos inferidos
+- Navegación de código mejorada
 
 ---
 
@@ -681,8 +744,8 @@ def bad_function(x: int) -> float:
 3. **Tipos genéricos**: Especifica contenido de colecciones (`list[int]`)
 4. **Type aliases**: Simplifica tipos complejos repetidos
 5. **NewType**: Previene mezclas accidentales de IDs
-6. **Verifica con mypy**: Los hints solo ayudan si los verificas
-7. **Configuración estricta**: Usa `--strict` para máxima seguridad
+6. **Verifica con pyright**: Los hints solo ayudan si los verificas
+7. **Configuración estricta**: Usa modo `strict` para máxima seguridad
 
 ---
 
@@ -730,13 +793,13 @@ def bad_function(x: int) -> float:
 Los type hints transforman Python en un lenguaje más seguro y mantenible:
 
 1. **Claridad**: Tipos explícitos eliminan ambigüedad
-2. **Detección temprana**: mypy encuentra errores antes de ejecutar
+2. **Detección temprana**: pyright encuentra errores antes de ejecutar
 3. **Documentación viva**: Los tipos son parte del código
 4. **Refactoring seguro**: Cambios de tipos se detectan automáticamente
 5. **Mejor tooling**: Autocompletado y navegación mejorados
 6. **Sin overhead**: No afectan performance en runtime
 
-**Regla de oro**: Si una función es pública o compleja, debe tener type hints completos. Si mypy no puede verificar tu código, los hints no son suficientemente específicos.
+**Regla de oro**: Si una función es pública o compleja, debe tener type hints completos. Si pyright no puede verificar tu código, los hints no son suficientemente específicos.
 
 ---
 
@@ -746,14 +809,15 @@ Los type hints transforman Python en un lenguaje más seguro y mantenible:
 2. PEP 585 – Type Hinting Generics In Standard Collections. <https://peps.python.org/pep-0585/>
 3. PEP 604 – Allow writing union types as X | Y. <https://peps.python.org/pep-0604/>
 4. PEP 613 – Explicit Type Aliases. <https://peps.python.org/pep-0613/>
-5. mypy Documentation: <https://mypy.readthedocs.io/>
+5. Pyright Documentation: <https://microsoft.github.io/pyright/>
 6. Python typing module: <https://docs.python.org/3/library/typing.html>
+7. Pylance (VS Code Extension): <https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance>
 
 ---
 
 ## Ejercicio Práctico Individual
 
-Añade type hints completos a este código y verifica con mypy:
+Añade type hints completos a este código y verifica con pyright:
 
 ```python
 def process_experiment_results(results, threshold):
@@ -773,7 +837,7 @@ def calculate_metrics(predictions, labels):
 - [ ] Type hints en todos los parámetros
 - [ ] Type hints en todos los retornos
 - [ ] Tipos genéricos específicos (no `dict`, sino `dict[str, ...]`)
-- [ ] mypy pasa sin errores con `--strict`
+- [ ] pyright pasa sin errores en modo `strict`
 - [ ] Docstrings con tipos en formato Sphinx
 
 ---
