@@ -19,10 +19,10 @@ Este documento se enfoca en **arquitectura en capas** para proyectos de Data/IA.
 ### Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
-Tu pipeline de ML mezcla lectura de CSV, transformaciones, entrenamiento, y visualizaciones en una función de 200 líneas. Cuando quieres cambiar el formato de salida, arriesgas romper el entrenamiento. Cuando quieres testear la lógica de limpieza, necesitas archivos CSV reales.
+Tu pipeline ETL mezcla lectura de CSV, transformaciones, validaciones, y generación de reportes en una función de 200 líneas. Cuando quieres cambiar el formato de salida, arriesgas romper las transformaciones. Cuando quieres testear la lógica de limpieza, necesitas archivos CSV reales.
 
 **Ejemplo concreto**:
-Tienes `train_model()` que hace TODO: carga datos, valida, transforma, entrena, evalúa, genera gráficos, y guarda resultados. No puedes reusar solo la transformación en otro proyecto sin copiar código mezclado con I/O específico.
+Tienes `process_sales_data()` que hace TODO: carga datos, valida, limpia, agrega, calcula métricas, genera gráficos, y guarda resultados. No puedes reusar solo la transformación en otro proyecto sin copiar código mezclado con I/O específico.
 
 **Consecuencias de NO usarlo**:
 - **Imposible testear lógica sin I/O**: Necesitas archivos reales para cada test
@@ -49,7 +49,7 @@ En proyectos de Data/IA, el código se organiza en tres capas con responsabilida
 - Transformaciones de datos (funciones puras)
 - Algoritmos y cálculos
 - Validaciones de reglas de negocio
-- Entrenamiento de modelos
+- Agregaciones y métricas
 
 **3. Capa de Presentación**:
 - Formateo de output
@@ -64,62 +64,109 @@ En proyectos de Data/IA, el código se organiza en tres capas con responsabilida
 ### Ejemplo Incorrecto: Todo Mezclado
 
 ```python
-def train_model(csv_path: str, output_dir: str) -> None:
-    """Train model - TODO mezclado."""
+def process_sales_data(csv_path: str, output_dir: str) -> None:
+    """Process sales data - TODO mezclado."""
     # I/O mezclado con lógica
     data = pd.read_csv(csv_path)  # I/O
     
-    if 'target' not in data.columns:  # Validación
-        print("Error: missing target")  # Presentación
+    if 'amount' not in data.columns:  # Validación
+        print("Error: missing amount column")  # Presentación
         return
     
-    # Transformación
+    # Transformación mezclada con magic numbers
     data = data.dropna()
-    data['normalized'] = (data['value'] - data['value'].mean()) / data['value'].std()
+    data['amount_usd'] = data['amount'] * 1.1  # Magic number sin explicación
+    data['category'] = data['product'].str.split('-').str[0]  # Lógica hardcodeada
     
-    # Entrenamiento
-    X = data.drop('target', axis=1)
-    y = data['target']
-    model = RandomForestClassifier()
-    model.fit(X, y)
+    # Agregación mezclada
+    monthly_sales = data.groupby('month')['amount_usd'].sum()
+    top_products = data.groupby('product')['amount_usd'].sum().nlargest(10)  # Magic number
     
-    # Evaluación + Visualización + I/O mezclados
-    accuracy = model.score(X, y)
+    # Visualización + I/O mezclados
     plt.figure()
-    plt.plot(y, model.predict(X))
-    plt.savefig(f"{output_dir}/predictions.png")  # I/O
-    joblib.dump(model, f"{output_dir}/model.pkl")  # I/O
-    print(f"Accuracy: {accuracy:.2f}")  # Presentación
+    monthly_sales.plot(kind='bar')
+    plt.savefig(f"{output_dir}/monthly_sales.png")  # I/O
+    
+    # Más I/O mezclado
+    monthly_sales.to_csv(f"{output_dir}/monthly_sales.csv")  # I/O
+    
+    # Presentación mezclada
+    print(f"Total sales: ${monthly_sales.sum():.2f}")  # Presentación
 ```
 
 **Problemas**:
 - No puedes testear transformaciones sin archivos CSV
-- No puedes reusar `normalize` en otro proyecto
-- Cambiar formato de salida requiere modificar función de entrenamiento
+- Magic numbers (1.1, 10) sin explicación
+- No puedes reusar lógica de categorización en otro proyecto
+- Cambiar formato de salida requiere modificar función de procesamiento
 - Imposible testear lógica de negocio aisladamente
 
 ---
 
-### Ejemplo Correcto: Capas Separadas
+### Ejemplo Correcto: Capas Separadas con Clean Code
 
 ```python
+# ============================================
+# CONSTANTS (Configuración centralizada)
+# ============================================
+
+# Business constants
+EUR_TO_USD_RATE = 1.1
+TOP_N_PRODUCTS = 10
+CATEGORY_SEPARATOR = '-'
+
+# Required columns for validation
+REQUIRED_COLUMNS = ['amount', 'product', 'month', 'date']
+
+# Visualization constants
+PLOT_FIGURE_SIZE = (12, 6)
+PLOT_COLOR = 'steelblue'
+
+
 # ============================================
 # CAPA 1: I/O (Adaptadores)
 # ============================================
 
-def load_training_data(csv_path: str) -> pd.DataFrame:
-    """Load data from CSV. Pure I/O, no logic."""
+def load_sales_data(csv_path: str) -> pd.DataFrame:
+    """
+    Load sales data from CSV.
+    
+    Pure I/O, no business logic.
+    
+    :param csv_path: Path to CSV file
+    :type csv_path: str
+    :return: Raw dataframe
+    :rtype: pd.DataFrame
+    """
     return pd.read_csv(csv_path)
 
 
-def save_model(model: RandomForestClassifier, path: str) -> None:
-    """Save model to disk. Pure I/O, no logic."""
-    joblib.dump(model, path)
+def save_dataframe(data: pd.DataFrame, path: str) -> None:
+    """
+    Save dataframe to CSV.
+    
+    Pure I/O, no business logic.
+    
+    :param data: Dataframe to save
+    :type data: pd.DataFrame
+    :param path: Output path
+    :type path: str
+    """
+    data.to_csv(path, index=False)
 
 
 def save_plot(fig: plt.Figure, path: str) -> None:
-    """Save plot to disk. Pure I/O, no logic."""
-    fig.savefig(path)
+    """
+    Save plot to disk.
+    
+    Pure I/O, no business logic.
+    
+    :param fig: Matplotlib figure
+    :type fig: plt.Figure
+    :param path: Output path
+    :type path: str
+    """
+    fig.savefig(path, bbox_inches='tight')
     plt.close(fig)
 
 
@@ -128,71 +175,159 @@ def save_plot(fig: plt.Figure, path: str) -> None:
 # ============================================
 # Funciones puras: sin I/O, fáciles de testear
 
-def validate_training_data(data: pd.DataFrame) -> None:
-    """Validate data structure. Pure function."""
-    if 'target' not in data.columns:
-        raise ValueError("Missing 'target' column")
+def validate_sales_data(data: pd.DataFrame) -> None:
+    """
+    Validate sales data has required columns.
+    
+    Pure function - raises exception if invalid.
+    
+    :param data: Input dataframe
+    :type data: pd.DataFrame
+    :raises ValueError: If validation fails
+    """
+    missing_columns = set(REQUIRED_COLUMNS) - set(data.columns)
+    if missing_columns:
+        raise ValueError(f"Missing columns: {missing_columns}")
+    
     if data.empty:
         raise ValueError("Data is empty")
 
 
-def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
-    """Normalize features. Pure function - testeable sin I/O."""
-    cleaned = data.dropna().copy()
-    cleaned['normalized'] = (
-        (cleaned['value'] - cleaned['value'].mean()) / 
-        cleaned['value'].std()
-    )
+def clean_sales_data(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Clean sales data by removing nulls and duplicates.
+    
+    Pure function - testeable sin I/O.
+    
+    :param data: Raw dataframe
+    :type data: pd.DataFrame
+    :return: Cleaned dataframe
+    :rtype: pd.DataFrame
+    """
+    cleaned = data.dropna(subset=REQUIRED_COLUMNS).copy()
+    cleaned = cleaned.drop_duplicates()
     return cleaned
 
 
-def train_random_forest(
-    X: pd.DataFrame,
-    y: pd.Series,
-    n_estimators: int = 100,
-) -> RandomForestClassifier:
-    """Train model. Pure function - testeable sin I/O."""
-    model = RandomForestClassifier(n_estimators=n_estimators)
-    model.fit(X, y)
-    return model
+def convert_to_usd(
+    data: pd.DataFrame,
+    amount_column: str = 'amount'
+) -> pd.DataFrame:
+    """
+    Convert amount to USD using configured rate.
+    
+    Pure function - uses constant for conversion rate.
+    
+    :param data: Input dataframe
+    :type data: pd.DataFrame
+    :param amount_column: Column name with amount
+    :type amount_column: str
+    :return: Dataframe with USD column
+    :rtype: pd.DataFrame
+    """
+    result = data.copy()
+    result['amount_usd'] = result[amount_column] * EUR_TO_USD_RATE
+    return result
 
 
-def calculate_accuracy(
-    model: RandomForestClassifier,
-    X: pd.DataFrame,
-    y: pd.Series,
-) -> float:
-    """Calculate accuracy. Pure function."""
-    return model.score(X, y)
+def extract_product_category(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Extract product category from product name.
+    
+    Pure function - assumes format 'CATEGORY-PRODUCT'.
+    
+    :param data: Input dataframe
+    :type data: pd.DataFrame
+    :return: Dataframe with category column
+    :rtype: pd.DataFrame
+    """
+    result = data.copy()
+    result['category'] = result['product'].str.split(CATEGORY_SEPARATOR).str[0]
+    return result
+
+
+def calculate_monthly_sales(data: pd.DataFrame) -> pd.Series:
+    """
+    Calculate total sales by month.
+    
+    Pure function - aggregation logic.
+    
+    :param data: Input dataframe with amount_usd and month
+    :type data: pd.DataFrame
+    :return: Series with monthly totals
+    :rtype: pd.Series
+    """
+    return data.groupby('month')['amount_usd'].sum()
+
+
+def calculate_top_products(
+    data: pd.DataFrame,
+    n: int = TOP_N_PRODUCTS
+) -> pd.Series:
+    """
+    Calculate top N products by sales.
+    
+    Pure function - aggregation logic.
+    
+    :param data: Input dataframe
+    :type data: pd.DataFrame
+    :param n: Number of top products
+    :type n: int
+    :return: Series with top products
+    :rtype: pd.Series
+    """
+    return data.groupby('product')['amount_usd'].sum().nlargest(n)
 
 
 # ============================================
 # CAPA 3: PRESENTACIÓN
 # ============================================
 
-def create_prediction_plot(
-    y_true: pd.Series,
-    y_pred: np.ndarray,
-) -> plt.Figure:
-    """Create plot. Returns figure, no I/O."""
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.scatter(y_true, y_pred, alpha=0.5)
-    ax.set_xlabel("True Values")
-    ax.set_ylabel("Predictions")
-    ax.set_title("Predictions vs True Values")
+def create_monthly_sales_plot(monthly_sales: pd.Series) -> plt.Figure:
+    """
+    Create bar plot of monthly sales.
+    
+    Returns figure, no I/O.
+    
+    :param monthly_sales: Series with monthly sales
+    :type monthly_sales: pd.Series
+    :return: Matplotlib figure
+    :rtype: plt.Figure
+    """
+    fig, ax = plt.subplots(figsize=PLOT_FIGURE_SIZE)
+    monthly_sales.plot(kind='bar', ax=ax, color=PLOT_COLOR)
+    ax.set_xlabel("Month")
+    ax.set_ylabel("Sales (USD)")
+    ax.set_title("Monthly Sales")
+    ax.grid(axis='y', alpha=0.3)
     return fig
 
 
-def format_training_report(
-    model_name: str,
-    accuracy: float,
-    n_samples: int,
+def format_sales_summary(
+    total_sales: float,
+    n_transactions: int,
+    top_product: str,
 ) -> str:
-    """Format report. Pure function, returns string."""
+    """
+    Format sales summary report.
+    
+    Pure function, returns string.
+    
+    :param total_sales: Total sales amount
+    :type total_sales: float
+    :param n_transactions: Number of transactions
+    :type n_transactions: int
+    :param top_product: Name of top product
+    :type top_product: str
+    :return: Formatted summary
+    :rtype: str
+    """
     return (
-        f"Model: {model_name}\n"
-        f"Accuracy: {accuracy:.2%}\n"
-        f"Samples: {n_samples:,}"
+        f"Sales Summary\n"
+        f"{'='*40}\n"
+        f"Total Sales: ${total_sales:,.2f}\n"
+        f"Transactions: {n_transactions:,}\n"
+        f"Top Product: {top_product}\n"
     )
 
 
@@ -200,43 +335,61 @@ def format_training_report(
 # ORQUESTADOR (Coordina las capas)
 # ============================================
 
-def train_model_pipeline(csv_path: str, output_dir: str) -> dict:
+def process_sales_pipeline(csv_path: str, output_dir: str) -> dict:
     """
-    Orchestrate training pipeline.
+    Orchestrate sales processing pipeline.
     
     Coordina las tres capas pero no contiene lógica de negocio.
+    
+    :param csv_path: Path to input CSV
+    :type csv_path: str
+    :param output_dir: Directory for outputs
+    :type output_dir: str
+    :return: Dictionary with results
+    :rtype: dict
     """
-    # Capa I/O
-    data = load_training_data(csv_path)
+    # Capa I/O: Load
+    data = load_sales_data(csv_path)
     
-    # Capa Lógica
-    validate_training_data(data)
-    processed = normalize_features(data)
-    X = processed.drop('target', axis=1)
-    y = processed['target']
-    model = train_random_forest(X, y)
-    accuracy = calculate_accuracy(model, X, y)
+    # Capa Lógica: Validate and Transform
+    validate_sales_data(data)
+    cleaned = clean_sales_data(data)
+    with_usd = convert_to_usd(cleaned)
+    with_category = extract_product_category(with_usd)
     
-    # Capa Presentación
-    predictions = model.predict(X)
-    fig = create_prediction_plot(y, predictions)
-    report = format_training_report("RandomForest", accuracy, len(data))
+    # Capa Lógica: Calculate metrics
+    monthly_sales = calculate_monthly_sales(with_category)
+    top_products = calculate_top_products(with_category)
     
-    # Capa I/O (salida)
-    save_model(model, f"{output_dir}/model.pkl")
-    save_plot(fig, f"{output_dir}/predictions.png")
+    # Capa Presentación: Create visualizations and reports
+    fig = create_monthly_sales_plot(monthly_sales)
+    summary = format_sales_summary(
+        total_sales=monthly_sales.sum(),
+        n_transactions=len(with_category),
+        top_product=top_products.index[0],
+    )
+    
+    # Capa I/O: Save outputs
+    save_dataframe(
+        monthly_sales.to_frame('sales'),
+        f"{output_dir}/monthly_sales.csv"
+    )
+    save_plot(fig, f"{output_dir}/monthly_sales.png")
     
     return {
-        "accuracy": accuracy,
-        "n_samples": len(data),
-        "report": report,
+        "total_sales": monthly_sales.sum(),
+        "n_transactions": len(with_category),
+        "summary": summary,
     }
 ```
 
 **Ventajas**:
 - Lógica de negocio testeable sin I/O
 - Funciones reutilizables en otros proyectos
-- Cambiar formato de archivo no afecta lógica
+- Constantes centralizadas (EUR_TO_USD_RATE, TOP_N_PRODUCTS)
+- Cada función hace una sola cosa
+- Nombres descriptivos que explican intención
+- Sin magic numbers
 - Fácil de mantener y extender
 - Cada capa puede evolucionar independientemente
 
