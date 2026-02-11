@@ -224,3 +224,246 @@ def normalize_dataset(data, feature_names):
         [{'age': 0.0, 'score': 0.0}, {'age': 1.0, 'score': 1.0}]
     """
     pass
+
+
+
+# Exercise 7: Postcondition Validation
+# TODO: Add type hints and implement with postcondition checks
+def train_test_split_safe(data, test_ratio):
+    """
+    Split data into train/test with defensive postconditions.
+    
+    TODO: Add :param, :type, :return, :rtype, :raises annotations
+    
+    Should validate (preconditions):
+        - data is a list
+        - data is not empty
+        - test_ratio is between 0 and 1 (exclusive)
+    
+    Should verify (postconditions):
+        - train + test lengths equal original data length
+        - no overlap between train and test indices
+        - test set size matches expected ratio (within 1 item)
+    
+    Returns tuple of (train_data, test_data).
+    
+    Example:
+        >>> data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        >>> train, test = train_test_split_safe(data, 0.2)
+        >>> len(test) == 2
+        True
+    """
+    pass
+
+
+# Exercise 8: Defensive Class Design
+# TODO: Implement class with defensive validation
+class DataProcessor:
+    """
+    Data processor with defensive validation.
+    
+    TODO: Implement class with:
+    - __init__(self, min_value, max_value) - validate min < max
+    - validate_value(self, value) - check value in range
+    - process_batch(self, values) - process list of values
+    - get_statistics(self) - return stats dict
+    
+    Should maintain internal state defensively:
+    - Track processed_count
+    - Track valid_count
+    - Track invalid_count
+    - Validate all inputs
+    """
+    
+    def __init__(self, min_value, max_value):
+        """
+        Initialize processor with value range.
+        
+        TODO: Add :param, :type, :raises annotations
+        TODO: Validate min_value < max_value
+        TODO: Initialize counters
+        """
+        pass
+    
+    def validate_value(self, value):
+        """
+        Validate if value is in acceptable range.
+        
+        TODO: Add :param, :type, :return, :rtype annotations
+        TODO: Validate value is numeric
+        TODO: Return True if in range, False otherwise
+        """
+        pass
+    
+    def process_batch(self, values):
+        """
+        Process batch of values with validation.
+        
+        TODO: Add :param, :type, :return, :rtype, :raises annotations
+        TODO: Validate values is a list
+        TODO: Process each value, track valid/invalid
+        TODO: Return list of valid values only
+        """
+        pass
+    
+    def get_statistics(self):
+        """
+        Get processing statistics.
+        
+        TODO: Add :return, :rtype annotations
+        TODO: Return dict with processed_count, valid_count, invalid_count
+        """
+        pass
+
+
+# Exercise 9: Defensive Function Composition
+# TODO: Add type hints and implement with defensive checks at each step
+def pipeline_process_data(raw_data, transformations):
+    """
+    Process data through pipeline with defensive checks.
+    
+    TODO: Add :param, :type, :return, :rtype, :raises annotations
+    
+    Should validate:
+        - raw_data is a list
+        - raw_data is not empty
+        - transformations is a list of callables
+        - each transformation returns a list
+        - data is not lost during transformations (length preserved or documented)
+    
+    Apply each transformation in sequence, validating after each step.
+    
+    Returns transformed data.
+    
+    Example:
+        >>> data = [1, 2, 3, 4, 5]
+        >>> transforms = [lambda x: [i*2 for i in x], lambda x: [i+1 for i in x]]
+        >>> pipeline_process_data(data, transforms)
+        [3, 5, 7, 9, 11]
+    """
+    pass
+
+
+# Exercise 10: Defensive Error Recovery
+# TODO: Add type hints and implement with error recovery
+def safe_divide_batch(numerators, denominators, default_value):
+    """
+    Safely divide lists element-wise with error recovery.
+    
+    TODO: Add :param, :type, :return, :rtype annotations
+    
+    Should validate:
+        - Both inputs are lists
+        - Both lists have same length
+        - default_value is numeric
+    
+    Should handle:
+        - Division by zero: use default_value
+        - Non-numeric values: skip and use default_value
+        - Log warnings for each error encountered
+    
+    Returns list of division results.
+    
+    Example:
+        >>> safe_divide_batch([10, 20, 30], [2, 0, 5], 0)
+        [5.0, 0, 6.0]
+    """
+    pass
+
+
+# Exercise 11: Defensive Resource Management
+# TODO: Add type hints and implement with defensive resource handling
+def process_files_safely(file_paths, processor_func):
+    """
+    Process multiple files with defensive error handling.
+    
+    TODO: Add :param, :type, :return, :rtype annotations
+    
+    Should validate:
+        - file_paths is a list
+        - processor_func is callable
+    
+    Should handle:
+        - FileNotFoundError: skip file, log warning, continue
+        - PermissionError: skip file, log error, continue
+        - Any other error: log critical, continue
+    
+    Returns dict mapping file_path to result (or error message).
+    
+    Example:
+        >>> def count_lines(path):
+        ...     with open(path) as f:
+        ...         return len(f.readlines())
+        >>> process_files_safely(['file1.txt', 'file2.txt'], count_lines)
+        {'file1.txt': 10, 'file2.txt': 'Error: File not found'}
+    """
+    pass
+
+
+# Exercise 12: Defensive State Management
+# TODO: Implement class with defensive state management
+class ModelTracker:
+    """
+    Track model training state with defensive validation.
+    
+    TODO: Implement class with:
+    - __init__(self, model_name) - validate model_name
+    - start_training(self) - can only start if not already training
+    - record_epoch(self, epoch, loss) - validate epoch increments, loss is positive
+    - finish_training(self, final_accuracy) - can only finish if training
+    - get_status(self) - return current state
+    
+    States: 'initialized', 'training', 'completed'
+    """
+    
+    def __init__(self, model_name):
+        """
+        Initialize tracker.
+        
+        TODO: Add :param, :type, :raises annotations
+        TODO: Validate model_name is non-empty string
+        TODO: Initialize state to 'initialized'
+        """
+        pass
+    
+    def start_training(self):
+        """
+        Start training session.
+        
+        TODO: Add :raises annotations
+        TODO: Validate state is 'initialized'
+        TODO: Change state to 'training'
+        """
+        pass
+    
+    def record_epoch(self, epoch, loss):
+        """
+        Record epoch results.
+        
+        TODO: Add :param, :type, :raises annotations
+        TODO: Validate state is 'training'
+        TODO: Validate epoch is positive integer
+        TODO: Validate loss is positive number
+        TODO: Validate epochs are recorded in order
+        """
+        pass
+    
+    def finish_training(self, final_accuracy):
+        """
+        Finish training session.
+        
+        TODO: Add :param, :type, :raises annotations
+        TODO: Validate state is 'training'
+        TODO: Validate final_accuracy is between 0 and 1
+        TODO: Change state to 'completed'
+        """
+        pass
+    
+    def get_status(self):
+        """
+        Get current status.
+        
+        TODO: Add :return, :rtype annotations
+        TODO: Return dict with state, model_name, and training info
+        """
+        pass

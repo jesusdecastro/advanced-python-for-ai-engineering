@@ -278,3 +278,323 @@ class TestNormalizeDataset:
         data = [{'age': 'twenty'}]
         with pytest.raises((TypeError, ValueError)):
             normalize_dataset(data, ['age'])
+
+
+
+class TestTrainTestSplitSafe:
+    """Test train_test_split_safe function."""
+
+    def test_splits_data_correctly(self):
+        """Should split data with correct ratio."""
+        from exercises.defensive import train_test_split_safe
+        
+        data = list(range(10))
+        train, test = train_test_split_safe(data, 0.2)
+        
+        assert len(test) == 2
+        assert len(train) == 8
+        assert len(train) + len(test) == len(data)
+
+    def test_raises_for_non_list(self):
+        """Should raise error for non-list data."""
+        from exercises.defensive import train_test_split_safe
+        
+        with pytest.raises((TypeError, ValueError)):
+            train_test_split_safe("not a list", 0.2)
+
+    def test_raises_for_empty_data(self):
+        """Should raise error for empty data."""
+        from exercises.defensive import train_test_split_safe
+        
+        with pytest.raises(ValueError):
+            train_test_split_safe([], 0.2)
+
+    def test_raises_for_invalid_ratio(self):
+        """Should raise error for invalid test_ratio."""
+        from exercises.defensive import train_test_split_safe
+        
+        with pytest.raises(ValueError):
+            train_test_split_safe([1, 2, 3], 0)
+        
+        with pytest.raises(ValueError):
+            train_test_split_safe([1, 2, 3], 1)
+        
+        with pytest.raises(ValueError):
+            train_test_split_safe([1, 2, 3], 1.5)
+
+
+class TestDataProcessor:
+    """Test DataProcessor class."""
+
+    def test_initializes_correctly(self):
+        """Should initialize with valid range."""
+        from exercises.defensive import DataProcessor
+        
+        processor = DataProcessor(0, 100)
+        assert processor is not None
+
+    def test_raises_for_invalid_range(self):
+        """Should raise error if min >= max."""
+        from exercises.defensive import DataProcessor
+        
+        with pytest.raises(ValueError):
+            DataProcessor(100, 0)
+        
+        with pytest.raises(ValueError):
+            DataProcessor(50, 50)
+
+    def test_validates_value_in_range(self):
+        """Should validate value in range."""
+        from exercises.defensive import DataProcessor
+        
+        processor = DataProcessor(0, 100)
+        assert processor.validate_value(50) is True
+        assert processor.validate_value(0) is True
+        assert processor.validate_value(100) is True
+
+    def test_validates_value_out_of_range(self):
+        """Should validate value out of range."""
+        from exercises.defensive import DataProcessor
+        
+        processor = DataProcessor(0, 100)
+        assert processor.validate_value(-1) is False
+        assert processor.validate_value(101) is False
+
+    def test_processes_batch(self):
+        """Should process batch of values."""
+        from exercises.defensive import DataProcessor
+        
+        processor = DataProcessor(0, 100)
+        values = [10, 50, 150, 75, -5, 90]
+        result = processor.process_batch(values)
+        
+        assert result == [10, 50, 75, 90]
+
+    def test_tracks_statistics(self):
+        """Should track processing statistics."""
+        from exercises.defensive import DataProcessor
+        
+        processor = DataProcessor(0, 100)
+        processor.process_batch([10, 50, 150, 75])
+        
+        stats = processor.get_statistics()
+        assert stats['processed_count'] == 4
+        assert stats['valid_count'] == 3
+        assert stats['invalid_count'] == 1
+
+
+class TestPipelineProcessData:
+    """Test pipeline_process_data function."""
+
+    def test_processes_through_pipeline(self):
+        """Should process data through transformations."""
+        from exercises.defensive import pipeline_process_data
+        
+        data = [1, 2, 3, 4, 5]
+        transforms = [
+            lambda x: [i * 2 for i in x],
+            lambda x: [i + 1 for i in x]
+        ]
+        
+        result = pipeline_process_data(data, transforms)
+        assert result == [3, 5, 7, 9, 11]
+
+    def test_raises_for_non_list_data(self):
+        """Should raise error for non-list data."""
+        from exercises.defensive import pipeline_process_data
+        
+        with pytest.raises((TypeError, ValueError)):
+            pipeline_process_data("not a list", [])
+
+    def test_raises_for_empty_data(self):
+        """Should raise error for empty data."""
+        from exercises.defensive import pipeline_process_data
+        
+        with pytest.raises(ValueError):
+            pipeline_process_data([], [lambda x: x])
+
+    def test_raises_for_non_callable_transformation(self):
+        """Should raise error for non-callable transformation."""
+        from exercises.defensive import pipeline_process_data
+        
+        with pytest.raises((TypeError, ValueError)):
+            pipeline_process_data([1, 2, 3], ["not callable"])
+
+
+class TestSafeDivideBatch:
+    """Test safe_divide_batch function."""
+
+    def test_divides_successfully(self):
+        """Should divide lists element-wise."""
+        from exercises.defensive import safe_divide_batch
+        
+        result = safe_divide_batch([10, 20, 30], [2, 4, 5], 0)
+        assert result == [5.0, 5.0, 6.0]
+
+    def test_handles_division_by_zero(self):
+        """Should use default for division by zero."""
+        from exercises.defensive import safe_divide_batch
+        
+        result = safe_divide_batch([10, 20, 30], [2, 0, 5], -1)
+        assert result == [5.0, -1, 6.0]
+
+    def test_raises_for_length_mismatch(self):
+        """Should raise error for length mismatch."""
+        from exercises.defensive import safe_divide_batch
+        
+        with pytest.raises(ValueError):
+            safe_divide_batch([10, 20], [2, 4, 5], 0)
+
+    def test_raises_for_non_list(self):
+        """Should raise error for non-list inputs."""
+        from exercises.defensive import safe_divide_batch
+        
+        with pytest.raises((TypeError, ValueError)):
+            safe_divide_batch("not a list", [1, 2], 0)
+
+
+class TestProcessFilesSafely:
+    """Test process_files_safely function."""
+
+    def test_processes_existing_files(self, tmp_path):
+        """Should process existing files."""
+        from exercises.defensive import process_files_safely
+        
+        file1 = tmp_path / "file1.txt"
+        file2 = tmp_path / "file2.txt"
+        file1.write_text("line1\nline2\nline3")
+        file2.write_text("line1\nline2")
+        
+        def count_lines(path):
+            with open(path) as f:
+                return len(f.readlines())
+        
+        result = process_files_safely([str(file1), str(file2)], count_lines)
+        
+        assert result[str(file1)] == 3
+        assert result[str(file2)] == 2
+
+    def test_handles_missing_files(self, tmp_path):
+        """Should handle missing files gracefully."""
+        from exercises.defensive import process_files_safely
+        
+        file1 = tmp_path / "exists.txt"
+        file1.write_text("content")
+        
+        def count_lines(path):
+            with open(path) as f:
+                return len(f.readlines())
+        
+        result = process_files_safely(
+            [str(file1), "nonexistent.txt"],
+            count_lines
+        )
+        
+        assert result[str(file1)] == 1
+        assert "Error" in result["nonexistent.txt"] or result["nonexistent.txt"] is None
+
+
+class TestModelTracker:
+    """Test ModelTracker class."""
+
+    def test_initializes_correctly(self):
+        """Should initialize with model name."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        status = tracker.get_status()
+        assert status['state'] == 'initialized'
+        assert status['model_name'] == 'MyModel'
+
+    def test_raises_for_empty_name(self):
+        """Should raise error for empty model name."""
+        from exercises.defensive import ModelTracker
+        
+        with pytest.raises(ValueError):
+            ModelTracker("")
+
+    def test_starts_training(self):
+        """Should start training from initialized state."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        
+        status = tracker.get_status()
+        assert status['state'] == 'training'
+
+    def test_cannot_start_training_twice(self):
+        """Should not allow starting training twice."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        
+        with pytest.raises((ValueError, RuntimeError)):
+            tracker.start_training()
+
+    def test_records_epoch(self):
+        """Should record epoch during training."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        tracker.record_epoch(1, 0.5)
+        tracker.record_epoch(2, 0.3)
+
+    def test_cannot_record_epoch_before_training(self):
+        """Should not allow recording epoch before training."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        
+        with pytest.raises((ValueError, RuntimeError)):
+            tracker.record_epoch(1, 0.5)
+
+    def test_validates_epoch_order(self):
+        """Should validate epochs are in order."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        tracker.record_epoch(1, 0.5)
+        
+        with pytest.raises(ValueError):
+            tracker.record_epoch(1, 0.4)  # Same epoch
+        
+        with pytest.raises(ValueError):
+            tracker.record_epoch(3, 0.3)  # Skipped epoch 2
+
+    def test_finishes_training(self):
+        """Should finish training successfully."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        tracker.record_epoch(1, 0.5)
+        tracker.finish_training(0.85)
+        
+        status = tracker.get_status()
+        assert status['state'] == 'completed'
+
+    def test_cannot_finish_before_training(self):
+        """Should not allow finishing before training."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        
+        with pytest.raises((ValueError, RuntimeError)):
+            tracker.finish_training(0.85)
+
+    def test_validates_final_accuracy(self):
+        """Should validate final accuracy is in range."""
+        from exercises.defensive import ModelTracker
+        
+        tracker = ModelTracker("MyModel")
+        tracker.start_training()
+        
+        with pytest.raises(ValueError):
+            tracker.finish_training(1.5)
+        
+        with pytest.raises(ValueError):
+            tracker.finish_training(-0.1)

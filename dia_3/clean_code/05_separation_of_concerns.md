@@ -1,87 +1,52 @@
-# Separación de Responsabilidades
+# Separación de Responsabilidades: Arquitectura en Capas
 
 ## Tabla de Contenidos
 
 1. [Introducción](#introducción)
-2. [Las Tres Capas Fundamentales](#1-las-tres-capas-fundamentales)
-3. [Capa de I/O: Input/Output](#2-capa-de-io-inputoutput)
-4. [Capa de Lógica de Negocio](#3-capa-de-lógica-de-negocio)
-5. [Capa de Presentación](#4-capa-de-presentación)
-6. [Arquitectura en Capas](#5-arquitectura-en-capas)
-7. [Resumen](#resumen-de-principios)
+2. [Las Tres Capas en Data/IA](#las-tres-capas-en-dataia)
+3. [Reglas de Dependencia](#reglas-de-dependencia-entre-capas)
+4. [Patrones de Organización](#patrones-de-organización)
+5. [Testing por Capas](#testing-por-capas)
 
 ---
 
 ## Introducción
 
-La separación de responsabilidades (Separation of Concerns) es un principio fundamental de diseño de software que establece que cada módulo o función debe tener una única responsabilidad bien definida. Este principio es especialmente crítico en proyectos de Data Science y ML donde el código tiende a mezclar I/O, transformaciones, y visualizaciones.
+Este documento se enfoca en **arquitectura en capas** para proyectos de Data/IA. Los conceptos de funciones pequeñas, hacer una cosa, y efectos secundarios ya están cubiertos en el Día 2 (Functions). Aquí nos centramos en cómo organizar el código en capas con responsabilidades claras.
 
-**Referencia principal**: Dijkstra, E. W. (1982). On the role of scientific thought. In *Selected writings on Computing: A Personal Perspective* (pp. 60-66). Springer.
+**Referencia principal**: Martin, R. C. (2017). *Clean Architecture: A Craftsman's Guide to Software Structure and Design*. Prentice Hall.
 
-### Contexto: Por Qué Importa
+### 🎯 Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
-Tienes una función `train_model()` que lee CSV, limpia datos, entrena modelo, genera gráficos, y guarda resultados. Cuando quieres cambiar el formato de salida, tienes que modificar una función de 200 líneas y arriesgarte a romper el entrenamiento. Cuando quieres testear la lógica de limpieza, necesitas archivos CSV reales.
+Tu pipeline de ML mezcla lectura de CSV, transformaciones, entrenamiento, y visualizaciones en una función de 200 líneas. Cuando quieres cambiar el formato de salida, arriesgas romper el entrenamiento. Cuando quieres testear la lógica de limpieza, necesitas archivos CSV reales.
 
 **Ejemplo concreto**:
-Tu función hace TODO: carga datos desde CSV, valida columnas, transforma features, entrena modelo, evalúa métricas, genera visualizaciones, y guarda resultados en múltiples formatos. Cuando necesitas reusar solo la transformación en otro proyecto, tienes que copiar y adaptar código mezclado con I/O específico.
+Tienes `train_model()` que hace TODO: carga datos, valida, transforma, entrena, evalúa, genera gráficos, y guarda resultados. No puedes reusar solo la transformación en otro proyecto sin copiar código mezclado con I/O específico.
 
 **Consecuencias de NO usarlo**:
-- **Difícil de testear**: No puedes testear lógica sin archivos reales
-- **Imposible de reusar**: Lógica mezclada con I/O específico
-- **Mantenimiento costoso**: Cambiar una parte afecta todo
-- **Trabajo en equipo difícil**: Conflictos constantes en la misma función
+- **Imposible testear lógica sin I/O**: Necesitas archivos reales para cada test
+- **No reutilizable**: Lógica mezclada con I/O específico
+- **Cambios riesgosos**: Modificar formato de archivo puede romper lógica de negocio
 - **Debugging complejo**: Errores pueden estar en cualquier capa
-- **Acoplamiento alto**: Cambios en formato de archivo rompen lógica de negocio
-
-### Principio Fundamental
-
-> "The separation of concerns is the key to managing complexity in software systems."
->
-> — Edsger W. Dijkstra
-
-Cada función debe hacer una cosa y hacerla bien. Mezclar responsabilidades crea código frágil y difícil de mantener.
+- **Trabajo en equipo difícil**: Conflictos constantes en las mismas funciones
 
 ---
 
-### El Concepto
+## Las Tres Capas en Data/IA
 
-**Definición técnica**:
-La separación de responsabilidades es un principio de diseño que establece que el código debe organizarse en módulos donde cada módulo tiene una responsabilidad específica y bien definida. En el contexto de Data/IA, esto significa separar I/O, lógica de negocio, y presentación.
+### 📚 El Concepto
 
-**Cómo funciona internamente**:
-1. **Identificar responsabilidades**: Determinar qué hace cada parte del código
-2. **Agrupar por responsabilidad**: Código con la misma responsabilidad va junto
-3. **Definir interfaces**: Establecer cómo se comunican las capas
-4. **Minimizar dependencias**: Cada capa solo conoce lo necesario
-
-**Terminología clave**:
-- **Separation of Concerns (SoC)**: Principio de separar código por responsabilidades
-- **Single Responsibility Principle (SRP)**: Cada módulo tiene una única razón para cambiar
-- **Layered Architecture**: Organización del código en capas con responsabilidades específicas
-- **Pure function**: Función sin efectos secundarios (sin I/O)
-- **Side effect**: Operación que modifica estado externo (I/O, modificar variables globales)
-
----
-
-## 1. Las Tres Capas Fundamentales
-
-### Por Qué Importa
-
-En proyectos de Data/IA, el código típicamente se organiza en tres capas principales. Entender estas capas y mantenerlas separadas es fundamental para código mantenible.
-
----
-
-### Las Tres Capas
+En proyectos de Data/IA, el código se organiza en tres capas con responsabilidades específicas:
 
 **1. Capa de I/O (Input/Output)**:
-- Lectura y escritura de archivos
+- Lectura/escritura de archivos (CSV, JSON, Parquet)
 - Llamadas a APIs externas
 - Acceso a bases de datos
 - Carga de configuraciones
 
-**2. Capa de Lógica de Negocio**:
-- Transformaciones de datos
+**2. Capa de Lógica de Negocio (Core)**:
+- Transformaciones de datos (funciones puras)
 - Algoritmos y cálculos
 - Validaciones de reglas de negocio
 - Entrenamiento de modelos
@@ -90,14 +55,421 @@ En proyectos de Data/IA, el código típicamente se organiza en tres capas princ
 - Formateo de output
 - Generación de visualizaciones
 - Creación de reportes
-- Preparación de respuestas
+- Logging de resultados
+
+**Regla de oro**: La lógica de negocio NO debe depender de I/O ni presentación.
 
 ---
 
-### Ejemplo Incorrecto: Todo Mezclado
+### ❌ Ejemplo Incorrecto: Todo Mezclado
 
 ```python
 def train_model(csv_path: str, output_dir: str) -> None:
+    """Train model - TODO mezclado."""
+    # I/O mezclado con lógica
+    data = pd.read_csv(csv_path)  # I/O
+    
+    if 'target' not in data.columns:  # Validación
+        print("Error: missing target")  # Presentación
+        return
+    
+    # Transformación
+    data = data.dropna()
+    data['normalized'] = (data['value'] - data['value'].mean()) / data['value'].std()
+    
+    # Entrenamiento
+    X = data.drop('target', axis=1)
+    y = data['target']
+    model = RandomForestClassifier()
+    model.fit(X, y)
+    
+    # Evaluación + Visualización + I/O mezclados
+    accuracy = model.score(X, y)
+    plt.figure()
+    plt.plot(y, model.predict(X))
+    plt.savefig(f"{output_dir}/predictions.png")  # I/O
+    joblib.dump(model, f"{output_dir}/model.pkl")  # I/O
+    print(f"Accuracy: {accuracy:.2f}")  # Presentación
+```
+
+**Problemas**:
+- No puedes testear transformaciones sin archivos CSV
+- No puedes reusar `normalize` en otro proyecto
+- Cambiar formato de salida requiere modificar función de entrenamiento
+- Imposible testear lógica de negocio aisladamente
+
+---
+
+### ✅ Ejemplo Correcto: Capas Separadas
+
+```python
+# ============================================
+# CAPA 1: I/O (Adaptadores)
+# ============================================
+
+def load_training_data(csv_path: str) -> pd.DataFrame:
+    """Load data from CSV. Pure I/O, no logic."""
+    return pd.read_csv(csv_path)
+
+
+def save_model(model: RandomForestClassifier, path: str) -> None:
+    """Save model to disk. Pure I/O, no logic."""
+    joblib.dump(model, path)
+
+
+def save_plot(fig: plt.Figure, path: str) -> None:
+    """Save plot to disk. Pure I/O, no logic."""
+    fig.savefig(path)
+    plt.close(fig)
+
+
+# ============================================
+# CAPA 2: LÓGICA DE NEGOCIO (Core)
+# ============================================
+# Funciones puras: sin I/O, fáciles de testear
+
+def validate_training_data(data: pd.DataFrame) -> None:
+    """Validate data structure. Pure function."""
+    if 'target' not in data.columns:
+        raise ValueError("Missing 'target' column")
+    if data.empty:
+        raise ValueError("Data is empty")
+
+
+def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
+    """Normalize features. Pure function - testeable sin I/O."""
+    cleaned = data.dropna().copy()
+    cleaned['normalized'] = (
+        (cleaned['value'] - cleaned['value'].mean()) / 
+        cleaned['value'].std()
+    )
+    return cleaned
+
+
+def train_random_forest(
+    X: pd.DataFrame,
+    y: pd.Series,
+    n_estimators: int = 100,
+) -> RandomForestClassifier:
+    """Train model. Pure function - testeable sin I/O."""
+    model = RandomForestClassifier(n_estimators=n_estimators)
+    model.fit(X, y)
+    return model
+
+
+def calculate_accuracy(
+    model: RandomForestClassifier,
+    X: pd.DataFrame,
+    y: pd.Series,
+) -> float:
+    """Calculate accuracy. Pure function."""
+    return model.score(X, y)
+
+
+# ============================================
+# CAPA 3: PRESENTACIÓN
+# ============================================
+
+def create_prediction_plot(
+    y_true: pd.Series,
+    y_pred: np.ndarray,
+) -> plt.Figure:
+    """Create plot. Returns figure, no I/O."""
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.scatter(y_true, y_pred, alpha=0.5)
+    ax.set_xlabel("True Values")
+    ax.set_ylabel("Predictions")
+    ax.set_title("Predictions vs True Values")
+    return fig
+
+
+def format_training_report(
+    model_name: str,
+    accuracy: float,
+    n_samples: int,
+) -> str:
+    """Format report. Pure function, returns string."""
+    return (
+        f"Model: {model_name}\n"
+        f"Accuracy: {accuracy:.2%}\n"
+        f"Samples: {n_samples:,}"
+    )
+
+
+# ============================================
+# ORQUESTADOR (Coordina las capas)
+# ============================================
+
+def train_model_pipeline(csv_path: str, output_dir: str) -> dict:
+    """
+    Orchestrate training pipeline.
+    
+    Coordina las tres capas pero no contiene lógica de negocio.
+    """
+    # Capa I/O
+    data = load_training_data(csv_path)
+    
+    # Capa Lógica
+    validate_training_data(data)
+    processed = normalize_features(data)
+    X = processed.drop('target', axis=1)
+    y = processed['target']
+    model = train_random_forest(X, y)
+    accuracy = calculate_accuracy(model, X, y)
+    
+    # Capa Presentación
+    predictions = model.predict(X)
+    fig = create_prediction_plot(y, predictions)
+    report = format_training_report("RandomForest", accuracy, len(data))
+    
+    # Capa I/O (salida)
+    save_model(model, f"{output_dir}/model.pkl")
+    save_plot(fig, f"{output_dir}/predictions.png")
+    
+    return {
+        "accuracy": accuracy,
+        "n_samples": len(data),
+        "report": report,
+    }
+```
+
+**Ventajas**:
+- ✅ Lógica de negocio testeable sin I/O
+- ✅ Funciones reutilizables en otros proyectos
+- ✅ Cambiar formato de archivo no afecta lógica
+- ✅ Fácil de mantener y extender
+- ✅ Cada capa puede evolucionar independientemente
+
+---
+
+## Reglas de Dependencia entre Capas
+
+### 📚 Principio de Dependencia
+
+**Regla fundamental**: Las dependencias apuntan hacia adentro.
+
+```
+┌─────────────────────────────────────┐
+│   Capa I/O (Adaptadores)            │
+│   - load_data()                     │
+│   - save_model()                    │
+└──────────────┬──────────────────────┘
+               │ depende de ↓
+┌──────────────▼──────────────────────┐
+│   Capa Lógica (Core)                │
+│   - normalize_features()            │
+│   - train_model()                   │
+│   - calculate_metrics()             │
+└──────────────┬──────────────────────┘
+               │ NO depende de ↑
+┌──────────────▼──────────────────────┐
+│   Capa Presentación                 │
+│   - format_report()                 │
+│   - create_plot()                   │
+└─────────────────────────────────────┘
+```
+
+**Reglas**:
+1. **Core NO importa de I/O**: Lógica de negocio es independiente
+2. **Core NO importa de Presentación**: Lógica no sabe cómo se presenta
+3. **I/O puede importar de Core**: Para usar tipos y estructuras
+4. **Presentación puede importar de Core**: Para formatear resultados
+
+---
+
+### ❌ Violación de Dependencia
+
+```python
+# ❌ MAL: Lógica de negocio depende de I/O
+def normalize_features(csv_path: str) -> pd.DataFrame:
+    """Lógica acoplada a formato de archivo."""
+    data = pd.read_csv(csv_path)  # ❌ I/O en lógica
+    return (data - data.mean()) / data.std()
+```
+
+**Problema**: No puedes testear sin archivo CSV. No puedes reusar con otros formatos.
+
+---
+
+### ✅ Dependencia Correcta
+
+```python
+# ✅ BIEN: Lógica pura, I/O separado
+def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
+    """Lógica pura, testeable sin I/O."""
+    return (data - data.mean()) / data.std()
+
+
+# I/O en capa separada
+def normalize_from_csv(csv_path: str) -> pd.DataFrame:
+    """Adaptador que combina I/O + lógica."""
+    data = pd.read_csv(csv_path)
+    return normalize_features(data)
+```
+
+**Ventaja**: `normalize_features` es testeable, reutilizable, y no depende de formato de archivo.
+
+---
+
+## Patrones de Organización
+
+### Estructura de Directorios
+
+```
+ml_project/
+├── data/                    # Capa I/O
+│   ├── loaders.py          # load_csv(), load_json()
+│   ├── savers.py           # save_model(), save_metrics()
+│   └── validators.py       # validate_file_exists()
+│
+├── core/                    # Capa Lógica (Core)
+│   ├── preprocessing.py    # normalize(), clean_data()
+│   ├── training.py         # train_model(), evaluate()
+│   └── metrics.py          # calculate_accuracy(), f1_score()
+│
+├── presentation/            # Capa Presentación
+│   ├── plots.py            # create_confusion_matrix()
+│   ├── reports.py          # format_training_report()
+│   └── formatters.py       # format_metrics()
+│
+└── pipelines/               # Orquestadores
+    ├── training.py         # train_pipeline()
+    └── inference.py        # predict_pipeline()
+```
+
+---
+
+### Patrón: Repository
+
+Encapsula acceso a datos detrás de una interfaz:
+
+```python
+# core/interfaces.py (Lógica define la interfaz)
+from abc import ABC, abstractmethod
+
+class DataRepository(ABC):
+    """Interface para acceso a datos."""
+    
+    @abstractmethod
+    def load_training_data(self) -> pd.DataFrame:
+        pass
+    
+    @abstractmethod
+    def save_model(self, model: Any, name: str) -> None:
+        pass
+
+
+# data/csv_repository.py (I/O implementa la interfaz)
+class CSVRepository(DataRepository):
+    """Implementación con CSV."""
+    
+    def __init__(self, data_dir: str):
+        self.data_dir = data_dir
+    
+    def load_training_data(self) -> pd.DataFrame:
+        return pd.read_csv(f"{self.data_dir}/train.csv")
+    
+    def save_model(self, model: Any, name: str) -> None:
+        joblib.dump(model, f"{self.data_dir}/{name}.pkl")
+
+
+# core/training.py (Lógica usa la interfaz)
+def train_model(repo: DataRepository) -> RandomForestClassifier:
+    """Lógica no sabe si datos vienen de CSV, DB, o API."""
+    data = repo.load_training_data()
+    # ... lógica de entrenamiento ...
+    return model
+```
+
+**Ventaja**: Puedes cambiar de CSV a base de datos sin modificar lógica de negocio.
+
+---
+
+## Testing por Capas
+
+### Capa I/O: Integration Tests
+
+```python
+def test_load_training_data():
+    """Test con archivo real."""
+    data = load_training_data("tests/fixtures/sample.csv")
+    assert len(data) > 0
+    assert 'target' in data.columns
+```
+
+### Capa Lógica: Unit Tests (Puros)
+
+```python
+def test_normalize_features():
+    """Test sin I/O - datos en memoria."""
+    data = pd.DataFrame({'value': [1, 2, 3, 4, 5]})
+    result = normalize_features(data)
+    
+    assert 'normalized' in result.columns
+    assert abs(result['normalized'].mean()) < 0.01  # ~0
+    assert abs(result['normalized'].std() - 1.0) < 0.01  # ~1
+```
+
+### Capa Presentación: Unit Tests
+
+```python
+def test_format_training_report():
+    """Test sin I/O - solo formateo."""
+    report = format_training_report("RF", 0.95, 1000)
+    
+    assert "RF" in report
+    assert "95%" in report
+    assert "1,000" in report
+```
+
+---
+
+## 💡 Aprendizaje Clave
+
+**Puntos críticos a recordar**:
+
+1. **Lógica de negocio debe ser pura**: Sin I/O, sin efectos secundarios, fácil de testear
+2. **Dependencias apuntan hacia adentro**: Core no depende de I/O ni Presentación
+3. **Orquestador coordina capas**: Pipeline combina capas pero no contiene lógica
+4. **Una función, una capa**: No mezcles I/O con lógica en la misma función
+
+**Cómo desarrollar intuición**:
+
+- **Pregúntate**: "¿Puedo testear esta función sin archivos reales?"
+  - NO → Separa I/O de lógica
+  - SÍ → Está bien diseñada
+
+- **Pregúntate**: "¿Puedo reusar esta función en otro proyecto?"
+  - NO → Probablemente está acoplada a I/O específico
+  - SÍ → Buena separación de responsabilidades
+
+**Cuándo usar**:
+- ✅ **Siempre en proyectos de ML/Data**: Facilita testing y mantenimiento
+- ✅ **Cuando el código crece**: Previene el caos
+- ✅ **Trabajo en equipo**: Cada persona puede trabajar en una capa
+
+**Cuándo NO preocuparse tanto**:
+- ❌ **Scripts de exploración**: Notebooks experimentales pueden mezclar capas
+- ❌ **Prototipos rápidos**: Primero valida la idea, luego refactoriza
+
+**Referencia oficial**: Martin, R. C. (2017). *Clean Architecture*. Prentice Hall. Chapter 22: The Clean Architecture.
+
+---
+
+## Resumen
+
+**Tres capas fundamentales**:
+1. **I/O**: Lectura/escritura de datos externos
+2. **Core**: Lógica de negocio pura (sin I/O)
+3. **Presentación**: Formateo y visualización
+
+**Regla de oro**: Core no depende de I/O ni Presentación.
+
+**Beneficios**:
+- Lógica testeable sin I/O
+- Código reutilizable
+- Mantenimiento más fácil
+- Cambios menos riesgosos
     """Train model - TODO mezclado en una función."""
     # I/O mezclado con lógica
     data = pd.read_csv(csv_path)
