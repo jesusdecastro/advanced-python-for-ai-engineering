@@ -27,14 +27,17 @@ uv sync
 ### 2. Ejecutar Tests
 
 ```bash
-# Ejecutar un test específico
+# Ejecutar un archivo de tests completo
 uv run pytest tests/test_error_handling.py
 
 # Ejecutar todos los tests
 uv run pytest
 
-# Ejecutar un test individual
+# Ejecutar un test individual (función)
 uv run pytest tests/test_error_handling.py::test_safe_divide
+
+# Ejecutar un test dentro de una clase
+uv run pytest tests/test_defensive.py::TestCalculateBMI::test_calculates_bmi_correctly
 
 # Con coverage
 uv run pytest --cov=exercises --cov-report=term-missing
@@ -136,9 +139,10 @@ cd dia_3/exercises
 uv sync
 
 # Ejecutar tests mientras trabajas
-uv run pytest tests/test_error_handling.py      # Test del ejercicio actual
-uv run pytest tests/test_defensive.py           # Otro ejercicio
-uv run pytest                                    # Todos los tests
+uv run pytest tests/test_error_handling.py                                      # Archivo completo
+uv run pytest tests/test_defensive.py::TestCalculateBMI                         # Clase completa
+uv run pytest tests/test_defensive.py::TestCalculateBMI::test_calculates_bmi_correctly  # Test específico
+uv run pytest                                                                    # Todos los tests
 
 # Verificar código
 uv run ruff check src/                           # Verificar estilo
