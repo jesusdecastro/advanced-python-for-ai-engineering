@@ -16,7 +16,7 @@ Este documento se enfoca en **arquitectura en capas** para proyectos de Data/IA.
 
 **Referencia principal**: Martin, R. C. (2017). *Clean Architecture: A Craftsman's Guide to Software Structure and Design*. Prentice Hall.
 
-### 🎯 Contexto: Por Qué Importa
+### Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 Tu pipeline de ML mezcla lectura de CSV, transformaciones, entrenamiento, y visualizaciones en una función de 200 líneas. Cuando quieres cambiar el formato de salida, arriesgas romper el entrenamiento. Cuando quieres testear la lógica de limpieza, necesitas archivos CSV reales.
@@ -35,7 +35,7 @@ Tienes `train_model()` que hace TODO: carga datos, valida, transforma, entrena, 
 
 ## Las Tres Capas en Data/IA
 
-### 📚 El Concepto
+### El Concepto
 
 En proyectos de Data/IA, el código se organiza en tres capas con responsabilidades específicas:
 
@@ -61,7 +61,7 @@ En proyectos de Data/IA, el código se organiza en tres capas con responsabilida
 
 ---
 
-### ❌ Ejemplo Incorrecto: Todo Mezclado
+### Ejemplo Incorrecto: Todo Mezclado
 
 ```python
 def train_model(csv_path: str, output_dir: str) -> None:
@@ -100,7 +100,7 @@ def train_model(csv_path: str, output_dir: str) -> None:
 
 ---
 
-### ✅ Ejemplo Correcto: Capas Separadas
+### Ejemplo Correcto: Capas Separadas
 
 ```python
 # ============================================
@@ -234,17 +234,17 @@ def train_model_pipeline(csv_path: str, output_dir: str) -> dict:
 ```
 
 **Ventajas**:
-- ✅ Lógica de negocio testeable sin I/O
-- ✅ Funciones reutilizables en otros proyectos
-- ✅ Cambiar formato de archivo no afecta lógica
-- ✅ Fácil de mantener y extender
-- ✅ Cada capa puede evolucionar independientemente
+- Lógica de negocio testeable sin I/O
+- Funciones reutilizables en otros proyectos
+- Cambiar formato de archivo no afecta lógica
+- Fácil de mantener y extender
+- Cada capa puede evolucionar independientemente
 
 ---
 
 ## Reglas de Dependencia entre Capas
 
-### 📚 Principio de Dependencia
+### Principio de Dependencia
 
 **Regla fundamental**: Las dependencias apuntan hacia adentro.
 
@@ -277,13 +277,13 @@ def train_model_pipeline(csv_path: str, output_dir: str) -> dict:
 
 ---
 
-### ❌ Violación de Dependencia
+### Violación de Dependencia
 
 ```python
-# ❌ MAL: Lógica de negocio depende de I/O
+# MAL: Lógica de negocio depende de I/O
 def normalize_features(csv_path: str) -> pd.DataFrame:
     """Lógica acoplada a formato de archivo."""
-    data = pd.read_csv(csv_path)  # ❌ I/O en lógica
+    data = pd.read_csv(csv_path)  # I/O en lógica
     return (data - data.mean()) / data.std()
 ```
 
@@ -291,10 +291,10 @@ def normalize_features(csv_path: str) -> pd.DataFrame:
 
 ---
 
-### ✅ Dependencia Correcta
+### Dependencia Correcta
 
 ```python
-# ✅ BIEN: Lógica pura, I/O separado
+# BIEN: Lógica pura, I/O separado
 def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
     """Lógica pura, testeable sin I/O."""
     return (data - data.mean()) / data.std()
@@ -424,7 +424,7 @@ def test_format_training_report():
 
 ---
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -444,13 +444,13 @@ def test_format_training_report():
   - SÍ → Buena separación de responsabilidades
 
 **Cuándo usar**:
-- ✅ **Siempre en proyectos de ML/Data**: Facilita testing y mantenimiento
-- ✅ **Cuando el código crece**: Previene el caos
-- ✅ **Trabajo en equipo**: Cada persona puede trabajar en una capa
+- **Siempre en proyectos de ML/Data**: Facilita testing y mantenimiento
+- **Cuando el código crece**: Previene el caos
+- **Trabajo en equipo**: Cada persona puede trabajar en una capa
 
 **Cuándo NO preocuparse tanto**:
-- ❌ **Scripts de exploración**: Notebooks experimentales pueden mezclar capas
-- ❌ **Prototipos rápidos**: Primero valida la idea, luego refactoriza
+- **Scripts de exploración**: Notebooks experimentales pueden mezclar capas
+- **Prototipos rápidos**: Primero valida la idea, luego refactoriza
 
 **Referencia oficial**: Martin, R. C. (2017). *Clean Architecture*. Prentice Hall. Chapter 22: The Clean Architecture.
 
