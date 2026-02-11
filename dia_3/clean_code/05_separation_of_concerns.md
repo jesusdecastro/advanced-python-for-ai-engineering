@@ -539,13 +539,18 @@ def process_sales_pipeline(csv_path: str, output_path: str) -> None:
 - I/O = Gasolina vs Eléctrico (puede cambiar, pero motor sigue igual)
 - Presentación = Color y diseño exterior (puede cambiar, motor sigue igual)
 
+---
 
+### Ejemplo: I/O en Capa Separada
+
+```python
+# Core: Lógica pura
 def normalize_features(data: pd.DataFrame) -> pd.DataFrame:
     """Lógica pura, testeable sin I/O."""
     return (data - data.mean()) / data.std()
 
 
-# I/O en capa separada
+# I/O: Adaptador que usa Core
 def normalize_from_csv(csv_path: str) -> pd.DataFrame:
     """Adaptador que combina I/O + lógica."""
     data = pd.read_csv(csv_path)
