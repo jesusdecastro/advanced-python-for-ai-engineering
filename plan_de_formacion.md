@@ -177,17 +177,21 @@ Cada día de formación sigue esta estructura:
 
 ## PROYECTO INTEGRADOR
 
-Los estudiantes trabajarán en grupos de 3 personas en uno de los proyectos descritos en el documento [proyectos_integradores.md](proyectos_integradores.md). Cada día agregarán funcionalidad aplicando los conceptos aprendidos.
+Los estudiantes trabajarán en grupos de 3 personas en uno de los proyectos descritos en el directorio [proyectos_integradores/](proyectos_integradores/). Cada día agregarán funcionalidad aplicando los conceptos aprendidos.
 
 **Opciones disponibles:**
-1. Data Pipeline Package (⭐⭐ Básica)
-2. Log Analyzer Tool (⭐⭐ Básica)
-3. Document Processor (⭐⭐⭐ Media)
-4. Data Validator Library (⭐⭐⭐ Media)
-5. Time Series Toolkit (⭐⭐⭐⭐ Alta)
-6. Web Scraper Framework (⭐⭐⭐⭐ Alta)
 
-Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles completos de cada proyecto, arquitectura sugerida y cómo cada día del curso contribuye a su desarrollo.
+### Nivel Básico (⭐⭐)
+1. **Data Pipeline Package** - Sistema ETL configurable
+2. **Log Analyzer Tool** - Análisis de logs con métricas y reportes
+3. **CSV Data Cleaner** - Limpieza y validación de datos CSV
+4. **Config File Manager** - Gestión de configuraciones multi-formato
+
+### Nivel Medio (⭐⭐⭐)
+5. **Data Validator Library** - Framework de validación de datos tabulares
+6. **Text Processing Toolkit** - Procesamiento y análisis de texto
+
+Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos de cada proyecto, arquitectura sugerida y cómo cada día del curso contribuye a su desarrollo.
 
 ---
 
@@ -207,4 +211,4 @@ Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles complet
 - requests, FastAPI (opcional)
 
 **Librerías según proyecto:**
-- Ver [proyectos_integradores.md](proyectos_integradores.md) para dependencias específicas de cada proyecto
+- Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) y las guías individuales para dependencias específicas de cada proyecto
