@@ -1,178 +1,124 @@
-# Curso de Python Avanzado para IA - Día 1
+# Python Avanzado para Ingeniería de IA
 
-Curso intensivo enfocado en Python avanzado aplicado a Ingeniería de IA, con énfasis en Clean Code, arquitectura de software y mejores prácticas de desarrollo.
+Curso intensivo de 5 días enfocado en Python avanzado aplicado a Ingeniería de IA, con énfasis en Clean Code, arquitectura de software y mejores prácticas de desarrollo.
 
-##  Bienvenido al Día 1
-
-Este repositorio contiene todo el material para el **Día 1: Fundamentos - Configuración de Proyectos Python**.
-
-**Duración:** 8 horas  
-**Nivel:** Intermedio-Avanzado
+**Duración:** 40 horas (5 días x 8 horas)  
+**Nivel:** Intermedio-Avanzado  
+**Enfoque:** Desarrollo de intuición profunda, no memorización
 
 ---
 
-##  Inicio Rápido
-
-### Paso 1: Clonar el Repositorio
+## Inicio Rápido
 
 ```bash
+# Clonar repositorio
 git clone https://github.com/jesusdecastro/advanced-python-for-ai-engineering.git
 cd advanced-python-for-ai-engineering
-```
 
-### Paso 2: Crear Entorno Virtual
-
-**Windows:**
-```bash
+# Crear entorno virtual
 python -m venv venv
-venv\Scripts\activate
-```
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
 
-**Linux/Mac:**
-```bash
-python -m venv venv
-source venv/bin/activate
-```
-
-### Paso 3: Instalar Dependencias
-
-```bash
+# Instalar dependencias
 pip install -e ".[dev]"
-```
 
-### Paso 4: Iniciar Jupyter
-
-```bash
-cd dia_1
+# Iniciar con el día que corresponda
+cd dia_1  # o dia_2, dia_3, etc.
 jupyter notebook
 ```
 
-**¿Necesitas ayuda?** Lee `dia_1/INICIO_RAPIDO.md` para una guía detallada.
+**Guías detalladas:** Cada día tiene su propio `README.md` e `INICIO_RAPIDO.md`
 
 ---
 
-##  Contenido del Día 1
+## Estructura del Curso
 
-### Notebooks
+**Ver plan completo:** [`plan_de_formacion.md`](plan_de_formacion.md)
 
-1. **01_python_idioms_intro.ipynb** - Introducción a código pythónico
-2. **02_virtual_environments.ipynb** - Entornos virtuales  CRÍTICO
-3. **03_modules_and_imports.ipynb** - Sistema de módulos e imports
-4. **04_type_hinting.ipynb** - Type hints  CRÍTICO
-5. **05_code_quality_tools.ipynb** - Ruff y Pyright  CRÍTICO
-6. **06_package_distribution.ipynb** - Distribución de paquetes
+El curso está organizado en 5 días con enfoque progresivo:
 
-### Ejercicios
+- **Día 1:** Fundamentos de Python avanzado (entornos virtuales, módulos, type hints, herramientas)
+- **Día 2:** Código pythónico (comprehensions, generators, decorators, context managers)
+- **Día 3:** Clean Code práctico (error handling, logging, defensive programming, objetos)
+- **Día 4:** Arquitectura y patrones de diseño
+- **Día 5:** Testing avanzado y proyectos integradores
 
-Los ejercicios están en `dia_1/exercises/` con tests unitarios en `dia_1/exercises/tests/`.
+---
 
-**Ejecutar tests:**
+## Proyectos Integradores
+
+Proyectos prácticos que integran conceptos de múltiples días:
+
+1. **Data Pipeline** - Pipeline ETL con validación y logging
+2. **Log Analyzer** - Análisis de logs con generators y comprehensions
+3. **CSV Cleaner** - Limpieza de datos con context managers
+4. **Config Manager** - Gestión de configuraciones con type hints
+5. **Data Validator** - Validación defensiva de datasets
+6. **Text Processing** - Procesamiento de texto con patrones pythónicos
+
+**Documentación:** `proyectos_integradores/README.md`
+
+---
+
+## Requisitos
+
+- **Python:** 3.11 o superior
+- **Git:** Para clonar el repositorio
+- **Editor:** VS Code recomendado
+- **Sistema operativo:** Windows, Linux o macOS
+
+**Verificar instalación:**
 ```bash
-cd dia_1
-pytest exercises/tests/ -v
+python --version  # Debe mostrar 3.11.x o superior
+git --version
 ```
 
----
-
-##  Documentación
-
-- **README del Día 1:** `dia_1/README.md` - Guía completa
-- **Inicio Rápido:** `dia_1/INICIO_RAPIDO.md` - Setup en 5 minutos
-- **FAQ:** `dia_1/FAQ.md` - Preguntas frecuentes
-- **Guía de Ejercicios:** `dia_1/EXERCISES_GUIDE.md` - Cómo trabajar con ejercicios
+**Guías de instalación:**
+- Python y entornos virtuales: `virtual_env_installation_guide.md`
+- Plugins de VS Code: `vscode_plugins.md`
 
 ---
 
-##  Objetivos de Aprendizaje
+## Herramientas y Tecnologías
 
-Al finalizar el Día 1, serás capaz de:
+**Desarrollo:**
+- pytest - Testing unitario
+- ruff - Linting y formateo
+- pyright - Type checking estático
+- jupyter - Notebooks interactivos
 
--  Crear y gestionar entornos virtuales profesionales
--  Estructurar proyectos Python siguiendo mejores prácticas
--  Usar type hints para código más robusto
--  Aplicar herramientas de calidad (ruff, pyright)
--  Entender el sistema de módulos e imports de Python
+**Gestión de proyectos:**
+- uv - Gestor de paquetes moderno (opcional)
+- pip - Gestor de paquetes estándar
+- venv - Entornos virtuales
 
----
-
-##  Requisitos
-
-- Python 3.11 o superior
-- Git
-- VS Code (recomendado)
-- Conexión a internet
-
-**Verificar Python:**
-```bash
-python --version
-```
-
-Debe mostrar `Python 3.11.x` o superior.
+**Documentación:**
+- Sphinx - Generación de documentación
+- Markdown - Documentación de referencia
 
 ---
 
-##  Soporte
+## Navegación Rápida
 
-**Problemas comunes:**
-- Consulta `dia_1/FAQ.md` para soluciones rápidas
-- Lee `dia_1/README.md` para documentación completa
+**Empezar el curso:**
+- Día 1: `dia_1/README.md` o `dia_1/INICIO_RAPIDO.md`
+- Día 2: `dia_2/README.md`
+- Día 3: `dia_3/README.md`
 
-**Durante el curso:**
-- Pregunta al instructor
-- Consulta con compañeros
-- Revisa la documentación
+**Material de referencia:**
+- Clean Code: `dia_3/clean_code/README.md`
+- Proyectos integradores: `proyectos_integradores/README.md`
+- Plan completo: `plan_de_formacion.md`
 
----
-
-##  Estructura del Repositorio
-
-```
-.
- dia_1/                    # Todo el contenido del Día 1
-    notebooks (6)         # Notebooks educativos
-    exercises/            # Ejercicios prácticos
-    examples/             # Ejemplos de código
-    README.md             # Guía completa del día
-    INICIO_RAPIDO.md      # Setup rápido
-    FAQ.md                # Preguntas frecuentes
- proyectos_integradores/   # Proyectos finales (próximamente)
- .kiro/steering/           # Estándares del curso
- pyproject.toml            # Configuración del proyecto
- README.md                 # Este archivo
-```
+**Guías de instalación:**
+- Entornos virtuales: `virtual_env_installation_guide.md`
+- VS Code: `vscode_plugins.md`
 
 ---
 
-##  Herramientas del Curso
-
-- **pytest** - Testing
-- **ruff** - Linting y formateo
-- **pyright** - Type checking
-- **jupyter** - Notebooks interactivos
-
----
-
-##  Próximos Días
-
-El contenido de los días 2-5 se irá añadiendo progresivamente:
-
-- **Día 2:** Código Pythónico (próximamente)
-- **Día 3:** Código Limpio (próximamente)
-- **Día 4:** Diseño OOP (próximamente)
-- **Día 5:** Testing y Optimización (próximamente)
-
----
-
-##  Contacto
-
-**Repositorio:** https://github.com/jesusdecastro/advanced-python-for-ai-engineering
-
----
-
-##  Licencia
+## Licencia
 
 Este material educativo está disponible bajo licencia MIT para uso educativo y formación.
 
----
-
-**¡Comienza tu aprendizaje en `dia_1/README.md`!**
+**Repositorio:** https://github.com/jesusdecastro/advanced-python-for-ai-engineering
