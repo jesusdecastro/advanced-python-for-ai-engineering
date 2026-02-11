@@ -1013,6 +1013,7 @@ La capa de I/O maneja toda la interacción con el mundo externo. Separar esta ca
 ### Ejemplo: Funciones de I/O
 
 ```python
+from typing import Any
 import json
 from pathlib import Path
 import pandas as pd
@@ -1035,14 +1036,14 @@ def load_csv_data(file_path: str) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
-def load_config(config_path: str) -> dict[str, any]:
+def load_config(config_path: str) -> dict[str, Any]:
     """
     Load configuration from JSON file.
     
     :param config_path: Path to config file
     :type config_path: str
     :return: Configuration dictionary
-    :rtype: dict[str, any]
+    :rtype: dict[str, Any]
     :raises FileNotFoundError: If file doesn't exist
     :raises json.JSONDecodeError: If JSON is invalid
     """
