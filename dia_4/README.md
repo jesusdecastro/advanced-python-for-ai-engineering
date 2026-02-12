@@ -12,15 +12,18 @@ Contenido avanzado sobre modelado de datos, composición, separación de respons
    - Comparación práctica
    - Validación de datos con Field y validators
 
-2. **Protocols y Structural Typing** (`teoria/02_protocols_structural_typing.md`)
-   - Duck typing vs Protocols
-   - Definición de Protocols
-   - Runtime checkable
-   - Generic Protocols
+2. **Composición sobre Herencia** (`teoria/02_composicion_sobre_herencia.md`)
+   - Por qué preferir composición
+   - Problemas de la herencia profunda
+   - Protocols como contratos
+   - Ejemplos prácticos en ML/Data
 
-3. **Principios SOLID en Python** (`teoria/03_solid_principles.md`)
+3. **Principios SOLID - Parte 1** (`teoria/03_solid_parte_1.md`)
    - Single Responsibility Principle (SRP)
    - Open-Closed Principle (OCP)
+   - Aplicación en proyectos de Data Science
+
+4. **Principios SOLID - Parte 2** (`teoria/04_solid_parte_2.md`)
    - Liskov Substitution Principle (LSP)
    - Interface Segregation Principle (ISP)
    - Dependency Inversion Principle (DIP)
