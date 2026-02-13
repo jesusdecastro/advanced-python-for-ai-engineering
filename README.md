@@ -41,8 +41,8 @@ El curso está organizado en 5 días con enfoque progresivo:
 - **Día 1:** Fundamentos de Python avanzado (entornos virtuales, módulos, type hints, herramientas)
 - **Día 2:** Código pythónico (comprehensions, generators, decorators, context managers)
 - **Día 3:** Clean Code práctico (error handling, logging, defensive programming, objetos)
-- **Día 4:** Arquitectura y patrones de diseño
-- **Día 5:** Testing avanzado y proyectos integradores
+- **Día 4:** Arquitectura y patrones de diseño (SOLID, patrones creacionales, estructurales y comportamentales)
+- **Día 5:** Testing con pytest (fixtures, parametrize, mocks, testing funcional)
 
 ---
 
@@ -105,6 +105,8 @@ git --version
 - Día 1: `dia_1/README.md` o `dia_1/INICIO_RAPIDO.md`
 - Día 2: `dia_2/README.md`
 - Día 3: `dia_3/README.md`
+- Día 4: `dia_4/README.md`
+- Día 5: `dia_5/README.md`
 
 **Material de referencia:**
 - Clean Code: `dia_3/clean_code/README.md`
