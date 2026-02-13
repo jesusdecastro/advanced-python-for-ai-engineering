@@ -1,6 +1,6 @@
 # Parametrize: Testing con Tablas de Datos
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -19,7 +19,7 @@ Tienes una función `remove_accents` que elimina acentos de texto. Necesitas tes
 - Difícil ver qué casos están cubiertos de un vistazo
 - Si cambias la firma de la función, editas N tests
 
-## 📚 El Concepto
+## El Concepto
 
 ### Definición técnica
 
@@ -38,7 +38,7 @@ Tienes una función `remove_accents` que elimina acentos de texto. Necesitas tes
 - **Test case**: Cada fila de la tabla — un conjunto de inputs/outputs
 - **Test ID**: Identificador opcional para cada caso (mejora legibilidad del output)
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 # Cinco funciones de test casi idénticas — solo cambia el input
@@ -72,7 +72,7 @@ def test_remove_accents_empty():
 - Difícil ver de un vistazo qué casos están cubiertos
 - Los nombres de test son genéricos y no aportan contexto de negocio
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 import pytest
@@ -199,7 +199,7 @@ def test_parse_log_line(log_line, expected):
     assert parse_log_line(log_line) == expected
 ```
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -215,12 +215,12 @@ def test_parse_log_line(log_line, expected):
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar parametrize cuando**:
+- **Usar parametrize cuando**:
   - Testeas la misma función con muchos inputs distintos
   - Funciones de transformación, validaciones, parsers
   - Quieres ver todos los casos de un vistazo
   
-- ❌ **NO usar parametrize cuando**:
+- **NO usar parametrize cuando**:
   - Los tests verifican comportamientos diferentes
   - El setup (Arrange) es distinto para cada caso
   - Los asserts son diferentes

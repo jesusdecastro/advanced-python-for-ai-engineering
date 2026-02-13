@@ -1,6 +1,6 @@
 # Introducción al Testing
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -18,7 +18,7 @@ Un equipo desarrolla un procesador de texto para NLP. La función `normalize_tex
 - **Regresiones**: Arreglas un bug hoy, introduces otro mañana en la misma función. Sin tests, no lo sabes
 - **Onboarding lento**: Un nuevo miembro del equipo no puede verificar que sus cambios no rompen nada
 
-## 📚 El Concepto
+## El Concepto
 
 ### Principio Fundamental
 
@@ -79,12 +79,12 @@ En data engineering y AI, la base de la pirámide (unit tests) es especialmente 
 
 | Tipo | ¿Qué prueba? | Ejemplo en AI/Data | Velocidad | Cantidad |
 |------|--------------|-------------------|-----------|----------|
-| Unit | Una función aislada | `clean_text(" Hello ")` → `"hello"` | ⚡ ms | Muchos (70-80%) |
-| Functional | Entrada → Salida real | Fichero CSV entra → fichero JSON sale | 🏃 ms-seg | Varios (15-20%) |
-| Integration | Componentes juntos | Leer CSV + limpiar + validar schema | 🏃 segundos | Pocos (5-10%) |
-| E2E | Flujo completo | Pipeline entero desde API hasta output | 🐢 minutos | Mínimos (1-5%) |
+| Unit | Una función aislada | `clean_text(" Hello ")` → `"hello"` | Rápido (ms) | Muchos (70-80%) |
+| Functional | Entrada → Salida real | Fichero CSV entra → fichero JSON sale | Medio (ms-seg) | Varios (15-20%) |
+| Integration | Componentes juntos | Leer CSV + limpiar + validar schema | Medio (segundos) | Pocos (5-10%) |
+| E2E | Flujo completo | Pipeline entero desde API hasta output | Lento (minutos) | Mínimos (1-5%) |
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 # test_pipeline.py — Un solo test E2E gigante que intenta probarlo todo
@@ -111,7 +111,7 @@ def test_entire_pipeline():
 - No aislado: un error en la función `clean_text` y un error en la conexión a BD producen el mismo síntoma
 - Imposible de ejecutar en CI sin infraestructura completa
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 # La pirámide en la práctica:
@@ -160,7 +160,7 @@ def test_pipeline_reads_and_transforms(mock_db, tmp_path):
 - Cada test es independiente — un fallo no contamina otros
 - Los nuevos miembros del equipo pueden ejecutar tests desde el primer día
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -178,13 +178,13 @@ def test_pipeline_reads_and_transforms(mock_db, tmp_path):
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar tests cuando**:
+- **Usar tests cuando**:
   - Escribes funciones de transformación de datos
   - Implementas validaciones o parsers
   - Tienes lógica de negocio que puede cambiar
   - Quieres refactorizar sin miedo
   
-- ❌ **NO necesitas tests para**:
+- **NO necesitas tests para**:
   - Wrappers triviales de una línea sin lógica
   - Código de configuración estático
   - Scripts de un solo uso

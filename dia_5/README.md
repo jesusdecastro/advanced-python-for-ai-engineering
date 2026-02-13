@@ -24,12 +24,12 @@ Al finalizar este módulo, serás capaz de:
 
 ### Teoría
 
-1. [Introducción al Testing](testing/01_introduccion_testing.md) - Por qué testear, tipos de tests, la pirámide de testing
-2. [pytest Básico](testing/02_pytest_basico.md) - Primeros tests, patrón AAA, convenciones
-3. [Parametrize](testing/03_parametrize.md) - Testing con tablas de datos
-4. [Fixtures](testing/04_fixtures.md) - Setup reutilizable y aislamiento
-5. [Mocks](testing/05_mocks.md) - Aislar dependencias externas
-6. [Functional Testing](testing/06_functional_testing.md) - Tests de I/O con tmp_path
+1. [Introducción al Testing](teoria/01_introduccion_testing.md) - Por qué testear, tipos de tests, la pirámide de testing
+2. [pytest Básico](teoria/02_pytest_basico.md) - Primeros tests, patrón AAA, convenciones
+3. [Parametrize](teoria/03_parametrize.md) - Testing con tablas de datos
+4. [Fixtures](teoria/04_fixtures.md) - Setup reutilizable y aislamiento
+5. [Mocks](teoria/05_mocks.md) - Aislar dependencias externas
+6. [Functional Testing](teoria/06_functional_testing.md) - Tests de I/O con tmp_path
 
 ### Ejercicios Prácticos
 
@@ -44,7 +44,7 @@ Los ejercicios están en el directorio `exercises/` con estructura de proyecto c
 ```
 dia_5/
 ├── README.md                          # Este archivo
-├── testing/                           # Contenido teórico
+├── teoria/                            # Contenido teórico
 │   ├── 01_introduccion_testing.md
 │   ├── 02_pytest_basico.md
 │   ├── 03_parametrize.md

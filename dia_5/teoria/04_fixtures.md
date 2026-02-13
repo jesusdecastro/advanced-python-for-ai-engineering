@@ -1,6 +1,6 @@
 # Fixtures: Setup Reutilizable
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -17,7 +17,7 @@ Tienes 10 tests que procesan una lista de registros de usuarios. Cada test copia
 - Difícil distinguir el setup del test real
 - Riesgo de contaminación entre tests si usas variables globales
 
-## 📚 El Concepto
+## El Concepto
 
 ### Definición técnica
 
@@ -37,7 +37,7 @@ Una **fixture** es una función decorada con `@pytest.fixture` que prepara datos
 - **Dependency injection**: pytest inyecta fixtures por nombre de parámetro
 - **Teardown**: Código de limpieza después del test (con `yield`)
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 # El mismo setup copiado en cada test
@@ -69,7 +69,7 @@ def test_count_invalid_records():
 - Difícil distinguir setup del test real
 - Ruido visual
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 import pytest
@@ -189,7 +189,7 @@ def temp_database():
     db.delete()
 ```
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -205,12 +205,12 @@ def temp_database():
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar fixtures cuando**:
+- **Usar fixtures cuando**:
   - Múltiples tests necesitan los mismos datos
   - El setup es complejo o costoso
   - Quieres garantizar aislamiento entre tests
   
-- ❌ **NO usar fixtures para**:
+- **NO usar fixtures para**:
   - Setup trivial de una línea
   - Datos que solo usa un test
 

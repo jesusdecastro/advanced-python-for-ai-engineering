@@ -1,6 +1,6 @@
 # Mocks: Aislar Dependencias Externas
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -18,7 +18,7 @@ Tienes una función que carga configuración desde un fichero JSON y valida que 
 - Tests lentos por I/O de red
 - Tests no deterministas — el resultado puede cambiar
 
-## 📚 El Concepto
+## El Concepto
 
 ### Definición técnica
 
@@ -40,7 +40,7 @@ Un **mock** es un objeto falso que simula el comportamiento de una dependencia e
 - **return_value**: Qué devuelve el mock cuando se llama
 - **MagicMock**: Mock que acepta cualquier atributo o método
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 # test que depende de un fichero real en disco
@@ -69,7 +69,7 @@ def test_get_embeddings():
 - Tests lentos por I/O de red
 - Tests no deterministas — el resultado puede cambiar
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 from unittest.mock import patch, mock_open
@@ -208,13 +208,13 @@ def test_get_user_data_success(mock_get):
 
 > **Mockea lo que NO quieres testear, nunca tu propia lógica.**
 
-✅ **Mockear**: lectura de ficheros, llamadas a APIs, conexiones a BD, `datetime.now()`
+**Mockear**: lectura de ficheros, llamadas a APIs, conexiones a BD, `datetime.now()`
 
-❌ **No mockear**: tus propias funciones de transformación, validación, o lógica de negocio
+**No mockear**: tus propias funciones de transformación, validación, o lógica de negocio
 
 Si te encuentras mockeando tu propio código, es una señal de que tu código está demasiado acoplado y necesita refactorización.
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -230,12 +230,12 @@ Si te encuentras mockeando tu propio código, es una señal de que tu código es
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar mocks cuando**:
+- **Usar mocks cuando**:
   - Tu código lee ficheros o llama a APIs
   - Quieres testear manejo de errores (fichero no existe, API falla)
   - Necesitas tests rápidos y deterministas
   
-- ❌ **NO usar mocks para**:
+- **NO usar mocks para**:
   - Funciones puras sin dependencias externas
   - Tu propia lógica de negocio
   - Tests de I/O donde quieres verificar el comportamiento real

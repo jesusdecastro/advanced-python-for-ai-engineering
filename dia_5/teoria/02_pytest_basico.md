@@ -1,6 +1,6 @@
 # pytest Básico
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -23,7 +23,7 @@ def normalize_whitespace(text: str) -> str:
 - No puedes refactorizar sin miedo
 - Los nuevos miembros del equipo no saben qué comportamiento es correcto
 
-## 📚 El Concepto
+## El Concepto
 
 ### Definición técnica
 
@@ -130,10 +130,10 @@ pytest tests/ -v --cov=src --cov-report=term-missing
 ### Output de pytest
 
 ```
-tests/test_text_utils.py::test_normalize_removes_extra_spaces PASSED  ← ✅
-tests/test_text_utils.py::test_normalize_strips_edges PASSED          ← ✅
-tests/test_text_utils.py::test_normalize_empty_string FAILED          ← ❌
-tests/test_text_utils.py::test_normalize_tabs ERROR                   ← 💥
+tests/test_text_utils.py::test_normalize_removes_extra_spaces PASSED  ←
+tests/test_text_utils.py::test_normalize_strips_edges PASSED          ←
+tests/test_text_utils.py::test_normalize_empty_string FAILED          ←
+tests/test_text_utils.py::test_normalize_tabs ERROR                   ←
 ```
 
 **Símbolos**:
@@ -184,7 +184,7 @@ def test_remove_accents_from_spanish_text():
 ### Nombres de ficheros y funciones
 
 ```python
-# ✅ Correcto
+# Correcto
 # tests/test_text_utils.py
 def test_normalize_whitespace():
     ...
@@ -192,7 +192,7 @@ def test_normalize_whitespace():
 def test_remove_accents():
     ...
 
-# ❌ Incorrecto — pytest no los descubre
+# Incorrecto — pytest no los descubre
 # tests/utils_test.py  (debe ser test_*.py)
 def check_normalize():  # (debe ser test_*)
     ...
@@ -201,14 +201,14 @@ def check_normalize():  # (debe ser test_*)
 ### Nombres descriptivos
 
 ```python
-# ❌ Mal — no dice qué verifica
+# Mal — no dice qué verifica
 def test_normalize():
     assert normalize_whitespace("  hello  ") == "hello"
 
 def test_normalize_2():
     assert normalize_whitespace("") == ""
 
-# ✅ Bien — nombre describe el comportamiento
+# Bien — nombre describe el comportamiento
 def test_normalize_strips_leading_and_trailing_spaces():
     assert normalize_whitespace("  hello  ") == "hello"
 
@@ -216,7 +216,7 @@ def test_normalize_handles_empty_string():
     assert normalize_whitespace("") == ""
 ```
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 # Test sin estructura clara
@@ -247,7 +247,7 @@ def test_increment_again():
 - Estado compartido — tests no son independientes
 - Assert ambiguo — `assert result` no dice qué se espera
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 def test_process_data_with_valid_input_returns_cleaned_dict():
@@ -291,7 +291,7 @@ def test_process_data_with_empty_string_returns_default():
 - Tests independientes — pueden ejecutarse en cualquier orden
 - Asserts explícitos — verifican comportamiento específico
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -307,12 +307,12 @@ def test_process_data_with_empty_string_returns_default():
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar pytest cuando**:
+- **Usar pytest cuando**:
   - Escribes cualquier código Python que necesita tests
   - Quieres tests rápidos y fáciles de escribir
   - Necesitas descubrimiento automático de tests
   
-- ❌ **NO usar pytest para**:
+- **NO usar pytest para**:
   - Tests de performance (usa pytest-benchmark)
   - Tests de carga (usa locust o similar)
 

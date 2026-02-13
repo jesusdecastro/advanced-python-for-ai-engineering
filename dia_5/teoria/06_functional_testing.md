@@ -1,6 +1,6 @@
 # Functional Testing: La Capa I/O con tmp_path
 
-## 🎯 Contexto: Por Qué Importa
+## Contexto: Por Qué Importa
 
 **Problema real en Data/IA**:
 
@@ -20,7 +20,7 @@ Tu función `process_csv_to_json` funciona perfectamente con mocks. En producci�
 - JSON con BOM invisible que rompe parsers
 - Ficheros que se crean pero están vacíos o corruptos
 
-## 📚 El Concepto
+## El Concepto
 
 ### Definición técnica
 
@@ -41,7 +41,7 @@ Un **functional test** verifica un flujo completo de entrada → salida con I/O 
 - **Pathlib.Path**: API moderna de Python para trabajar con paths
 - **write_text() / read_text()**: Métodos convenientes para ficheros de texto
 
-## ❌ Ejemplo Incorrecto
+## Ejemplo Incorrecto
 
 ```python
 import os
@@ -73,7 +73,7 @@ def test_csv_processing():
 - No portable — `/tmp` no existe en Windows
 - No aislado — un test puede leer restos del test anterior
 
-## ✅ Ejemplo Correcto
+## Ejemplo Correcto
 
 ```python
 import csv
@@ -198,7 +198,7 @@ def test_process_csv(sample_csv_file, tmp_path):
     assert output.exists()
 ```
 
-## 💡 Aprendizaje Clave
+## Aprendizaje Clave
 
 **Puntos críticos a recordar**:
 
@@ -214,12 +214,12 @@ def test_process_csv(sample_csv_file, tmp_path):
 
 **Cuándo usar / NO usar**:
 
-- ✅ **Usar functional tests cuando**:
+- **Usar functional tests cuando**:
   - Tu código lee/escribe ficheros locales
   - Quieres verificar encodings, formatos, edge cases de I/O
   - Necesitas testear un flujo completo entrada → salida
   
-- ❌ **NO usar functional tests para**:
+- **NO usar functional tests para**:
   - Funciones puras sin I/O
   - Código que llama a APIs externas (usa mocks)
   - Tests que requieren infraestructura compleja (BD, S3)
