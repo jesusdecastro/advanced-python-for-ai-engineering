@@ -5,19 +5,20 @@ build-backend = "hatchling.build"
 [project]
 name = "exercises"
 version = "0.1.0"
-description = "Ejercicios prácticos del Día 2"
+description = "Ejercicios Día 3: Error Handling, Logging y Defensive Programming"
 requires-python = ">=3.11"
 dependencies = []
 
 [dependency-groups]
 dev = [
     "pytest",
+    "pytest-cov",
     "ruff",
     "pyright",
 ]
 
-[tool.hatchling.build.targets.wheel]
-packages = ["src/exercises"]
+# [tool.hatch.build.targets.wheel]
+# packages = ["src/exercises"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -38,3 +39,7 @@ target-version = "py311"
 [tool.ruff.lint.per-file-ignores]
 # Ejercicios: permitir prints para debugging y ejemplos
 "src/exercises/**/*.py" = ["T20", "D103"]
+
+[tool.pyright]
+pythonVersion = "3.11"
+typeCheckingMode = "basic"

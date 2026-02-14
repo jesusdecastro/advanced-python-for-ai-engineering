@@ -669,7 +669,7 @@ except InvalidDataFormatError as e:
 
 ---
 
-## Ejercicio Práctico
+## Ejercicio Práctico Individual
 
 Refactoriza el siguiente código aplicando los principios de funciones limpias:
 
@@ -690,3 +690,300 @@ def process(data_path, output_path):
 - ¿Están todas al mismo nivel de abstracción?
 - ¿Tiene efectos secundarios?
 - ¿Mezcla comando y consulta?
+
+---
+
+## 🏋️ Ejercicio Grupal: Refactorizar un Main Complejo
+
+**Objetivo**: Aplicar todos los principios de funciones limpias en un caso real de ML/IA.
+
+**Contexto**: Has heredado un script de entrenamiento de modelo que "funciona" pero es imposible de mantener. El equipo necesita añadir nuevas features pero nadie se atreve a tocar el código.
+
+**Tiempo estimado**: 30-45 minutos
+
+**Dinámica**:
+1. **Lectura individual** (5 min): Lee el código y anota problemas
+2. **Discusión en grupo** (10 min): Identifiquen violaciones de principios
+3. **Refactorización colaborativa** (20 min): Dividan el trabajo y refactoricen
+4. **Presentación** (10 min): Compartan su solución con otros grupos
+
+---
+
+### Código a Refactorizar
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
+import joblib
+import json
+import smtplib
+from email.mime.text import MIMEText
+import logging
+
+def main(data_path, config_path, output_model_path, send_email=True):
+    """Main training pipeline."""
+    
+    # Load config
+    with open(config_path) as f:
+        config = json.load(f)
+    
+    # Setup logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    logger.info("Starting training pipeline")
+    
+    # Load data
+    logger.info(f"Loading data from {data_path}")
+    df = pd.read_csv(data_path)
+    
+    # Data validation
+    if df.isnull().sum().sum() > 0:
+        logger.warning("Found missing values, dropping them")
+        df = df.dropna()
+    
+    if len(df) < 100:
+        raise ValueError("Not enough data for training")
+    
+    # Feature engineering
+    logger.info("Engineering features")
+    df['age_group'] = pd.cut(df['age'], bins=[0, 18, 35, 50, 100], labels=['young', 'adult', 'middle', 'senior'])
+    df['income_log'] = np.log1p(df['income'])
+    df['purchase_frequency'] = df['purchases'] / (df['days_since_signup'] + 1)
+    
+    # Encode categorical
+    df = pd.get_dummies(df, columns=['age_group', 'country', 'device_type'])
+    
+    # Prepare features and target
+    target_col = config['target_column']
+    feature_cols = [col for col in df.columns if col != target_col]
+    
+    X = df[feature_cols].values
+    y = df[target_col].values
+    
+    # Split data
+    test_size = config.get('test_size', 0.2)
+    random_state = config.get('random_state', 42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=random_state, stratify=y
+    )
+    
+    logger.info(f"Train size: {len(X_train)}, Test size: {len(X_test)}")
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Train model
+    logger.info("Training model")
+    n_estimators = config.get('n_estimators', 100)
+    max_depth = config.get('max_depth', 10)
+    min_samples_split = config.get('min_samples_split', 5)
+    
+    model = RandomForestClassifier(
+        n_estimators=n_estimators,
+        max_depth=max_depth,
+        min_samples_split=min_samples_split,
+        random_state=random_state,
+        n_jobs=-1
+    )
+    
+    model.fit(X_train_scaled, y_train)
+    
+    # Evaluate
+    logger.info("Evaluating model")
+    y_pred_train = model.predict(X_train_scaled)
+    y_pred_test = model.predict(X_test_scaled)
+    
+    train_acc = accuracy_score(y_train, y_pred_train)
+    test_acc = accuracy_score(y_test, y_pred_test)
+    train_f1 = f1_score(y_train, y_pred_train, average='weighted')
+    test_f1 = f1_score(y_test, y_pred_test, average='weighted')
+    
+    logger.info(f"Train Accuracy: {train_acc:.4f}, F1: {train_f1:.4f}")
+    logger.info(f"Test Accuracy: {test_acc:.4f}, F1: {test_f1:.4f}")
+    
+    # Check for overfitting
+    if train_acc - test_acc > 0.1:
+        logger.warning("Model might be overfitting!")
+    
+    # Feature importance
+    feature_importance = pd.DataFrame({
+        'feature': feature_cols,
+        'importance': model.feature_importances_
+    }).sort_values('importance', ascending=False)
+    
+    logger.info("Top 5 features:")
+    for idx, row in feature_importance.head().iterrows():
+        logger.info(f"  {row['feature']}: {row['importance']:.4f}")
+    
+    # Save model
+    logger.info(f"Saving model to {output_model_path}")
+    joblib.dump({
+        'model': model,
+        'scaler': scaler,
+        'feature_cols': feature_cols,
+        'config': config
+    }, output_model_path)
+    
+    # Save metrics
+    metrics_path = output_model_path.replace('.pkl', '_metrics.json')
+    metrics = {
+        'train_accuracy': float(train_acc),
+        'test_accuracy': float(test_acc),
+        'train_f1': float(train_f1),
+        'test_f1': float(test_f1),
+        'n_train_samples': int(len(X_train)),
+        'n_test_samples': int(len(X_test)),
+        'n_features': int(X_train.shape[1])
+    }
+    
+    with open(metrics_path, 'w') as f:
+        json.dump(metrics, f, indent=2)
+    
+    logger.info(f"Metrics saved to {metrics_path}")
+    
+    # Send email notification
+    if send_email and 'email' in config:
+        logger.info("Sending email notification")
+        try:
+            smtp_server = config['email']['smtp_server']
+            smtp_port = config['email']['smtp_port']
+            sender = config['email']['sender']
+            password = config['email']['password']
+            recipient = config['email']['recipient']
+            
+            msg = MIMEText(f"""
+            Training completed successfully!
+            
+            Results:
+            - Train Accuracy: {train_acc:.4f}
+            - Test Accuracy: {test_acc:.4f}
+            - Train F1: {train_f1:.4f}
+            - Test F1: {test_f1:.4f}
+            
+            Model saved to: {output_model_path}
+            """)
+            
+            msg['Subject'] = 'Model Training Completed'
+            msg['From'] = sender
+            msg['To'] = recipient
+            
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(sender, password)
+                server.send_message(msg)
+            
+            logger.info("Email sent successfully")
+        except Exception as e:
+            logger.error(f"Failed to send email: {e}")
+    
+    logger.info("Training pipeline completed")
+    
+    return {
+        'model': model,
+        'scaler': scaler,
+        'metrics': metrics,
+        'feature_importance': feature_importance
+    }
+
+
+if __name__ == '__main__':
+    main(
+        data_path='data/customers.csv',
+        config_path='config/training_config.json',
+        output_model_path='models/customer_churn_model.pkl',
+        send_email=True
+    )
+```
+
+---
+
+### Instrucciones para el Grupo
+
+**Paso 1: Identificar Problemas** (10 minutos)
+
+Discutan y anoten:
+
+1. ¿Cuántas responsabilidades tiene la función `main`?
+2. ¿Qué principios de funciones limpias se violan?
+3. ¿Qué partes son difíciles de probar?
+4. ¿Qué pasaría si necesitan cambiar el modelo de RandomForest a XGBoost?
+5. ¿Qué pasaría si necesitan añadir validación cruzada?
+
+**Paso 2: Diseñar la Solución** (10 minutos)
+
+Decidan en grupo:
+
+1. ¿Qué funciones necesitan crear?
+2. ¿Cómo se llamarán?
+3. ¿Qué parámetros recibirá cada una?
+4. ¿Qué devolverá cada una?
+5. ¿Cómo se organizarán (mismo archivo, módulos separados)?
+
+**Paso 3: Refactorizar** (20 minutos)
+
+Dividan el trabajo:
+
+- **Persona 1**: Funciones de carga y validación de datos
+- **Persona 2**: Funciones de feature engineering
+- **Persona 3**: Funciones de entrenamiento y evaluación
+- **Persona 4**: Funciones de guardado y notificación
+- **Todos**: Función `main` refactorizada que orquesta todo
+
+**Criterios de Éxito**:
+
+- [ ] Cada función hace exactamente una cosa
+- [ ] Funciones tienen máximo 20 líneas
+- [ ] Todas las funciones tienen type hints
+- [ ] Todas las funciones tienen docstrings
+- [ ] No hay efectos secundarios ocultos
+- [ ] Separación comando-consulta respetada
+- [ ] Fácil de testear con mocks
+- [ ] Fácil de cambiar el modelo o añadir features
+
+---
+
+### Pistas
+
+**Para Data Loading**:
+- Separar carga, validación y limpieza
+- Cada validación en su propia función
+- Devolver datos limpios, no modificar in-place
+
+**Para Feature Engineering**:
+- Una función por tipo de transformación
+- Funciones puras sin efectos secundarios
+- Fácil de añadir nuevas features
+
+**Para Training**:
+- Separar construcción del modelo, entrenamiento y evaluación
+- Métricas en función separada
+- Feature importance en función separada
+
+**Para Saving/Notification**:
+- Separar guardado de modelo, métricas y notificación
+- Cada uno en su propia función
+- Manejo de errores explícito
+
+**Para Main**:
+- Debe ser una orquestación de alto nivel
+- Máximo 20-30 líneas
+- Cada línea debe ser una llamada a función bien nombrada
+- Fácil de leer como una receta
+
+---
+
+### Preguntas para Reflexión
+
+Después de refactorizar, discutan:
+
+1. ¿Es más fácil entender el código ahora?
+2. ¿Qué partes serían más fáciles de testear?
+3. ¿Qué cambios serían más fáciles de implementar ahora?
+4. ¿Qué principios fueron más difíciles de aplicar?
+5. ¿Qué trade-offs hicieron (si los hubo)?

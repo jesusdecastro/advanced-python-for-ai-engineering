@@ -12,13 +12,13 @@ Cada día de formación sigue esta estructura:
 | Bloque | Franja | Actividad |
 |--------|--------|-----------|
 | 1 | 9:00 – 10:30 | Sesión teórica/práctica |
-| ☕ | 10:30 – 10:45 | Descanso |
+| Descanso | 10:30 – 10:45 | Descanso |
 | 2 | 10:45 – 12:15 | Sesión teórica/práctica |
-| ☕ | 12:15 – 12:30 | Descanso |
+| Descanso | 12:15 – 12:30 | Descanso |
 | 3 | 12:30 – 14:00 | Sesión teórica/práctica |
-| 🍽️ | 14:00 – 15:00 | Comida |
+| Comida | 14:00 – 15:00 | Comida |
 | 4 | 15:00 – 16:30 | Sesión práctica/ejercicios |
-| ☕ | 16:30 – 16:45 | Descanso |
+| Descanso | 16:30 – 16:45 | Descanso |
 | 5 | 16:45 – 18:00 | Trabajo en proyecto + cierre |
 
 ---
@@ -97,59 +97,54 @@ Cada día de formación sigue esta estructura:
 
 ---
 
-### DÍA 4: Diseño - Programación Orientada a Objetos
+### DÍA 4: Arquitectura de Software y Principios SOLID
 **Duración:** 8 horas
 
 **Conceptos clave:**
-- Objects vs Data Structures
-- Pydantic vs dataclasses
-- Classes (SRP, cohesión)
-- Herencia vs composición
-- Abstract Base Classes (ABC)
-- SOLID principles en Python
+- Modelado de datos: @property, dataclasses, Pydantic
+- Pydantic v2: validación, Field, validators, discriminated unions
+- Composición sobre herencia
+- Protocols vs Abstract Base Classes
+- Single Responsibility Principle (SRP)
+- Dependency Inversion Principle (DIP)
+- Open/Closed Principle (OCP)
+- Liskov Substitution Principle (LSP)
+- Interface Segregation Principle (ISP)
 
 **Para el proyecto integrador:**
 - Crear modelos de datos con Pydantic (schemas, validación automática)
-- Implementar Abstract Base Classes (BaseReader, BaseTransformer, BaseWriter)
-- Diseñar clases concretas que hereden de ABCs
-- Aplicar composición para combinar funcionalidades
-- Refactorizar siguiendo SRP (cada clase una responsabilidad)
-- Implementar interfaces claras entre componentes
+- Implementar Protocols para abstracciones
+- Diseñar clases usando composición sobre herencia
+- Aplicar SRP: cada clase una responsabilidad clara
+- Aplicar DIP: depender de abstracciones (Protocols)
+- Aplicar OCP: diseñar para extensión sin modificación
+- Refactorizar "God classes" en componentes cohesivos
+- Implementar Strategy pattern para comportamientos intercambiables
 
 ---
 
-### DÍA 5: Procesamiento de Datos y Testing
+### DÍA 5: Testing y Trabajo en Proyecto Integrador
 **Duración:** 8 horas
 
 **Conceptos clave:**
-- NumPy vectorization
-- pandas fundamentals y optimization
-- Memory profiling y dtypes
-- Unit testing con pytest (fixtures, mocking, coverage)
-- TDD (Test-Driven Development)
+- Unit testing fundamentals (qué, por qué, cuándo)
+- Anatomía de un test: Arrange, Act, Assert
+- pytest: fixtures, parametrize, marks
+- Test coverage y métricas
+- Mocking y test doubles (fakes, stubs, mocks)
+- Test-Driven Development (TDD): Red-Green-Refactor
+- Testing best practices: independencia, determinismo, velocidad
+- Organización de tests: estructura de directorios, naming conventions
 
 **Para el proyecto integrador:**
-- Optimizar transformaciones con pandas/numpy (vectorización)
-- Perfilar memoria y optimizar dtypes
 - Escribir tests unitarios para todas las funciones críticas
-- Crear fixtures para datos de prueba
-- Implementar mocking para dependencias externas (archivos, APIs)
+- Crear fixtures para datos de prueba reutilizables
+- Implementar mocking para dependencias externas (archivos, APIs, bases de datos)
+- Usar parametrize para probar múltiples casos con el mismo test
 - Alcanzar 80%+ de cobertura de código
 - Aplicar TDD para nuevas features
-
----
-
-### OPCIONAL: APIs y Servicios Web
-**Si el tiempo lo permite antes del Día 6**
-
-**Conceptos:**
-- HTTP requests library
-- FastAPI basics
-- API design
-
-**Aplicación al proyecto:**
-- Crear endpoints FastAPI para exponer funcionalidad (opcional)
-- Integrar requests para fuentes de datos remotas (si aplica)
+- Refactorizar código existente con confianza gracias a los tests
+- Documentar casos edge y comportamientos esperados mediante tests
 
 ---
 
@@ -177,17 +172,21 @@ Cada día de formación sigue esta estructura:
 
 ## PROYECTO INTEGRADOR
 
-Los estudiantes trabajarán en grupos de 3 personas en uno de los proyectos descritos en el documento [proyectos_integradores.md](proyectos_integradores.md). Cada día agregarán funcionalidad aplicando los conceptos aprendidos.
+Los estudiantes trabajarán en grupos de 3 personas en uno de los proyectos descritos en el directorio [proyectos_integradores/](proyectos_integradores/). Cada día agregarán funcionalidad aplicando los conceptos aprendidos.
 
 **Opciones disponibles:**
-1. Data Pipeline Package (⭐⭐ Básica)
-2. Log Analyzer Tool (⭐⭐ Básica)
-3. Document Processor (⭐⭐⭐ Media)
-4. Data Validator Library (⭐⭐⭐ Media)
-5. Time Series Toolkit (⭐⭐⭐⭐ Alta)
-6. Web Scraper Framework (⭐⭐⭐⭐ Alta)
 
-Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles completos de cada proyecto, arquitectura sugerida y cómo cada día del curso contribuye a su desarrollo.
+### Nivel Básico
+1. **Data Pipeline Package** - Sistema ETL configurable
+2. **Log Analyzer Tool** - Análisis de logs con métricas y reportes
+3. **CSV Data Cleaner** - Limpieza y validación de datos CSV
+4. **Config File Manager** - Gestión de configuraciones multi-formato
+
+### Nivel Medio
+5. **Data Validator Library** - Framework de validación de datos tabulares
+6. **Text Processing Toolkit** - Procesamiento y análisis de texto
+
+Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) para detalles completos de cada proyecto, arquitectura sugerida y cómo cada día del curso contribuye a su desarrollo.
 
 ---
 
@@ -207,4 +206,4 @@ Ver [proyectos_integradores.md](proyectos_integradores.md) para detalles complet
 - requests, FastAPI (opcional)
 
 **Librerías según proyecto:**
-- Ver [proyectos_integradores.md](proyectos_integradores.md) para dependencias específicas de cada proyecto
+- Ver [proyectos_integradores/README.md](proyectos_integradores/README.md) y las guías individuales para dependencias específicas de cada proyecto
