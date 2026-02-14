@@ -18,176 +18,219 @@ Run the tests with: pytest tests/test_01_comprehensions.py
 
 
 # Exercise 1: Basic List Comprehensions
-# TODO: Add type hints and implement using list comprehension
-def get_squares(n):
+from typing import List, Dict, Set, Any  # Añadimos Dict y Any
+
+def get_squares(n: int) -> List[int]:  # 2. Tipamos la entrada (int) y la salida (Lista de enteros)
     """Generate a list of squares from 1 to n.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param n: The maximum number to square.
+    :type n: int
+    :return: A list of squared numbers from 1 to n.
+    :rtype: List[int]
 
     Example:
         >>> get_squares(5)
-        [1, 4, 9, 16, 25]
+        [1-5]
     """
-    return [number ** 2 for number in n]
+    # 3. CORRECCIÓN LÓGICA:
+    # No puedes iterar sobre un número ("in n"). 
+    # Usamos range(1, n + 1) para ir desde el 1 hasta n incluido.
+    return [number ** 2 for number in range(1, n + 1)]
 
 
-# TODO: Add type hints and implement using list comprehension
-def filter_even_numbers(numbers):
+def filter_even_numbers(numbers: List[int]) -> List[int]:
     """
     Filter only even numbers from a list.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param numbers: The input list of integers.
+    :type numbers: List[int]
+    :return: A list containing only the even numbers.
+    :rtype: List[int]
 
     Example:
-        >>> filter_even_numbers([1, 2, 3, 4, 5, 6])
+        >>> filter_even_numbers([1-6])
         [2, 4, 6]
     """
-    pass
+    # Usamos comprensión de lista con un 'if' al final para filtrar
+    return [num for num in numbers if num % 2 == 0]
 
 
-# TODO: Add type hints and implement using list comprehension
-def uppercase_strings(strings):
+def uppercase_strings(strings: List[str]) -> List[str]:
     """
     Convert all strings in a list to uppercase.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param strings: The list of strings to convert.
+    :type strings: List[str]
+    :return: A new list with all strings in uppercase.
+    :rtype: List[str]
 
     Example:
         >>> uppercase_strings(['hello', 'world'])
         ['HELLO', 'WORLD']
     """
-    pass
+    # Aplicamos .upper() a cada elemento 's' de la lista
+    return [s.upper() for s in strings]
 
 
 # Exercise 2: Dict Comprehensions
-# TODO: Add type hints and implement using dict comprehension
-def create_number_to_cube_dict(n):
+
+def create_number_to_cube_dict(n: int) -> Dict[int, int]:
     """
     Create a dictionary mapping numbers 1 to n to their cubes.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param n: The maximum number.
+    :type n: int
+    :return: A dictionary with numbers as keys and their cubes as values.
+    :rtype: Dict[int, int]
 
     Example:
         >>> create_number_to_cube_dict(3)
         {1: 1, 2: 8, 3: 27}
     """
-    pass
+    # Sintaxis: {clave: valor for variable in rango}
+    return {x: x**3 for x in range(1, n + 1)}
 
 
-# TODO: Add type hints and implement using dict comprehension
-def invert_dictionary(original):
+def invert_dictionary(original: Dict[Any, Any]) -> Dict[Any, Any]:
     """
     Invert a dictionary (swap keys and values).
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param original: The dictionary to invert.
+    :type original: Dict[Any, Any]
+    :return: A new dictionary with keys and values swapped.
+    :rtype: Dict[Any, Any]
 
     Example:
         >>> invert_dictionary({'a': 1, 'b': 2})
         {1: 'a', 2: 'b'}
     """
-    pass
+    # Usamos .items() para obtener clave (k) y valor (v), y los invertimos
+    return {v: k for k, v in original.items()}
 
 
-# TODO: Add type hints and implement using dict comprehension
-def filter_dict_by_value(data, threshold):
+def filter_dict_by_value(data: Dict[str, int], threshold: int) -> Dict[str, int]:
     """
     Filter dictionary to only include items where value > threshold.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param data: The input dictionary.
+    :type data: Dict[str, int]
+    :param threshold: The minimum value to keep.
+    :type threshold: int
+    :return: A filtered dictionary.
+    :rtype: Dict[str, int]
 
     Example:
         >>> filter_dict_by_value({'a': 10, 'b': 5, 'c': 15}, 7)
         {'a': 10, 'c': 15}
     """
-    pass
+    # Añadimos el 'if' al final para filtrar
+    return {k: v for k, v in data.items() if v > threshold}
 
 
 # Exercise 3: Set Comprehensions
-# TODO: Add type hints and implement using set comprehension
-def get_unique_characters(text):
+def get_unique_characters(text: str) -> Set[str]:
     """
     Extract unique characters from a string (excluding spaces).
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param text: The input string.
+    :type text: str
+    :return: A set of unique characters.
+    :rtype: Set[str]
 
     Example:
         >>> get_unique_characters('hello world')
         {'h', 'e', 'l', 'o', 'w', 'r', 'd'}
     """
-    pass
+    # Usamos { } para crear un conjunto.
+    # Filtramos los espacios con el 'if'.
+    return {char for char in text if char != ' '}
 
 
-# TODO: Add type hints and implement using set comprehension
-def get_unique_numbers(numbers):
+def get_unique_numbers(numbers: List[int]) -> Set[int]:
     """
     Get unique numbers from a list with duplicates.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param numbers: List of integers that may contain duplicates.
+    :type numbers: List[int]
+    :return: A set containing only unique integers.
+    :rtype: Set[int]
 
     Example:
-        >>> get_unique_numbers([1, 2, 2, 3, 3, 3, 4])
+        >>> get_unique_numbers([1-4])
         {1, 2, 3, 4}
     """
-    pass
+    # Al convertir a set, los duplicados desaparecen automáticamente.
+    return {num for num in numbers}
 
 
-# TODO: Add type hints and implement using set comprehension
-def get_word_lengths(words):
+def get_word_lengths(words: List[str]) -> Set[int]:
     """
     Create a set of unique word lengths.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param words: List of words.
+    :type words: List[str]
+    :return: A set of unique lengths found.
+    :rtype: Set[int]
 
     Example:
         >>> get_word_lengths(['cat', 'dog', 'bird', 'fish'])
         {3, 4}
     """
-    pass
+    # Calculamos la longitud len() de cada palabra.
+    # Si dos palabras miden lo mismo (ej: cat, dog -> 3), el set solo guarda un 3.
+    return {len(word) for word in words}
 
 
 # Exercise 4: Advanced Comprehensions
-# TODO: Add type hints and implement using list comprehension
-def flatten_matrix(matrix):
+def flatten_matrix(matrix: List[List[int]]) -> List[int]:
     """
     Flatten a 2D matrix into a 1D list.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param matrix: A list of lists of integers.
+    :type matrix: List[List[int]]
+    :return: A single flattened list of integers.
+    :rtype: List[int]
 
     Example:
         >>> flatten_matrix([[1, 2], [3, 4], [5, 6]])
-        [1, 2, 3, 4, 5, 6]
+        [1-6]
     """
-    pass
+    # Doble bucle en una línea: "para cada fila en la matriz, para cada número en esa fila"
+    return [num for row in matrix for num in row]
 
 
-# TODO: Add type hints and implement using dict comprehension
-def word_frequency(words):
+def word_frequency(words: List[str]) -> Dict[str, int]:
     """
     Create a dictionary with word frequencies.
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param words: List of words to count.
+    :type words: List[str]
+    :return: Dictionary where keys are words and values are their counts.
+    :rtype: Dict[str, int]
 
     Example:
-        >>> word_frequency(['apple', 'banana', 'apple', 'cherry', 'banana', 'apple'])
-        {'apple': 3, 'banana': 2, 'cherry': 1}
+        >>> word_frequency(['apple', 'banana', 'apple'])
+        {'apple': 2, 'banana': 1}
     """
-    pass
+    # Usamos set(words) para no contar la misma palabra varias veces.
+    # words.count(w) cuenta cuántas veces aparece 'w'.
+    return {word: words.count(word) for word in set(words)}
 
 
-# TODO: Add type hints and implement using list comprehension
-def extract_names_from_users(users):
+def extract_names_from_users(users: List[Dict[str, Any]]) -> List[str]:
     """
     Extract names from a list of user dictionaries (only active users).
 
-    TODO: Add :param, :type, :return, :rtype annotations
+    :param users: List of user dictionaries containing 'name' and 'active' keys.
+    :type users: List[Dict[str, Any]]
+    :return: List of names of active users.
+    :rtype: List[str]
 
     Example:
-        >>> users = [
-        ...     {'name': 'Alice', 'active': True},
-        ...     {'name': 'Bob', 'active': False},
-        ...     {'name': 'Charlie', 'active': True}
-        ... ]
-        >>> extract_names_from_users(users)
-        ['Alice', 'Charlie']
+        >>> extract_names_from_users([{'name': 'Alice', 'active': True}])
+        ['Alice']
     """
-    pass
+    # 1. Iteramos sobre 'user' en 'users'
+    # 2. Filtramos: if user.get('active') es True
+    # 3. Extraemos: user['name']
+    return [user['name'] for user in users if user.get('active') is True]

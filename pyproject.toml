@@ -21,7 +21,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["mi_entregable_brutal/src"]
+where = ["src"]
 
 [tool.ruff]
 line-length = 100
@@ -41,3 +41,9 @@ addopts = "-v --tb=short"
 [tool.pyright]
 typeCheckingMode = "standard"
 reportMissingTypeStubs = false
+
+[tool.uv.workspace]
+members = [
+    "my-project",
+    "my-project/MiProyecto_Oscar",
+]

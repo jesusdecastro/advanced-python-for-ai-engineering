@@ -16,8 +16,8 @@ dev = [
     "pyright",
 ]
 
-# [tool.hatchling.build.targets.wheel]
-# packages = ["src/exercises"]
+[tool.hatchling.build.targets.wheel]
+packages = ["src/exercises"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
