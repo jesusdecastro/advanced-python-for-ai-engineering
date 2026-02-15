@@ -30,8 +30,11 @@ where = ["src"]
 
 [tool.uv.workspace]
 members = [
-    "dia_2/exercises",
+    "my-project",
+    "dia_1/exercises",
     "dia_3/exercises",
+    "dia_4/exercises",
+    "dia_5/exercises"
 ]
 
 # ============================================================================
@@ -280,9 +283,3 @@ addopts = "-v --tb=short"
 [tool.pyright]
 typeCheckingMode = "standard"
 reportMissingTypeStubs = false
-
-[tool.uv.workspace]
-members = [
-    "my-project",
-    "my-project/MiProyecto_Oscar",
-]
