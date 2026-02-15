@@ -1,18 +1,18 @@
-
-[project]
-name = "mi-proyecto-oscar"
-version = "0.1.0"
-description = "Proyecto del curso Advanced Python for AI"
-readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "ruff",
-    "pyright"
-]
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[project]
+name = "cv-converter"
+version = "0.1.0"
+description = "Herramienta para transformar CVs al formato corporativo de Hiberus"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0.0",  
+    "ruff",             
+    "pyright"           
+]
+
 [tool.hatch.build.targets.wheel]
-packages = ["src/MiProyecto_Oscar"]
+packages = ["src/cv_converter"]
