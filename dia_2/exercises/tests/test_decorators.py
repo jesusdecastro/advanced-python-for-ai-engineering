@@ -7,7 +7,7 @@ import pytest
 
 # Import from the installed package
 from exercises.decorators import BankAccount, Date, validate_types
-                                    
+
 
 class TestBankAccount:
     """Tests for BankAccount class with @property."""
@@ -178,7 +178,7 @@ class TestValidateTypesDecorator:
             return x * 2
 
         assert my_function.__name__ == "my_function"
-        assert "Multiply" in my_function.__doc__
+        assert "docstring" in my_function.__doc__
 
     def test_no_annotations_works(self):
         """Test that functions without annotations still work."""

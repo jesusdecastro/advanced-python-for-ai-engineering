@@ -9,245 +9,175 @@ Your tasks:
 2. Implement the Date class with @classmethod factory methods
 3. Create a custom @validate_types decorator
 
-Run the tests with: pytest tests/test_decorators.py
+Run the tests with: pytest tests/test_03_decorators.py
 """
 
-import functools
-import time
-from datetime import datetime
-from typing import Any, Callable, Type, Union
+# TODO: Import necessary modules
+# Hint: You'll need functools for wraps, datetime for Date class
 
 
 # Exercise 1: BankAccount with @property
+# TODO: Complete the BankAccount class
 class BankAccount:
     """
     Bank account with balance management.
 
-    :param initial_balance: Starting balance.
+    TODO: Add complete docstring with:
+    :param initial_balance: Starting balance
     :type initial_balance: float
-    :ivar _balance: Private balance attribute.
+    :ivar _balance: Private balance attribute
     :vartype _balance: float
     """
 
-    def __init__(self, initial_balance: float):
-        # Validamos que el balance inicial no sea negativo
-        if initial_balance < 0:
-            raise ValueError("Initial balance cannot be negative")
-        self._balance = initial_balance
+    def __init__(self, initial_balance):
+        # TODO: Initialize _balance attribute
+        # Hint: Validate that initial_balance is not negative
+        pass
 
-    @property
-    def balance(self) -> float:
+    # TODO: Add @property decorator
+    def balance(self):
         """
         Get current balance (read-only property).
 
-        :return: The current balance.
-        :rtype: float
+        TODO: Add return type annotation
         """
-        return self._balance
+        pass
 
-    def deposit(self, amount: float) -> None:
+    def deposit(self, amount):
         """
         Deposit money into account.
 
-        :param amount: Amount to deposit.
-        :type amount: float
-        :raises ValueError: If amount is not positive.
+        TODO: Add parameter and return type annotations
+        TODO: Add :param, :type, :raises annotations
         """
-        if amount <= 0:
-            raise ValueError("Deposit amount must be positive")
-        self._balance += amount
+        # TODO: Validate amount is positive
+        # TODO: Add amount to balance
+        pass
 
-    def withdraw(self, amount: float) -> None:
+    def withdraw(self, amount):
         """
         Withdraw money from account.
 
-        :param amount: Amount to withdraw.
-        :type amount: float
-        :raises ValueError: If amount is not positive or sufficient funds.
+        TODO: Add parameter and return type annotations
+        TODO: Add :param, :type, :raises annotations
         """
-        if amount <= 0:
-            raise ValueError("Withdrawal amount must be positive")
-        if amount > self._balance:
-            raise ValueError("Insufficient funds")
-        self._balance -= amount
+        # TODO: Validate amount is positive
+        # TODO: Validate sufficient balance
+        # TODO: Subtract amount from balance
+        pass
+
 
 # Exercise 2: Date class with @classmethod
+# TODO: Complete the Date class
 class Date:
     """
     Date representation with factory methods.
 
-    :param day: Day of month.
+    TODO: Add complete docstring with:
+    :param day: Day of month
     :type day: int
-    :param month: Month number (1-12).
+    :param month: Month number (1-12)
     :type month: int
-    :param year: Year.
+    :param year: Year
     :type year: int
     """
 
-    def __init__(self, day: int, month: int, year: int):
-        self.day = day
-        self.month = month
-        self.year = year
+    def __init__(self, day, month, year):
+        # TODO: Add type hints to parameters
+        # TODO: Initialize day, month, year attributes
+        pass
 
-    @classmethod
-    def from_string(cls, date_string: str) -> "Date":
+    # TODO: Add @classmethod decorator
+    def from_string(self, date_string):
         """
         Create Date instance from string in DD-MM-YYYY format.
 
-        :param date_string: Date string in "DD-MM-YYYY" format.
-        :type date_string: str
-        :return: A new Date instance.
-        :rtype: Date
+        TODO: Add parameter and return type annotations
+        TODO: Add :param, :type, :return, :rtype annotations
         """
-        # Parseamos el string "DD-MM-YYYY"
-        # map(int, ...) convierte cada trozo en un entero
-        day, month, year = map(int, date_string.split('-'))
-        
-        # Usamos cls(...) en lugar de Date(...) para que funcione 
-        # incluso si alguien hereda de esta clase.
-        return cls(day, month, year)
+        # TODO: Parse date_string (format: "DD-MM-YYYY")
+        # TODO: Extract day, month, year
+        # TODO: Return new instance using cls(day, month, year)
+        pass
 
-    @classmethod
-    def today(cls) -> "Date":
+    # TODO: Add @classmethod decorator
+    def today(self):
         """
         Create Date instance with today's date.
 
-        :return: A new Date instance representing today.
-        :rtype: Date
+        TODO: Add return type annotation
+        TODO: Add :return, :rtype annotations
         """
-        # Usamos la librería datetime que importamos arriba
-        now = datetime.now()
-        return cls(now.day, now.month, now.year)
+        # TODO: Get current date using datetime
+        # TODO: Return new instance with current day, month, year
+        pass
 
-    def display(self) -> str:
+    def display(self):
         """
         Display date in readable format.
 
-        :return: Date formatted as "DD de [Month] de YYYY".
-        :rtype: str
+        TODO: Add return type annotation
+        TODO: Add :return, :rtype annotations
         """
-        month_names = {
-            1: "enero", 2: "febrero", 3: "marzo", 4: "abril",
-            5: "mayo", 6: "junio", 7: "julio", 8: "agosto",
-            9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"
-        }
-        # Obtenemos el nombre del mes (o "desconocido" si no es 1-12)
-        month_name = month_names.get(self.month, "desconocido")
-        return f"{self.day} de {month_name} de {self.year}"
+        # TODO: Return formatted string like "25 de diciembre de 2024"
+        # Hint: Create a month names dictionary
+        pass
 
 
 # Exercise 3: Custom decorator with type validation
-def validate_types(func: Callable) -> Callable:
+# TODO: Implement the validate_types decorator
+def validate_types(func):
     """
     Validate function arguments match their type hints.
 
-    :param func: Function to decorate.
+    TODO: Add complete docstring with:
+    :param func: Function to decorate
     :type func: callable
-    :return: Wrapped function with type validation.
+    :return: Wrapped function with type validation
     :rtype: callable
-    :raises TypeError: When argument types don't match hints.
+    :raises TypeError: When argument types don't match hints
     """
 
-    @functools.wraps(func)
+    # TODO: Add @wraps(func) decorator to preserve metadata
     def wrapper(*args, **kwargs):
-        # 1. Obtenemos las anotaciones (type hints) de la función
-        annotations = func.__annotations__
-        
-        # 2. Obtenemos los nombres de los argumentos
-        # co_varnames nos da todos los nombres locales, cogemos solo los argumentos
-        arg_names = func.__code__.co_varnames[:func.__code__.co_argcount]
-        
-        # 3. Mapeamos los argumentos posicionales (*args) a sus nombres
-        args_dict = dict(zip(arg_names, args))
-        
-        # 4. Fusionamos con los argumentos nombrados (**kwargs)
-        args_dict.update(kwargs)
-        
-        # 5. Validamos cada argumento
-        for name, value in args_dict.items():
-            # Solo validamos si el argumento tiene type hint definido
-            if name in annotations:
-                expected_type = annotations[name]
-                
-                # Ignoramos la anotación de retorno ('return') si está presente
-                if name == 'return':
-                    continue
-                
-                # Verificamos el tipo
-                # Nota: Esto funciona bien con tipos nativos (int, str). 
-                # Para tipos complejos como List[int] se requeriría lógica extra.
-                if not isinstance(value, expected_type):
-                    raise TypeError(
-                        f"Argument '{name}' expected {expected_type.__name__}, "
-                        f"but got {type(value).__name__}"
-                    )
-                    
-        return func(*args, **kwargs)
+        """
+        Perform type validation.
+
+        TODO: Add parameter and return type annotations
+        """
+        # TODO: Get function annotations using func.__annotations__
+        # TODO: Get parameter names using func.__code__.co_varnames
+        # TODO: For each argument, check if it matches the type hint
+        # TODO: Raise TypeError if types don't match
+        # TODO: Call and return original function
+        pass
 
     return wrapper
 
 
 # Bonus Exercise: Create a timing decorator
-def timing_decorator(func: Callable) -> Callable:
+# TODO: Implement a decorator that measures execution time
+def timing_decorator(func):
     """
     Measure and print function execution time.
 
-    :param func: The function to measure.
-    :return: The wrapped function.
+    TODO: Add complete docstring
+    TODO: Use functools.wraps
+    TODO: Measure time before and after function call
+    TODO: Print execution time
     """
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start_time = time.perf_counter()  # Inicio del cronómetro
-        try:
-            result = func(*args, **kwargs)
-            return result
-        finally:
-            end_time = time.perf_counter()  # Fin del cronómetro
-            execution_time = end_time - start_time
-            print(f"Function '{func.__name__}' took {execution_time:.4f} seconds to execute")
-            
-    return wrapper
+    pass
 
 
 # Bonus Exercise: Create a retry decorator with parameters
-def retry(max_attempts: int = 3, delay: float = 1.0) -> Callable:
+# TODO: Implement a decorator that retries failed function calls
+def retry(max_attempts=3, delay=1.0):
     """
     Retry a function on failure.
 
-    Executes the decorated function and, if it raises an exception,
-    retries it up to 'max_attempts' times, waiting 'delay' seconds
-    between attempts.
-
-    :param max_attempts: Maximum number of execution attempts (default: 3).
-    :type max_attempts: int
-    :param delay: Seconds to wait between retries (default: 1.0).
-    :type delay: float
-    :return: The wrapped function with retry logic.
-    :rtype: Callable
+    TODO: Add complete docstring with parameters
+    TODO: Implement three-level decorator structure
+    TODO: Catch exceptions and retry up to max_attempts
+    TODO: Add delay between retries
     """
-    # NIVEL 1: La "Fábrica" de decoradores (recibe los argumentos)
-    def decorator(func: Callable) -> Callable:
-        
-        # NIVEL 2: El Decorador real (recibe la función)
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs) -> Any:
-            
-            # NIVEL 3: El Wrapper (la lógica de ejecución)
-            last_exception = None
-            
-            for attempt in range(1, max_attempts + 1):
-                try:
-                    return func(*args, **kwargs)
-                except Exception as e:
-                    last_exception = e
-                    # Si aún nos quedan intentos, esperamos
-                    if attempt < max_attempts:
-                        print(f"Attempt {attempt}/{max_attempts} failed. Retrying in {delay}s...")
-                        time.sleep(delay)
-            
-            # Si salimos del bucle, es que fallaron todos los intentos
-            print(f"Function failed after {max_attempts} attempts.")
-            raise last_exception
-            
-        return wrapper
-    return decorator
+    pass
