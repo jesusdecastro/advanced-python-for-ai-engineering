@@ -1,6 +1,6 @@
 import argparse
 import sys
-import logging  # <--- NUEVO: Biblioteca estándar para trazas
+import logging  
 from cv_converter.readers import JSONReader
 from cv_converter.models import CurriculumVitae
 from cv_converter.generators import HiberusTextGenerator
@@ -10,8 +10,8 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.StreamHandler(sys.stdout),  # Sale por terminal
-        logging.FileHandler("app.log")      # Se guarda en un archivo de log
+        logging.StreamHandler(sys.stdout),  
+        logging.FileHandler("app.log")      
     ]
 )
 logger = logging.getLogger(__name__)
