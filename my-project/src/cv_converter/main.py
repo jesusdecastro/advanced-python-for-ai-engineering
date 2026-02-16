@@ -43,7 +43,7 @@ def main():
         logger.info(f"Documento generado y guardado en: {args.output}")
 
     except Exception as e:
-        logger.error(f"Se ha producido un error: {e}") # <--- Log de error profesional
+        logger.error(f"Se ha producido un error: {e}") 
         sys.exit(1)
 
 if __name__ == "__main__":

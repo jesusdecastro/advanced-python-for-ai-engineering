@@ -11,7 +11,7 @@ class JSONReader:
     def read(self, file_path: str) -> Dict[str, Any]:
         path = Path(file_path)
         
-        # Validación de existencia
+        
         if not path.exists():
             raise FileNotFoundError(f"Error: No encuentro el archivo '{file_path}'")
             
