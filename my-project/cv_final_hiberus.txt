@@ -1,0 +1,14 @@
+============================================================
+                 HIBERUS TECHNOLOGY - PERFIL                
+============================================================
+NOMBRE:   OSCAR ARAOZ
+PERFIL:   Economista. Analista de datos de los empleados de hiberus.
+EMAIL:    oaaraoz@hiberus.com
+------------------------------------------------------------
+TECH STACK: [Python | PowerBI | MS Office | People Analytics]
+------------------------------------------------------------
+EXPERIENCIA LABORAL:
+* Hiberus | People Analytics Specialist (2024 - Actualidad)
+  > Creando procesos para la toma de decisiones en base a datos de empleados.
+
+============================================================

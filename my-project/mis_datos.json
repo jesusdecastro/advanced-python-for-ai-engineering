@@ -1,0 +1,21 @@
+{
+  "nombre_completo": "Oscar Araoz",
+  "perfil_profesional": "Economista. Analista de datos de los empleados de hiberus.",
+  "tech_stack": [
+    "Python",
+    "PowerBI",
+    "MS Office",
+    "People Analytics"
+  ],
+  "contacto": {
+    "email": "oaaraoz@hiberus.com"
+  },
+  "experiencia_laboral": [
+    {
+      "empresa": "Hiberus",
+      "rol": "People Analytics Specialist",
+      "fecha_inicio": "2024",
+      "descripcion": "Creando procesos para la toma de decisiones en base a datos de empleados."
+    }
+  ]
+}

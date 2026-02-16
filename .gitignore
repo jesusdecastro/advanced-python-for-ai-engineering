@@ -65,3 +65,10 @@ RESUMEN_PARA_PROFESOR.md
 dia_1/GUIA_PROFESOR.md
 dia_1/CHECKLIST_INSTRUCTOR.md
 dia_1/MEJORAS_REALIZADAS.md
+
+notebook/
+__pycache__/
+*.log
+*.env
+.vscode/
+dist/

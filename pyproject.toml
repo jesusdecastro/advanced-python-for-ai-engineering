@@ -21,7 +21,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["mi_entregable_brutal/src"]
+where = ["src"]
 
 # ============================================================================
 # UV WORKSPACE CONFIGURATION
@@ -30,8 +30,11 @@ where = ["mi_entregable_brutal/src"]
 
 [tool.uv.workspace]
 members = [
-    "dia_2/exercises",
+    "my-project",
+    "dia_1/exercises",
     "dia_3/exercises",
+    "dia_4/exercises",
+    "dia_5/exercises"
 ]
 
 # ============================================================================
